@@ -25,7 +25,6 @@ tailwind.config = {
 #tab-necro      { --accent:#849db0; --mech-title:#6e8d9e; --row-top:#0b1018 }
 #tab-temple     { --accent:#f0c030; --mech-title:#f0c030; --row-top:#181505 }
 #tab-schism     { --accent:#7ecbd4; --mech-title:#5bb8c8; --row-top:#060e12 }
-#tab-subclasses { --accent:#a0a0c4; --mech-title:#8080a8; --row-top:#0a0a14 }
 
 /* ── Tab behaviour ────────────────────────────────────────────────────── */
 .tab-content { display: none }
@@ -251,7 +250,6 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="necro"      style="--c:#90a4ae">NECROPOLIS</button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="temple"     style="--c:#ffd54f">TEMPLE</button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="schism"     style="--c:#7ecbd4">SCHISM</button>
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="subclasses" style="--c:#a0a0c4">SUBCLASSES</button>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════ HIVE ══ -->
@@ -371,6 +369,14 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-sec>Classes</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Subclass notes:</strong> Subclasses are rare achievements: most games end before either player unlocks one, because they require Expert level in 5 specific skills at once.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can hand you 3-4 required skills at once; if you are already close, the subclass becomes realistic immediately.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass:</strong> payoff, achievability, and required-skill quality. Do not wreck a viable build chasing weak payoff or dead skills.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps do not exist, so doubling-stat subclasses keep real value even above 100 total stats.</li>
+  </ol>
+</g-notes>
 <div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
 
 <g-class name="Enforcer" type="Might" img="class_demon_might.png">
@@ -385,7 +391,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   </g-sc>
   <g-sc name="Soul Eater" tier="top" img="sub_class_demons_might_2.png">
     <g-desc>Grants a new battle ability. It allows the hero to consume a target corpse, gaining bonus Attack, Defense, and Spell Power until the end of battle.</g-desc>
-    <g-alt>Infinite stat scaling across the final fight. Required skills (Insight, Logistics, Resistance, Daylight) are all core Enforcer picks — Battle Magic is the only bottleneck.</g-alt>
+    <g-alt>Top-tier because it gives stacking Attack/Defense/Power for the rest of the fight. In a long final, every corpse becomes permanent combat scaling. Required skills (Insight, Logistics, Resistance, Daylight) are all core Enforcer picks — Battle Magic is the only bottleneck.</g-alt>
     <g-req skill="resistance">Expert Resistance</g-req>
     <g-req skill="battlemage">Expert Battle Magic</g-req>
     <g-req skill="magic_day">Expert Daylight Magic</g-req>
@@ -529,6 +535,14 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-sec>Classes</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Subclass notes:</strong> Subclasses are rare achievements: most games end before either player unlocks one, because they require Expert level in 5 specific skills at once.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can hand you 3-4 required skills at once; if you are already close, the subclass becomes realistic immediately.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass:</strong> payoff, achievability, and required-skill quality. Do not wreck a viable build chasing weak payoff or dead skills.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps do not exist, so doubling-stat subclasses keep real value even above 100 total stats.</li>
+  </ol>
+</g-notes>
 <div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
 
 <g-class name="Overlord" type="Might" img="class_dungeon_might.png">
@@ -555,7 +569,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-class name="Warlock" type="Magic" img="class_dungeon_magic.png">
   <g-sc name="Amelchia's Heir" tier="top" img="sub_class_dungeon_magic_1.png">
     <g-desc>The hero gains +100% Spell Power.</g-desc>
-    <g-alt>80 Spell Power becomes 160 — the most frequently achieved subclass in actual play. Battlecraft and Tactics are the hardest requirements; pursue aggressively when near-complete, especially with a university.</g-alt>
+    <g-alt>Top-tier because doubling Spell Power turns 80 into 160 and stays valuable at any stat total. This is the most frequently seen subclass in actual play; Battlecraft and Tactics are the hard requirements, and a university can make it very realistic.</g-alt>
     <g-req skill="formation">Expert Battlecraft</g-req>
     <g-req skill="summoner">Expert Summon Avatar</g-req>
     <g-req skill="magic_primal">Expert Primal Magic</g-req>
@@ -703,6 +717,14 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-sec>Classes</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Subclass notes:</strong> Subclasses are rare achievements: most games end before either player unlocks one, because they require Expert level in 5 specific skills at once.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can hand you 3-4 required skills at once; if you are already close, the subclass becomes realistic immediately.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass:</strong> payoff, achievability, and required-skill quality. Do not wreck a viable build chasing weak payoff or dead skills.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps do not exist, so doubling-stat subclasses keep real value even above 100 total stats.</li>
+  </ol>
+</g-notes>
 <div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
 
 <g-class name="Warden" type="Might" img="class_nature_might.png">
@@ -717,7 +739,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   </g-sc>
   <g-sc name="Fortune's Favored" tier="top" img="sub_class_nature_might_2.png">
     <g-desc>Friendly creatures have their maximum possible Luck and will always land a Lucky Strike when attacking.</g-desc>
-    <g-alt>One of the best subclasses in the game. Grove's luck-amplifying laws push this to triple damage on every hit. One Diplomacy slot is the only real cost.</g-alt>
+    <g-alt>One of the best subclasses in the game. Guaranteed lucky strikes become absurd with Grove laws: Nature's Wildness and Luck of the Fittest can push this toward triple damage on every attack. One Diplomacy slot is the only real cost.</g-alt>
     <g-req skill="assault">Expert Offense</g-req>
     <g-req skill="mastery">Expert Wisdom</g-req>
     <g-req skill="magic_primal">Expert Primal Magic</g-req>
@@ -869,12 +891,20 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-sec>Classes</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Subclass notes:</strong> Subclasses are rare achievements: most games end before either player unlocks one, because they require Expert level in 5 specific skills at once.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can hand you 3-4 required skills at once; if you are already close, the subclass becomes realistic immediately.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass:</strong> payoff, achievability, and required-skill quality. Do not wreck a viable build chasing weak payoff or dead skills.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps do not exist, so doubling-stat subclasses keep real value even above 100 total stats.</li>
+  </ol>
+</g-notes>
 <div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
 
 <g-class name="Death Knight" type="Might" img="class_undead_might.png">
   <g-sc name="Harbinger of Doom" tier="decent" img="sub_class_undead_might_1.png">
     <g-desc>Enemy creatures always have their minimum possible Luck and will always land an Unlucky Strike when attacking.</g-desc>
-    <g-alt>Effectively ~50% damage reduction on all incoming hits. Primal Magic and Scouting are hard to find on a Death Knight — only pursue with university support.</g-alt>
+    <g-alt>Decent because it is effectively about 50% damage reduction on all incoming hits. The payoff is real, but Primal Magic and Scouting are hard to find on a Death Knight — only pursue with university support.</g-alt>
     <g-req skill="protection">Expert Defense</g-req>
     <g-req skill="sorcery">Expert Sorcery</g-req>
     <g-req skill="magic_primal">Expert Primal Magic</g-req>
@@ -895,7 +925,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-class name="Necromancer" type="Magic" img="class_undead_magic.png">
   <g-sc name="Soulweaver" tier="decent" img="sub_class_undead_magic_1.png">
     <g-desc>After an enemy stack is killed in battle, a temporary stack of friendly Wights appears in their place.</g-desc>
-    <g-alt>Easy to achieve — Logistics, Insight, and Avatar are core Necromancer picks anyway. Battlecraft is the only bottleneck. Payoff is modest but you sacrifice almost nothing.</g-alt>
+    <g-alt>Decent because it is easy to achieve: Logistics, Insight, and Avatar are core Necromancer picks anyway. Battlecraft is the only real bottleneck. Payoff is modest, but you sacrifice almost nothing.</g-alt>
     <g-req skill="formation">Expert Battlecraft</g-req>
     <g-req skill="summoner">Expert Summon Avatar</g-req>
     <g-req skill="magic_space">Expert Arcane Magic</g-req>
@@ -1043,12 +1073,20 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-sec>Classes</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Subclass notes:</strong> Subclasses are rare achievements: most games end before either player unlocks one, because they require Expert level in 5 specific skills at once.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can hand you 3-4 required skills at once; if you are already close, the subclass becomes realistic immediately.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass:</strong> payoff, achievability, and required-skill quality. Do not wreck a viable build chasing weak payoff or dead skills.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps do not exist, so doubling-stat subclasses keep real value even above 100 total stats.</li>
+  </ol>
+</g-notes>
 <div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
 
 <g-class name="Knight" type="Might" img="class_human_might.png">
   <g-sc name="Swashbuckler" tier="top" img="sub_class_human_might_1.png">
     <g-desc>Heroic Strike deals +60 basic Damage.</g-desc>
-    <g-alt>Best subclass for combat+leadership builds. The bonus stays relevant even late game — enough to one-shot meaningful threats.</g-alt>
+    <g-alt>Top-tier for combat+leadership builds. +60 base damage stays relevant even late game — enough to one-shot meaningful threats — and most required skills (Offense, Leadership, Luck) are wanted anyway.</g-alt>
     <g-req skill="assault">Expert Offense</g-req>
     <g-req skill="mastery">Expert Wisdom</g-req>
     <g-req skill="magic_night">Expert Nightshade Magic</g-req>
@@ -1215,12 +1253,20 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-sec>Classes</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Subclass notes:</strong> Subclasses are rare achievements: most games end before either player unlocks one, because they require Expert level in 5 specific skills at once.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can hand you 3-4 required skills at once; if you are already close, the subclass becomes realistic immediately.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass:</strong> payoff, achievability, and required-skill quality. Do not wreck a viable build chasing weak payoff or dead skills.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps do not exist, so doubling-stat subclasses keep real value even above 100 total stats.</li>
+  </ol>
+</g-notes>
 <div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
 
 <g-class name="Oathkeeper" type="Might" img="class_unfrozen_might.png">
   <g-sc name="Unbound" tier="decent" img="sub_class_unfrozen_might_1.png">
     <g-desc>Increases the level of all hero's spells to their maximum.</g-desc>
-    <g-alt>Max-level spells are powerful but achievable via items (Seven Eyes). Sorcery is the unlikely bottleneck — rarely offered to Oathkeepers. Mediocre payoff relative to difficulty.</g-alt>
+    <g-alt>Decent when a university hands you Sorcery. Max-level spells are genuinely powerful, but the payoff is partially achievable through items like Seven Eyes, and Sorcery is rarely offered to Oathkeepers naturally.</g-alt>
     <g-req skill="assault">Expert Offense</g-req>
     <g-req skill="sorcery">Expert Sorcery</g-req>
     <g-req skill="magic_day">Expert Daylight Magic</g-req>
@@ -1241,7 +1287,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-class name="Riftspeaker" type="Magic" img="class_unfrozen_magic.png">
   <g-sc name="Unstoppable" tier="decent" img="sub_class_unfrozen_magic_1.png">
     <g-desc>The hero gains +10 Attack, Defense, Spell Power, and Knowledge.</g-desc>
-    <g-alt>About a 20% stat boost — modest but always impactful. Battlecraft and Tactics are rarely offered to Riftspeakers. Only realistic with university support.</g-alt>
+    <g-alt>Decent because +10 to all stats is roughly a 20% boost and always matters, especially with no stat caps. Battlecraft and Tactics are unlikely Riftspeaker offers, so treat it as university-only.</g-alt>
     <g-req skill="formation">Expert Battlecraft</g-req>
     <g-req skill="battlemage">Expert Battle Magic</g-req>
     <g-req skill="magic_primal">Expert Primal Magic</g-req>
@@ -1250,7 +1296,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   </g-sc>
   <g-sc name="Unfathomable" tier="top" img="sub_class_unfrozen_magic_2.png">
     <g-desc>All enemies always deal minimum and take maximum Damage.</g-desc>
-    <g-alt>Permanent bless+curse on all enemies. All required skills (Avatar, Armor, Luck, Logistics, Arcane) are core Riftspeaker pickups — you gain the subclass almost for free. Consistently achievable.</g-alt>
+    <g-alt>Top-tier permanent bless+curse on all enemies. All required skills (Avatar, Armor, Luck, Logistics, Arcane) are core Riftspeaker pickups, so the subclass comes almost for free alongside a normal build.</g-alt>
     <g-req skill="protection">Expert Defense</g-req>
     <g-req skill="summoner">Expert Summon Avatar</g-req>
     <g-req skill="magic_space">Expert Arcane Magic</g-req>
@@ -1262,50 +1308,6 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </div>
 
 </div><!-- /tab-schism -->
-
-<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-subclasses">
-
-<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">SUBCLASSES</h1>
-<div class="text-[#45455a] text-[.84em] mb-[30px] italic">⚠ Rare achievements — most games end without either player unlocking one. Achieving a subclass requires Expert level in 5 specific skills simultaneously.</div>
-
-<g-mech title="Three Rating Criteria">
-  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
-    <li><strong>Payoff</strong> — How impactful is the subclass effect in actual combat?</li>
-    <li><strong>Achievability</strong> — How realistic is it to assemble the required skill set in a normal game?</li>
-    <li><strong>Skill quality</strong> — Are the required skills things you'd want anyway, or dead weight?</li>
-  </ul>
-</g-mech>
-
-<g-sec>Additional Notes</g-sec>
-<g-notes>
-  <ol class="pl-6 space-y-[11px]">
-    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Universities are the primary path.</strong> A single university visit can provide 3–4 required skills at once — if you're close to a subclass and find a university, it becomes immediately realistic.</li>
-    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Scholar Shrine</strong> (full skill relearn) can enable otherwise-impossible paths, but the short clock in online formats makes this very demanding.</li>
-    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Only commit if 2 of 3 criteria pass.</strong> Don't sacrifice a viable build chasing a subclass with weak payoff or too many dead skills.</li>
-    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Stat caps don't exist — stats can go well beyond 100. A doubling subclass (Amelchia's Heir, Balthazar's Bodyguard, Silvertongue's Envoy) always provides real value regardless of your current stat total.</li>
-  </ol>
-</g-notes>
-
-<g-sec>Quick Reference — Worth Going For</g-sec>
-
-<g-table tier="top" base="classes" cols="Subclass,Class — Faction,Why it's top tier">
-  <g-row img="sub_class_nature_might_2.png" name="Fortune's Favored" spec="Warden — Grove">Guaranteed max lucky strike on every attack. Combined with Grove's luck-amplifying laws, this effectively <strong>triples all damage output</strong>. One of the highest payoffs in the game.</g-row>
-  <g-row img="sub_class_unfrozen_magic_2.png" name="Unfathomable" spec="Riftspeaker — Schism"><strong>Permanent bless+curse</strong> on all enemies. Every required skill (Avatar, Armor, Luck, Logistics, Arcane) is a core Riftspeaker pickup — achieved almost for free alongside a normal build.</g-row>
-  <g-row img="sub_class_dungeon_magic_1.png" name="Amelchia's Heir" spec="Warlock — Dungeon"><strong>Doubles Spell Power</strong> (e.g. 80 → 160). The most frequently seen subclass in actual play. Battlecraft and Tactics are the hardest requirements; a university makes it very realistic.</g-row>
-  <g-row img="sub_class_human_might_1.png" name="Swashbuckler" spec="Knight — Temple">Heroic Strike deals <strong>+60 base damage</strong> — a massive boost for combat+leadership builds that stays relevant even in late-game armies. Most required skills (Offense, Leadership, Luck) are wanted anyway.</g-row>
-  <g-row img="sub_class_demons_might_2.png" name="Soul Eater" spec="Enforcer — Hive">New ability: consume any corpse to gain <strong>stacking Attack/Defense/Power</strong> for the rest of the fight. All required skills (Insight, Logistics, Resistance, Daylight) are core Enforcer picks.</g-row>
-</g-table>
-
-<g-table tier="decent" base="classes" cols="Subclass,Class — Faction,When and why to pursue">
-  <g-row img="sub_class_undead_might_1.png" name="Harbinger of Doom" spec="Death Knight — Necropolis">Enemies always roll minimum luck and always land unlucky strikes — effectively <strong>~50% damage reduction</strong> on incoming hits. Primal Magic and Scouting are the hard-to-find bottlenecks; realistic only with university support.</g-row>
-  <g-row img="sub_class_undead_magic_1.png" name="Soulweaver" spec="Necromancer — Necropolis">A friendly Wight stack spawns wherever an enemy stack dies. Easy to pursue since Logistics, Insight, and Avatar are core picks anyway — <strong>Battlecraft is the only bottleneck</strong>. Payoff is modest but costs almost nothing.</g-row>
-  <g-row img="sub_class_unfrozen_might_1.png" name="Unbound" spec="Oathkeeper — Schism">All hero spells at <strong>maximum level</strong>. Genuinely powerful, but Sorcery is rarely offered to Oathkeepers and the payoff is partially achievable through items (Seven Eyes). Worth pursuing if a university hands you Sorcery.</g-row>
-  <g-row img="sub_class_unfrozen_magic_1.png" name="Unstoppable" spec="Riftspeaker — Schism"><strong>+10 to all stats</strong> (~20% increase). Always impactful since there are no stat caps. Battlecraft and Tactics are unlikely offers; only realistic with a university.</g-row>
-  <g-row img="sub_class_dungeon_might_1.png" name="Balthazar's Bodyguard" spec="Overlord — Dungeon">Doubles Attack skill — <strong>roughly +50% damage</strong> in practice. Offense and Leadership are already wanted; Diplomacy is the one wasted slot. Fun novelty pick, not a core build-around.</g-row>
-  <g-row img="sub_class_dungeon_might_2.png" name="Silvertongue's Envoy" spec="Overlord — Dungeon">Doubles Defense skill — <strong>marginally better than Balthasar's</strong> since defense is universally useful. Sorcery is the unlikely bottleneck. Mid across all three criteria.</g-row>
-</g-table>
-
-</div><!-- /tab-subclasses -->
 
 <script>
 (function () {
