@@ -109,7 +109,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 /* Map guide cards */
 .maps-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
 }
 .map-guide-card {
@@ -119,14 +119,11 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   border-left: 3px solid color-mix(in srgb, var(--accent) 54%, transparent);
   border-radius: 4px;
 }
-.map-guide-card.featured {
-  grid-column: 1 / -1;
-}
 .map-shot {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
   background: #050507;
   border-bottom: 1px solid color-mix(in srgb, var(--accent) 16%, #1e1e25);
 }
@@ -228,11 +225,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   }
 
   .maps-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .map-guide-card.featured {
-    grid-column: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   h1 {
@@ -346,6 +339,10 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 @media (max-width: 460px) {
   .tab-content {
     padding: 22px 14px 40px !important;
+  }
+
+  .maps-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .tab-btn {
@@ -1456,7 +1453,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-sec>Template Guide</g-sec>
 
 <div class="maps-grid">
-  <section class="map-guide-card featured">
+  <section class="map-guide-card">
     <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/exodus" target="_blank" class="el"><img class="map-shot" src="img/maps/exodus.png" alt="Exodus map preview"></a>
     <div class="map-card-body">
       <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">128 x 128</span><span class="map-pill">Tournament</span></div>
@@ -2583,7 +2580,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-sec>Przewodnik po template'ach</g-sec>
 
 <div class="maps-grid">
-  <section class="map-guide-card featured">
+  <section class="map-guide-card">
     <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/exodus" target="_blank" class="el"><img class="map-shot" src="img/maps/exodus.png" alt="Exodus map preview"></a>
     <div class="map-card-body">
       <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">128 x 128</span><span class="map-pill">Tournament</span></div>
