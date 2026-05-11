@@ -185,6 +185,76 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   color: #b8b8c4;
   line-height: 1.55;
 }
+.map-object-glossary {
+  margin: 0 0 24px;
+  padding: 20px 22px 22px;
+  background: color-mix(in srgb, var(--accent) 3%, #0d0d11);
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, #1e1e25);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 54%, transparent);
+  border-radius: 4px;
+}
+.map-object-head {
+  display: grid;
+  grid-template-columns: minmax(160px, 260px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.map-object-head h2 {
+  color: #eeeef5;
+  font-family: Cinzel, serif;
+  font-size: 1.35em;
+  line-height: 1.15;
+  margin: 0;
+}
+.map-object-head p {
+  color: #a8a8b8;
+  line-height: 1.58;
+  margin: 0;
+}
+.map-object-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.map-object-card {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 13px;
+  align-items: start;
+  min-height: 132px;
+  padding: 14px 15px;
+  background: color-mix(in srgb, var(--accent) 4%, #101016);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, #24242d);
+  border-radius: 4px;
+}
+.map-object-card img {
+  display: block;
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+  padding: 5px;
+  background: #060607;
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, #24242d);
+  border-radius: 4px;
+}
+.map-object-card h3 {
+  color: var(--accent);
+  font-family: Rajdhani, sans-serif;
+  font-size: .9em;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.map-object-card p {
+  color: #b8b8c4;
+  font-size: .94em;
+  line-height: 1.54;
+  margin: 0;
+}
 
 /* Mobile / narrow layout */
 @media (max-width: 1024px) {
@@ -228,6 +298,15 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .map-object-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .map-object-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   h1 {
     font-size: clamp(2rem, 10vw, 3rem) !important;
     letter-spacing: clamp(4px, 2.2vw, 10px) !important;
@@ -243,6 +322,19 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 @media (max-width: 760px) {
   body { font-size: 14px }
+
+  .map-object-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .map-object-card {
+    grid-template-columns: 62px minmax(0, 1fr);
+  }
+
+  .map-object-card img {
+    width: 62px;
+    height: 62px;
+  }
 
   table,
   thead,
@@ -1452,6 +1544,23 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 <g-sec>Template Guide</g-sec>
 
+<div class="map-object-glossary">
+  <div class="map-object-head">
+    <h2>Object Glossary</h2>
+    <p>Quick meaning of the map objects that decide tempo, break timing and late-zone value on these templates.</p>
+  </div>
+  <div class="map-object-grid">
+    <div class="map-object-card"><img src="img/objects/pandora_box.png" alt="Pandora Box"><div><h3>Pandora Box</h3><p>Guarded reward box. On box templates it usually means army tempo; higher variants in later zones tend to pay better and are often the main reason to race the map.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/dragon_utopia.png" alt="Dragon Utopia"><div><h3>Dragon Utopia</h3><p>High-value guarded bank. Expect a serious fight for a big payoff: artifacts, resources and enough value to justify planning a turn around it.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/arena.png" alt="Arena"><div><h3>Arena</h3><p>Hero-scaling object, usually taken for permanent combat stats. Important when a template expects a large final fight or repeated tournament fights.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/tree_of_abundance.png" alt="Aboropia"><div><h3>Aboropia</h3><p>Growth swing object. It triggers an extra creature-growth payoff, so it is strongest after your important towns and dwellings are already online.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/orb_observatory.png" alt="Observatory"><div><h3>Observatory</h3><p>Early Knowledge/utility pickup. On Vendetta the two nearby observatories enable day-1 Mage Guild into control-spell tempo.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/fickle_shrine.png" alt="Four Scholar Shrine"><div><h3>Four Scholar Shrine</h3><p>Hero rebuild payoff. Use it to drop early scaling skills and rebuild toward hard combat skills before the decisive fights.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/unstable_ruins.png" alt="Ruins / Banks"><div><h3>Ruins / Banks</h3><p>Guarded high-value content such as Unstable Ruins, Chimerologist or Eternal Dragon. These are late-zone reasons to keep gaining army instead of forcing too early.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/watchtower.png" alt="Watchtower / Mirage"><div><h3>Watchtower / Mirage</h3><p>Information and map-control objects. They make routes, opponent movement and valuable nearby objectives easier to read.</p></div></div>
+  </div>
+</div>
+
 <div class="maps-grid">
   <section class="map-guide-card">
     <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/exodus" target="_blank" class="el"><img class="map-shot" src="img/maps/exodus.png" alt="Exodus map preview"></a>
@@ -2578,6 +2687,23 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-mech title="Szybki read template'ów ranked">Szybki ranked reference dla pięciu template'ów Single Hero: czego każda mapa od ciebie wymaga, gdzie leży power i jakie profile bohaterów albo jednostek zyskują wartość.</g-mech>
 
 <g-sec>Przewodnik po template'ach</g-sec>
+
+<div class="map-object-glossary">
+  <div class="map-object-head">
+    <h2>Słownik obiektów</h2>
+    <p>Krótkie znaczenie obiektów, które decydują o tempie, timingu breaka i wartości late zone'ów na tych template'ach.</p>
+  </div>
+  <div class="map-object-grid">
+    <div class="map-object-card"><img src="img/objects/pandora_box.png" alt="Pandora Box"><div><h3>Pandora Box</h3><p>Guarded reward box. Na box template'ach zwykle oznacza tempo armii; wyższe warianty w dalszych strefach płacą lepiej i są głównym powodem race'u po mapie.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/dragon_utopia.png" alt="Dragon Utopia"><div><h3>Dragon Utopia</h3><p>Mocny guarded bank. Spodziewaj się trudnej walki za duży payoff: artefakty, surowce i wartość, pod którą często planujesz całą turę.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/arena.png" alt="Arena"><div><h3>Arena</h3><p>Obiekt do skalowania bohatera, zwykle pod stałe staty bojowe. Ważna tam, gdzie template kończy się dużym final fightem albo seriami walk turniejowych.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/tree_of_abundance.png" alt="Aboropia"><div><h3>Aboropia</h3><p>Growth swing. Odpala dodatkowy payoff z przyrostu jednostek, więc jest najmocniejsza dopiero wtedy, gdy kluczowe miasta i dwellingi już działają.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/orb_observatory.png" alt="Observatory"><div><h3>Observatory</h3><p>Early pickup pod Knowledge i utility. Na Vendetta dwa pobliskie observatoria umożliwiają day-1 Mage Guild i tempo z control spelli.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/fickle_shrine.png" alt="Four Scholar Shrine"><div><h3>Four Scholar Shrine</h3><p>Payoff do przebudowy bohatera. Pozwala wyrzucić early scaling skille i przejść w twarde skille bojowe przed decydującymi walkami.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/unstable_ruins.png" alt="Ruins / Banks"><div><h3>Ruins / Banks</h3><p>Guarded high-value content, np. Unstable Ruins, Chimerologist albo Eternal Dragon. To late-zone powód, żeby dalej zbierać armię zamiast wymuszać za wcześnie.</p></div></div>
+    <div class="map-object-card"><img src="img/objects/watchtower.png" alt="Watchtower / Mirage"><div><h3>Watchtower / Mirage</h3><p>Obiekty informacji i kontroli mapy. Pomagają czytać ścieżki, ruch przeciwnika i wartościowy content w okolicy.</p></div></div>
+  </div>
+</div>
 
 <div class="maps-grid">
   <section class="map-guide-card">
