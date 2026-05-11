@@ -276,6 +276,68 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 .map-facts ul {
   padding-left: 18px;
 }
+.vendetta-tierlist {
+  margin: 0 0 26px;
+  padding: 20px 22px 22px;
+  background: color-mix(in srgb, var(--accent) 3%, #0d0d11);
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, #1e1e25);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 54%, transparent);
+  border-radius: 4px;
+}
+.vendetta-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.vendetta-tier-card {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 14px;
+  min-height: 132px;
+  padding: 15px 16px;
+  background: color-mix(in srgb, var(--tier-color, var(--accent)) 5%, #101016);
+  border: 1px solid color-mix(in srgb, var(--tier-color, var(--accent)) 18%, #24242d);
+  border-left: 3px solid color-mix(in srgb, var(--tier-color, var(--accent)) 58%, transparent);
+  border-radius: 4px;
+}
+.vendetta-tier-rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border: 1px solid color-mix(in srgb, var(--tier-color, var(--accent)) 34%, #272730);
+  background: color-mix(in srgb, var(--tier-color, var(--accent)) 12%, #08080b);
+  color: #fff7e8;
+  font-family: Rajdhani, sans-serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.vendetta-tier-card h3 {
+  color: #eeeef5;
+  font-family: Cinzel, serif;
+  font-size: 1.08em;
+  line-height: 1.2;
+  margin: 0 0 7px;
+}
+.vendetta-tier-card p {
+  color: #b8b8c4;
+  font-size: .95em;
+  line-height: 1.56;
+  margin: 0;
+}
+.vendetta-tier-note {
+  color: #9696a8;
+  line-height: 1.6;
+  margin: 16px 0 0;
+}
+.tier-splus { --tier-color: #58e09a }
+.tier-s { --tier-color: #d7c35a }
+.tier-a { --tier-color: #7ecbd4 }
+.tier-b { --tier-color: #a98add }
+.tier-c { --tier-color: #d97070 }
 
 /* Mobile / narrow layout */
 @media (max-width: 1024px) {
@@ -326,6 +388,10 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
   .map-object-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .vendetta-tier-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   h1 {
@@ -433,6 +499,18 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
   .map-object-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vendetta-tier-card {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .vendetta-tier-rank {
+    width: 48px;
+    height: 48px;
+    font-size: .95em;
   }
 
   .map-object-card {
@@ -1670,6 +1748,22 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   </div>
 </div>
 
+<div class="vendetta-tierlist">
+  <div class="map-object-head">
+    <h2>Vendetta Faction Tier List</h2>
+    <p>Vendetta rewards early control-spell abuse, Knowledge, mana sustain, clean box fights and mixed-army scaling. This ranking is template-specific, not a general faction ranking.</p>
+  </div>
+  <div class="vendetta-tier-grid">
+    <div class="vendetta-tier-card tier-splus"><div class="vendetta-tier-rank">S+</div><div><h3>Grove</h3><p>Vatawna is the format breaker: extra Dimension Door tempo from turn 1 can snowball the whole map. Even without her, Dusk Hoplet + Avatar/Bloom gives Grove some of the fastest early fight access in the game.</p></div></div>
+    <div class="vendetta-tier-card tier-s"><div class="vendetta-tier-rank">S</div><div><h3>Temple</h3><p>Merry Elias gives the faction a similar Vendetta spike through extra global map spell usage. Temple also has a stable Austringer start, Heroic Strike scaling and strong morale/Angel late plans.</p></div></div>
+    <div class="vendetta-tier-card tier-a"><div class="vendetta-tier-rank">A+</div><div><h3>Dungeon</h3><p>Very reliable on Vendetta: strong day-1 shooter, caster tempo, good direct damage and flexible power stacks. It lacks the absurd map-spell abuse of Grove/Temple, but handles random box games extremely well.</p></div></div>
+    <div class="vendetta-tier-card tier-a"><div class="vendetta-tier-rank">A</div><div><h3>Necropolis</h3><p>Good on Knowledge-heavy and longer Vendetta games. Sustain, revive/overheal tools and durable stack plans let Necro take hard fights with less real bleed, though its race-to-mid ceiling is lower than the top tiers.</p></div></div>
+    <div class="vendetta-tier-card tier-b"><div class="vendetta-tier-rank">B+</div><div><h3>Schism</h3><p>Strong native early game through Communion and Shadow Army, but Vendetta gives lots of foreign box army that does not fully benefit from core Schism mechanics. Big upside if Unfrozen Strength laws come online, since they affect all units.</p></div></div>
+    <div class="vendetta-tier-card tier-c"><div class="vendetta-tier-rank">B-/C+</div><div><h3>Hive</h3><p>Playable with Maelstrom or Zoran, rough without them. Hive wants time to form one real power stack, while Vendetta punishes weak early fights, low shooting and avoidable bleed.</p></div></div>
+  </div>
+  <p class="vendetta-tier-note">Hero pick matters more than the faction badge here: Grove with Vatawna and Temple with Merry Elias are different tiers than those factions without their Vendetta specialists.</p>
+</div>
+
 <div class="maps-grid">
   <section class="map-guide-card">
     <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/exodus" target="_blank" class="el"><img class="map-shot" src="img/maps/exodus.png" alt="Exodus map preview"></a>
@@ -2817,6 +2911,22 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
     <a href="https://olden-era.gameatlas.games/objects/unstable_ruins/" target="_blank" class="map-object-card"><img src="img/objects/unstable_ruins.png" alt="Ruins / Banks"><div><h3>Ruins / Banks</h3><p>Guarded high-value content, np. Unstable Ruins, Chimerologist albo Eternal Dragon. To late-zone powód, żeby dalej zbierać armię zamiast wymuszać za wcześnie.</p></div></a>
     <a href="https://olden-era.gameatlas.games/objects/watchtower/" target="_blank" class="map-object-card"><img src="img/objects/watchtower.png" alt="Watchtower / Mirage"><div><h3>Watchtower / Mirage</h3><p>Obiekty informacji i kontroli mapy. Pomagają czytać ścieżki, ruch przeciwnika i wartościowy content w okolicy.</p></div></a>
   </div>
+</div>
+
+<div class="vendetta-tierlist">
+  <div class="map-object-head">
+    <h2>Tierlista frakcji na Vendetta</h2>
+    <p>Vendetta premiuje abuse control spelli od startu, Knowledge, mana sustain, czyste box fighty i mixed-army scaling. To ranking pod ten template, nie ogólna tierlista frakcji.</p>
+  </div>
+  <div class="vendetta-tier-grid">
+    <div class="vendetta-tier-card tier-splus"><div class="vendetta-tier-rank">S+</div><div><h3>Knieja</h3><p>Vatawna łamie format: dodatkowy Dimension Door od tury 1 potrafi snowballować całą mapę. Nawet bez niej Dusk Hoplet + Avatar/Bloom daje Kniei jeden z najszybszych early fight accessów w grze.</p></div></div>
+    <div class="vendetta-tier-card tier-s"><div class="vendetta-tier-rank">S</div><div><h3>Świątynia</h3><p>Merry Elias daje frakcji podobny spike na Vendetta przez dodatkowe użycia global map spelli. Do tego Świątynia ma stabilny start Austringerami, Heroic Strike scaling i mocne morale/Angel plany na late.</p></div></div>
+    <div class="vendetta-tier-card tier-a"><div class="vendetta-tier-rank">A+</div><div><h3>Loch</h3><p>Bardzo pewny pick na Vendetta: mocny day-1 shooter, caster tempo, dobry direct damage i elastyczne power stacki. Nie ma tak absurdalnego abuse map spelli jak Knieja/Świątynia, ale świetnie znosi losowe box games.</p></div></div>
+    <div class="vendetta-tier-card tier-a"><div class="vendetta-tier-rank">A</div><div><h3>Nekropolia</h3><p>Dobra na knowledge-heavy i dłuższe gry na Vendetta. Sustain, revive/overheal i trwałe plany stacków pozwalają brać trudne walki z mniejszym realnym bleedem, choć race-to-mid ma niższy sufit niż top tier.</p></div></div>
+    <div class="vendetta-tier-card tier-b"><div class="vendetta-tier-rank">B+</div><div><h3>Schizma</h3><p>Mocny własny early przez Communion i Shadow Army, ale Vendetta daje dużo obcej armii z boxów, która nie korzysta w pełni z mechanik frakcji. Duży upside, gdy wejdą prawa Unfrozen Strength, bo działają na wszystkie jednostki.</p></div></div>
+    <div class="vendetta-tier-card tier-c"><div class="vendetta-tier-rank">B-/C+</div><div><h3>Rój</h3><p>Grywalny z Maelstromem albo Zoranem, ciężki bez nich. Rój potrzebuje czasu na złożenie jednego realnego power stacka, a Vendetta karze słabe early walki, brak strzelania i niepotrzebny bleed.</p></div></div>
+  </div>
+  <p class="vendetta-tier-note">Na Vendetta bohater znaczy więcej niż sama frakcja: Knieja z Vatawną i Świątynia z Merry Eliasem to inny tier niż te same frakcje bez swoich specjalistów od tego template'u.</p>
 </div>
 
 <div class="maps-grid">
