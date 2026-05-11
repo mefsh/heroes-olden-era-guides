@@ -19,17 +19,45 @@ tailwind.config = {
 </script>
 <style>
 /* ── Faction colour variables ─────────────────────────────────────────── */
-#tab-hive       { --accent:#ff8f00; --mech-title:#ffa726; --row-top:#0e1108 }
-#tab-dungeon    { --accent:#c084d4; --mech-title:#b56fc7; --row-top:#120a18 }
-#tab-grove      { --accent:#72c275; --mech-title:#59b55c; --row-top:#08160a }
-#tab-necro      { --accent:#849db0; --mech-title:#6e8d9e; --row-top:#0b1018 }
-#tab-temple     { --accent:#f0c030; --mech-title:#f0c030; --row-top:#181505 }
-#tab-schism     { --accent:#7ecbd4; --mech-title:#5bb8c8; --row-top:#060e12 }
+.tab-content[data-tab="hive"]    { --accent:#ff8f00; --mech-title:#ffa726; --row-top:#0e1108 }
+.tab-content[data-tab="dungeon"] { --accent:#c084d4; --mech-title:#b56fc7; --row-top:#120a18 }
+.tab-content[data-tab="grove"]   { --accent:#72c275; --mech-title:#59b55c; --row-top:#08160a }
+.tab-content[data-tab="necro"]   { --accent:#849db0; --mech-title:#6e8d9e; --row-top:#0b1018 }
+.tab-content[data-tab="temple"]  { --accent:#f0c030; --mech-title:#f0c030; --row-top:#181505 }
+.tab-content[data-tab="schism"]  { --accent:#7ecbd4; --mech-title:#5bb8c8; --row-top:#060e12 }
 
 /* ── Tab behaviour ────────────────────────────────────────────────────── */
 .tab-content { display: none }
 .tab-content.active { display: block }
 .tab-btn.active { color:var(--c); border-bottom-color:var(--c); text-shadow:0 0 22px var(--c) }
+.lang-switch {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 18px;
+}
+.lang-btn {
+  min-width: 42px;
+  height: 32px;
+  border: 1px solid #20202a;
+  background: #0d0d12;
+  color: #5c5c70;
+  cursor: pointer;
+  font-family: Rajdhani, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: border-color .18s ease, color .18s ease, background .18s ease, transform .18s ease;
+}
+.lang-btn:hover {
+  color: #c8c8d8;
+  border-color: #38384a;
+}
+.lang-btn.active {
+  color: #eeeeF5;
+  border-color: var(--active-lang, #ff8f00);
+  background: color-mix(in srgb, var(--active-lang, #ff8f00) 12%, #0d0d12);
+}
 
 /* ── color-mix() — no Tailwind equivalent ────────────────────────────── */
 h1 {
@@ -94,6 +122,15 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
     padding-left: 18px !important;
     padding-right: 18px !important;
     letter-spacing: 1.4px !important;
+  }
+
+  .lang-switch {
+    position: sticky;
+    right: 0;
+    margin-left: 8px;
+    padding-left: 12px;
+    padding-right: 2px;
+    background: #060607;
   }
 
   .tab-content {
@@ -244,17 +281,21 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <body class="bg-[#09090c] text-[#b8b8c4] font-sans text-base leading-relaxed">
 
 <nav class="sticky top-0 z-[100] bg-[#060607] border-b border-[#18181f] flex px-[52px]">
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0] active" data-tab="hive"       style="--c:#ff8f00">HIVE</button>
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="dungeon"    style="--c:#ce93d8">DUNGEON</button>
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="grove"      style="--c:#81c784">GROVE</button>
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="necro"      style="--c:#90a4ae">NECROPOLIS</button>
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="temple"     style="--c:#ffd54f">TEMPLE</button>
-  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="schism"     style="--c:#7ecbd4">SCHISM</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0] active" data-tab="hive"    data-label-en="HIVE"       data-label-pl="RÓJ"        style="--c:#ff8f00">HIVE</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="dungeon" data-label-en="DUNGEON"    data-label-pl="LOCH"       style="--c:#ce93d8">DUNGEON</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="grove"   data-label-en="GROVE"      data-label-pl="KNIEJA"     style="--c:#81c784">GROVE</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="necro"   data-label-en="NECROPOLIS" data-label-pl="NEKROPOLIA" style="--c:#90a4ae">NECROPOLIS</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="temple"  data-label-en="TEMPLE"     data-label-pl="ŚWIĄTYNIA"  style="--c:#ffd54f">TEMPLE</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="schism"  data-label-en="SCHISM"     data-label-pl="SCHIZMA"    style="--c:#7ecbd4">SCHISM</button>
+  <div class="lang-switch" aria-label="Language">
+    <button class="lang-btn active" type="button" data-lang="en" title="English" aria-label="English">🇬🇧 EN</button>
+    <button class="lang-btn" type="button" data-lang="pl" title="Polski" aria-label="Polski">🇵🇱 PL</button>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════ HIVE ══ -->
 
-﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto active" id="tab-hive">
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-hive-en" data-lang="en" data-tab="hive">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">HIVE</h1>
 
@@ -305,14 +346,14 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <g-row img="Curson__Duke_of_Rage.png" href="demon_hero_5" name="Curson, Duke of Rage">Heroic Strike — focus conflict: Heroic Strike vs Summon Swarm compete for same resource.</g-row>
   <g-row img="Goldentongue.png" href="demon_hero_8" name="Goldentongue">Morale — no shooters, no consistent morale procs. Melee-only army can't rely on it.</g-row>
   <g-row img="Abigor__Duke_of_Battle.png" href="demon_hero_9" name="Abigor, Duke of Battle">+1 initiative/6 levels — buff comes too late.</g-row>
-  <g-row img="Fleu.png" href="demon_hero_10" name="Fleu">Starts with Doom (way too expensive early). Bottleneck elsewhere.</g-row>
+  <g-row img="Fleu.png" href="demon_hero_10" name="Fleu">Starts with Doom, which is far too expensive before Hive has the stats and mana economy to support it.</g-row>
   <g-row img="Xirr.png" href="demon_hero_11" name="Xirr">Resistance — only useful vs players; you die before meeting them.</g-row>
-  <g-row img="Bathym__Duke_of_Jewels.png" href="demon_hero_12" name="Bathym, Duke of Jewels">Crystal economy. Useless.</g-row>
+  <g-row img="Bathym__Duke_of_Jewels.png" href="demon_hero_12" name="Bathym, Duke of Jewels">Crystal economy does not improve creeping, scaling, or final-fight power.</g-row>
   <g-row img="Leira.png" href="demon_hero_13" name="Leira">Hornet specialist — Hornets can't function as power stack.</g-row>
   <g-row img="Groo.png" href="demon_hero_14" name="Groo">Hive Queen specialist — starts with zero Hive Queens.</g-row>
   <g-row img="Khariseth.png" href="demon_hero_17" name="Khariseth">Primal magic — starts with Anti-Magic (useless early).</g-row>
   <g-row img="Pauper.png" href="demon_hero_18" name="Pauper">+1 speed to all (great specialty!) but starts with Battle Magic — dead skill before you have stats. Fatal for Hive early game.</g-row>
-  <g-row img="Lo.png" href="demon_hero_7" name="Lo">Middle of pack. Not bad, not strong enough.</g-row>
+  <g-row img="Lo.png" href="demon_hero_7" name="Lo">Playable filler: not actively harmful, but offers no clear route that beats the faction's stronger specialists.</g-row>
 </g-table>
 </div>
 
@@ -332,7 +373,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <g-row img="trick_demon_upg_alt.png" href="trick_demon_upg_alt" name="Ravager Parasite" spec="T1 upgrade">Slightly better initiative/speed. <strong>Vanguard</strong>: +1 attack per unique Hive unit in army. Least-bad T1.</g-row>
   <g-row img="wasp_upg_alt.png" href="wasp_upg_alt" name="Stinger" spec="T3 upgrade (Hornet)"><strong>Piercing Sting</strong> (guaranteed death effect). Fast. Hard to build a reliable stack of.</g-row>
   <g-row img="lava_larva.png" href="lava_larva" name="Fire Larva" spec="Summon Swarm">Explode on death (AoE). Weak early. <strong>Huge late game</strong> with Infernal Rage law: 300 larvae at +1 dmg = massive damage wave.</g-row>
-  <g-row img="hive_queen_upg_alt.png" href="hive_queen_upg_alt" name="Hive Huntress" spec="T7 upgrade">Loses Contaminating Blast for more damage/speed. Decent if you build many.</g-row>
+  <g-row img="hive_queen_upg_alt.png" href="hive_queen_upg_alt" name="Hive Huntress" spec="T7 upgrade">Trades Contaminating Blast for raw damage and speed. Fine when you already have a large T7 stack, but weaker as a payoff target.</g-row>
 </g-table>
 
 <g-table tier="useless" base="units" cols="Unit,Why">
@@ -351,20 +392,20 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-table tier="top" base="laws">
   <g-row img="fraction_law_demon_2.png" name="Laws of the Hive">Each point spent counts as bonus points toward unlocking higher law tiers. Lets you get T5/T6 unit laws on <strong>Week 1</strong>. Core enabler — rush immediately.</g-row>
   <g-row img="fraction_law_demon_17.png" name="Elite Reavers">Rank 1: +1 morale &amp; luck. <strong>Rank 2: +5 morale</strong> → Reavers permanently at max luck. Always pick.</g-row>
-  <g-row img="fraction_law_demon_28.png" name="Infernal Rage">+1 damage to ALL units. 300 Larvae gain +20% damage. Scales everything.</g-row>
+  <g-row img="fraction_law_demon_28.png" name="Infernal Rage">+1 damage to every unit scales especially well with large Larva waves and remains relevant across the whole army.</g-row>
   <g-row img="fraction_law_demon_18.png" name="Elite Waurmos">T6 unit law, accessible at only 15 law points. Increases Worm growth. Rush this (if Worm route).</g-row>
 </g-table>
 
 <g-table tier="decent" base="laws">
   <g-row img="fraction_law_demon_9.png" name="Mana Devour">Applies to Dimension Door, Second Wind, all combat spells. Useful when heroes are knowledge-starved.</g-row>
-  <g-row img="fraction_law_demon_7.png" name="Breeding Frenzy">Boosts unit population. Good long term.</g-row>
-  <g-row img="fraction_law_demon_29.png" name="No Compassion">Increases luck chance. Stacks well with Reaver/Worm late game.</g-row>
+  <g-row img="fraction_law_demon_7.png" name="Breeding Frenzy">A solid long-term population boost when the game is slow enough for growth to matter.</g-row>
+  <g-row img="fraction_law_demon_29.png" name="No Compassion">Improves luck consistency and pairs well with Reaver or Worm stacks once the faction reaches late game.</g-row>
   <g-row img="fraction_law_demon_6.png" name="Hive Offsprings">Enemies adjacent to Larvae must target Larvae instead. Situational but can be overwhelming.</g-row>
-  <g-row img="fraction_law_demon_19.png" name="Hive Offsprings II">Some Larvae attack twice. Good with large swarms + Infernal Rage.</g-row>
+  <g-row img="fraction_law_demon_19.png" name="Hive Offsprings II">Double-attacking Larvae become meaningful when Swarm counts are high, especially alongside Infernal Rage.</g-row>
 </g-table>
 
 <g-table tier="useless" base="laws" cols="Law,Why">
-  <g-row img="fraction_law_demon_21.png" name="Natural Selection">You upgrade in town anyway. Pointless.</g-row>
+  <g-row img="fraction_law_demon_21.png" name="Natural Selection">Low value because upgrades are already handled in town without spending law points.</g-row>
   <g-row img="fraction_law_demon_22.png" name="Hive Magic">Boosts primal/damage spells. Hive heroes lack stats to cast them effectively. Design mismatch.</g-row>
 </g-table>
 
@@ -425,7 +466,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 </div><!-- /tab-hive -->
 
-﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-dungeon">
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-dungeon-en" data-lang="en" data-tab="dungeon">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">DUNGEON</h1>
 
@@ -455,7 +496,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-sec>Heroes</g-sec>
 
 <g-table tier="top" base="heroes" label="TOP — Perma Ban / Perma Pick">
-  <g-row img="Stinger.png" href="dungeon_hero_3" name="Stinger" spec="Heroic Strike specialist">+10 dmg per strike +5 per 6 levels. <strong>Stackable poison: 18 magic dmg/round forever.</strong> Starts with Combat. Consistently perma-banned. "She's one of the best heroes the dungeon has to offer."</g-row>
+  <g-row img="Stinger.png" href="dungeon_hero_3" name="Stinger" spec="Heroic Strike specialist">+10 Heroic Strike damage, scaling by +5 every 6 levels, plus permanent stacking poison. Starts with Combat, pressures every fight from turn one, and is consistently ban-worthy.</g-row>
   <g-row img="Kelarr__son_of_Navarr.png" href="dungeon_hero_10" name="Kelarr, son of Navarr" spec="Insight / XP specialist">+1 attribute per 2 levels, extra XP scaling with level. Starts with Insight. "One of the most favorite heroes in the entire roster." Fully flexible — no direction commitment. Perma ban/pick.</g-row>
   <g-row img="Typhona.png" href="dungeon_hero_16" name="Typhona" spec="Hydra specialist">Starts with <strong>2 T6 Hydras</strong>. Advanced Trombarati Strength → Expert at level 2 → Flow immediately. "Amazing, really really good, most of the time you're going to be seeing her banned."</g-row>
 </g-table>
@@ -467,17 +508,17 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 <g-table tier="decent" base="heroes">
   <g-row img="Zakron_the_Great.png" href="dungeon_hero_11" name="Zakron the Great" spec="Sorcery specialist">+10% extra spell dmg (+1% per 2 levels). Enemy hero spells deal same % less. Starts with Sorcery + Fireball. Dragon stance (Power) synergy. "Gem in the rough — can carry a game."</g-row>
-  <g-row img="Motley.png" href="dungeon_hero_13" name="Motley" spec="Onyx Dancer specialist">Starts with 3 Dancer stacks + Twilight spell. "Middle of pack, sometimes banned/picked, but in my honest opinion kind of overrated."</g-row>
+  <g-row img="Motley.png" href="dungeon_hero_13" name="Motley" spec="Onyx Dancer specialist">Starts with 3 Dancer stacks and Twilight. Good early tools, but the ceiling is lower than Dungeon's true carry heroes.</g-row>
 </g-table>
 
 <g-table tier="useless" base="heroes" cols="Hero,Why it fails">
-  <g-row img="Tellaris_the_Betrayed.png" href="dungeon_hero_2" name="Tellaris the Betrayed">Masterful Early Star (undispellable) but specialty is a gimmick. "Still kind of sucks. Filler hero."</g-row>
+  <g-row img="Tellaris_the_Betrayed.png" href="dungeon_hero_2" name="Tellaris the Betrayed">Masterful Early Star being undispellable is cute, but the specialty lacks enough tempo or scaling to justify the pick.</g-row>
   <g-row img="Kieran.png" href="dungeon_hero_4" name="Kieran">T1 specialist + Tactics. Viable on very slow maps only. Generally overlooked.</g-row>
   <g-row img="Mouaren.png" href="dungeon_hero_5" name="Mouaren">Infiltrator specialist + Scouting. "Nobody likes her and I think that is for good reason."</g-row>
-  <g-row img="Creta__daughter_of_Navarr.png" href="dungeon_hero_7" name="Creta, daughter of Navarr">Gem economy. "Really bad. Filler hero."</g-row>
+  <g-row img="Creta__daughter_of_Navarr.png" href="dungeon_hero_7" name="Creta, daughter of Navarr">Gem economy does not help Dungeon win fights or reach its power stacks faster.</g-row>
   <g-row img="Rhea.png" href="dungeon_hero_8" name="Rhea">Luck specialist. Dungeon has almost no luck synergy (only 2 units benefit). "Gets overlooked for good reason."</g-row>
   <g-row img="Gleard_the_Grey.png" href="dungeon_hero_9" name="Gleard the Grey">Arcane magic specialist. "Probably the worst of all school specialists. Arcane spells are nothing special, complete garbage in early game."</g-row>
-  <g-row img="Sister_Deira.png" href="dungeon_hero_12" name="Sister Deira">Masterful Arena's Chosen + Vomitory. "I have no idea how you would use this hero. I think she sucks."</g-row>
+  <g-row img="Sister_Deira.png" href="dungeon_hero_12" name="Sister Deira">Masterful Arena's Chosen is hard to convert into a coherent game plan, and the starting skill does not fix her tempo.</g-row>
   <g-row img="Ylwari.png" href="dungeon_hero_14" name="Ylwari">Army-when-fleeing / Diplomacy. "Not fit for one-hero gameplay."</g-row>
   <g-row img="Glastor.png" href="dungeon_hero_15" name="Glastor">Economy specialist. "Pitiful scrap change — farming banks with avatar/combat is better money."</g-row>
   <g-row img="Sunny_Rauktol.png" href="dungeon_hero_17" name="Sunny Rauktol">Daylight specialist. "Warlocks don't function with daylight at all. No game plan here."</g-row>
@@ -524,10 +565,10 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-table tier="decent" base="laws">
-  <g-row img="fraction_law_dungeon_23.png" name="Merchants Guild">Eliminates all price markups in marketplaces. Resources freely tradeable at no value loss. "Pretty insane, very interesting."</g-row>
+  <g-row img="fraction_law_dungeon_23.png" name="Merchants Guild">Eliminates marketplace markups, letting resources convert cleanly into whatever Dungeon needs for upgrades and tech.</g-row>
   <g-row img="fraction_law_dungeon_9.png" name="Alchemists Code I">75 dust (4 pts) + 150 dust (4 pts higher). Dungeon has more dust laws than any faction — needed for item/unit upgrades.</g-row>
-  <g-row img="fraction_law_dungeon_20.png" name="Tactical Advantage">Good quality-of-life for all units.</g-row>
-  <g-row img="fraction_law_dungeon_8.png" name="Jadame Maps">Gives moon points. "Usually happy to get this."</g-row>
+  <g-row img="fraction_law_dungeon_20.png" name="Tactical Advantage">A broad quality-of-life law that improves positioning and makes Dungeon's unit tactics easier to execute.</g-row>
+  <g-row img="fraction_law_dungeon_8.png" name="Jadame Maps">Provides moon points with little opportunity cost; a useful pickup when it fits the route.</g-row>
 </g-table>
 
 <g-table tier="useless" base="laws" cols="Law,Why">
@@ -591,7 +632,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 </div><!-- /tab-dungeon -->
 
-﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-grove">
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-grove-en" data-lang="en" data-tab="grove">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">GROVE</h1>
 
@@ -637,14 +678,14 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-table tier="decent" base="heroes">
-  <g-row img="Faleor.png" href="nature_hero_7" name="Faleor" spec="Masterful Fireball + Advanced Murmuring">"Sleeper hero. Top #1 player on ladder owned me with him. Fireball hits like an asteroid. Advanced Murmuring = immediate sub-skill choice = Child of the Woods + early Dusk Hoplet power = Day 1 playing with ~12 spell power." Underexplored.</g-row>
+  <g-row img="Faleor.png" href="nature_hero_7" name="Faleor" spec="Masterful Fireball + Advanced Murmuring">Sleeper pick. Fireball gives immediate burst, while Advanced Murmuring enables an instant Child of the Woods route and early Dusk Hoplet spell-power stacking. Underexplored but dangerous.</g-row>
 </g-table>
 
 <g-table tier="useless" base="heroes" cols="Hero,Why it fails">
   <g-row img="Eith.png" href="nature_hero_1" name="Eith">Pathing specialist (no terrain penalty, +sight). "Not popular. Not good enough. You want your hero to do more powerful things."</g-row>
   <g-row img="Old_Pilgrim.png" href="nature_hero_4" name="Old Pilgrim">Battle Magic + Masterful Guillotine. "Way too slow. Other spells one-shot things before this stacks up. Not good enough, not fast enough. No bueno."</g-row>
   <g-row img="Octavia.png" href="nature_hero_5" name="Octavia">Luck specialist. "Hard to rely on. Can already reach 45% lucky strike chance without her. Better to scale those lucky hits with Gorl's offense."</g-row>
-  <g-row name="Economy hero (crystal)">Just skipping over more crystals. We want damage and cool effects.</g-row>
+  <g-row name="Economy hero (crystal)">Crystal income does not solve Grove's real priorities: early tempo, Avatar scaling, and reliable fight control.</g-row>
   <g-row img="Alluring_Sh_a.png" href="nature_hero_8" name="Alluring Sh'a">Diplomacy / army when fleeing. "Not a 1-hero kind of hero. Not interesting on ladder."</g-row>
   <g-row img="Elder_Tss_kish.png" href="nature_hero_11" name="Elder Tss'kish">Starts with herbmancers + Theurgy. "Army is slow and hard to use. Theurgy starting skill is whack — can't afford expensive second spell early anyway. Bad hero."</g-row>
   <g-row img="Aeliniel.png" href="nature_hero_12" name="Aeliniel">Masterful Firewall (+1 round), Primal Magic. "Middle of pack best case. Really expensive spell, better ways to play."</g-row>
@@ -676,9 +717,9 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-table tier="useless" base="units" cols="Unit,Why">
-  <g-row img="twinkle.png" href="twinkle" name="Hoplet">"Just a piece of meat if you're not upgrading it." Always upgrade.</g-row>
+  <g-row img="twinkle.png" href="twinkle" name="Hoplet">The base unit is mostly filler; upgrade immediately so Hoplets can contribute focus or Bloom value.</g-row>
   <g-row img="druid.png" href="druid" name="Herbomancer">"Garbage unit. Slow, clunky long-reach melee. Hard to position. Main selling point: available Day 1 — that's literally the only reason it's seen."</g-row>
-  <g-row img="aqualotl.png" href="aqualotl" name="Naiad">"Completely out of the meta. Never seen used unironically. Only built as prerequisite to Quillins/Phoenixes."</g-row>
+  <g-row img="aqualotl.png" href="aqualotl" name="Naiad">Currently out of the competitive meta and usually built only as a prerequisite for Qilins or Phoenixes.</g-row>
   <g-row img="qilin.png" href="qilin" name="Qilin">Solid stats but build path is brutal — 6,500g to unlock + 1,400g per unit. Rarely reached in real games.</g-row>
 </g-table>
 </div>
@@ -695,25 +736,25 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-table tier="decent" base="laws">
   <g-row img="fraction_law_nature_10.png" name="Elite Iriyads">+5 HP per point to Vine/Crystal Iads. "Most popular early law — keeps your tanks alive."</g-row>
   <g-row img="fraction_law_nature_5.png" name="Elite Fauns">+50% melee damage to Fawns. Only good for <strong>Fawn Warrior + Ginger Tale</strong> build. Does NOT improve Fawn Archers.</g-row>
-  <g-row img="fraction_law_nature_6.png" name="Elite Hoplets">Hoplets deal maximum damage. Not bad.</g-row>
+  <g-row img="fraction_law_nature_6.png" name="Elite Hoplets">A modest but useful boost when Hoplets remain part of the army longer than usual.</g-row>
   <g-row img="fraction_law_nature_22.png" name="Elite Mancers">Herbmancer abilities cost 1 less focus charge. Makes Murmurman echo cost 1 instead of 2. "If you're running Murmurman one-stacks, you probably want this."</g-row>
-  <g-row img="fraction_law_nature_23.png" name="Elite Qilins">More growth + damage. Take if building a Quillin power stack.</g-row>
-  <g-row img="fraction_law_nature_27.png" name="Elite Phoenixes">More growth + max damage. Take if building Phoenixes.</g-row>
+  <g-row img="fraction_law_nature_23.png" name="Elite Qilins">Take only when committing to a Qilin power stack; otherwise the timing is usually too late.</g-row>
+  <g-row img="fraction_law_nature_27.png" name="Elite Phoenixes">Worth considering when Phoenixes are the intended late-game stack, but irrelevant in faster games.</g-row>
   <g-row img="fraction_law_nature_29.png" name="Sanctuary">Awakening costs 1 less focus charge (3 → 2). "Actually pretty legit." Requires 50 law points — very late.</g-row>
-  <g-row img="fraction_law_nature_7.png" name="Children of the Wild">+sight radius + movement. "Pretty good when you reach it."</g-row>
+  <g-row img="fraction_law_nature_7.png" name="Children of the Wild">Extra sight and movement are useful once unlocked, though the law competes with more direct fight power.</g-row>
   <g-row img="fraction_law_nature_19.png" name="Focus">+1 focus charge per round. "Grove is focus-hungry — also pretty good."</g-row>
 </g-table>
 
 <g-table tier="useless" base="laws" cols="Law,Why">
   <g-row img="fraction_law_nature_28.png" name="Fairy Tale">+2 spd/ini to Fawns/Hoplets/Herbmancers. Requires 50 law points — "by that point those units are gone from your army. Strong effect, bad timing."</g-row>
   <g-row img="fraction_law_nature_25.png" name="Force of Nature">Heroic Strike +10 dmg. "Faction has zero heroic strike synergy. No heroes with Combat. Weird inclusion."</g-row>
-  <g-row img="fraction_law_nature_9.png" name="Woodland Resistance">Enemies can't see army details. "Doesn't do anything useful."</g-row>
-  <g-row img="fraction_law_nature_3.png" name="Folk Heroes">"By this law point you've already bought your heroes."</g-row>
-  <g-row img="fraction_law_nature_8.png" name="Save the Forests">Cheaper wood. "Wood is already spent."</g-row>
-  <g-row img="fraction_law_nature_18.png" name="The Power of the Written Word">Temporary scrolls +1 level. "Almost never noticed this working."</g-row>
-  <g-row img="fraction_law_nature_31.png" name="Natural Serenity">Cooldown reduction. "Don't trust cooldowns."</g-row>
-  <g-row img="fraction_law_nature_21.png" name="Live roots">Enemies can't flee. "Nothing."</g-row>
-  <g-row img="fraction_law_nature_20.png" name="Fertile Ground">"Too late for current meta game lengths."</g-row>
+  <g-row img="fraction_law_nature_9.png" name="Woodland Resistance">Hiding army details rarely changes competitive decisions enough to justify the law points.</g-row>
+  <g-row img="fraction_law_nature_3.png" name="Folk Heroes">Arrives after the hero purchase window has usually passed, so the payoff is mostly wasted.</g-row>
+  <g-row img="fraction_law_nature_8.png" name="Save the Forests">Wood discounts arrive too late to affect the important build-order bottlenecks.</g-row>
+  <g-row img="fraction_law_nature_18.png" name="The Power of the Written Word">Too narrow and inconsistent: temporary scroll value rarely decides meaningful fights.</g-row>
+  <g-row img="fraction_law_nature_31.png" name="Natural Serenity">Cooldown reduction is too conditional compared with Grove's direct focus, luck, and unit laws.</g-row>
+  <g-row img="fraction_law_nature_21.png" name="Live roots">Preventing retreats is rarely worth law points in the formats this guide targets.</g-row>
+  <g-row img="fraction_law_nature_20.png" name="Fertile Ground">Too slow for current competitive game lengths; the payoff usually arrives after the decisive fights.</g-row>
 </g-table>
 
 <g-sec>Classes</g-sec>
@@ -773,7 +814,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 </div><!-- /tab-grove -->
 
-﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-necro">
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-necro-en" data-lang="en" data-tab="necro">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">NECROPOLIS</h1>
 
@@ -831,7 +872,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <g-row img="Zam.png" href="necro_hero_9" name="Zam">Battlecraft (generates resources). A specialty needs to give fighting power, not just mercury. Bad.</g-row>
   <g-row img="Mag.png" href="necro_hero_10" name="Mag">Arcane magic specialist. Arcane spells are terrible in the early game. No competitive value until very late — by which point any other hero would be better.</g-row>
   <g-row img="Adahn.png" href="necro_hero_11" name="Adon">White/Wraith specialist, starts with Recruitment — one of the worst skills in the game. Trash.</g-row>
-  <g-row img="Milossa_The_Golden.png" href="necro_hero_18" name="Milossa the Golden">Gold economy specialist. Nobody cares about gold specialists.</g-row>
+  <g-row img="Milossa_The_Golden.png" href="necro_hero_18" name="Milossa the Golden">Gold economy does not provide enough fight power or necromancy scaling to justify the hero slot.</g-row>
 </g-table>
 </div>
 
@@ -886,7 +927,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </g-table>
 
 <g-table tier="useless" base="laws" cols="Law,Why">
-  <g-row img="fraction_law_undead_3.png" name="Resource Riches I">Low value. Skip for higher-impact nodes.</g-row>
+  <g-row img="fraction_law_undead_3.png" name="Resource Riches I">Low impact compared with laws that improve necromancy output, terrain control, or sustain.</g-row>
   <g-row img="fraction_law_undead_9.png" name="Death Equalizes All">Low priority — skippable on most builds.</g-row>
 </g-table>
 
@@ -947,7 +988,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 </div><!-- /tab-necro -->
 
-﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-temple">
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-temple-en" data-lang="en" data-tab="temple">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">TEMPLE</h1>
 
@@ -1001,18 +1042,18 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <g-row img="Zenith.png" href="human_hero_12" name="Zenith" spec="Light Weaver specialist">+1 growth in cities, starts with 2 Light Weaver stacks + Heavenly Blades spell. Heavenly Blades + Austringers = ~150 flat extra dmg per attack. Niche — "not that great of a hero overall."</g-row>
   <g-row img="Vesper.png" href="human_hero_15" name="Vesper" spec="Masterful Blessing (target always deals max dmg)">Old HoMM3 Bless effect + 35% damage buff combined. Some good players experimenting. "Has potential."</g-row>
   <g-row img="Aeos_the_Exalted.png" href="human_hero_5" name="Aeos the Exalted" spec="+1 morale + +2% trigger chance per morale pt per level">Late-game morale stacking dream. Theoretical 70%+ morale trigger. "Nobody has tried her yet. Overlooked despite interesting specialty."</g-row>
-  <g-row img="Lia_the_Untethered_One.png" href="human_hero_13" name="Lia the Untethered One" spec="Daylight spells +1 level, double daylight cast (Theurgy), blocks enemy daylight">"Sounds better than it actually is. Nobody using her and it's kind of a shame." Possibly too mana-hungry.</g-row>
+  <g-row img="Lia_the_Untethered_One.png" href="human_hero_13" name="Lia the Untethered One" spec="Daylight spells +1 level, double daylight cast (Theurgy), blocks enemy daylight">The kit reads powerful, but double Daylight casting is mana-hungry and harder to leverage than the top Temple heroes.</g-row>
 </g-table>
 
 <g-table tier="useless" base="heroes" cols="Hero,Why it fails">
-  <g-row img="Leon_Sticky_Fingers.png" href="human_hero_2" name="Leon Sticky Fingers">Pathfinder + scouting. "No pathfinding skill in Olden Era. Mostly ignore him."</g-row>
+  <g-row img="Leon_Sticky_Fingers.png" href="human_hero_2" name="Leon Sticky Fingers">Scouting and pathing utility are not enough to compete with Temple's fight-winning specialists.</g-row>
   <g-row img="John_Johnson.png" href="human_hero_3" name="John Johnson">T1 specialist (triple stack). "Newbie trap. Tempo is too high — you move on from tier ones too early."</g-row>
-  <g-row img="Heretic_Avis.png" href="human_hero_6" name="Heretic Avis">Gems economy + recruitment. "Filler hero."</g-row>
+  <g-row img="Heretic_Avis.png" href="human_hero_6" name="Heretic Avis">Gem economy and Recruitment do not provide enough early fighting power.</g-row>
   <g-row img="Keandra.png" href="human_hero_7" name="Keandra">Cavalry specialist. "Cavalry dwelling not available at spawn → awkward setup. Rarely tested."</g-row>
-  <g-row img="Julius.png" href="human_hero_14" name="Julius">Masterful Healing Water (cure). "Trash. Filler."</g-row>
+  <g-row img="Julius.png" href="human_hero_14" name="Julius">Masterful Healing Water is too narrow; Temple needs tempo, scaling, or decisive combat pressure.</g-row>
   <g-row img="Anastasia_the_Meek.png" href="human_hero_16" name="Anastasia the Meek">Masterful Arena's Touch (+1 speed version). "Not good enough to justify pick."</g-row>
   <g-row img="Nadir.png" href="human_hero_17" name="Nadir">Masterful Vulnerability + starts with Nightshade. "Wrong faction — Temple synergizes with daylight, not nightshade."</g-row>
-  <g-row img="Clarissa.png" href="human_hero_18" name="Clarissa">Economy. "Not a competitive pick."</g-row>
+  <g-row img="Clarissa.png" href="human_hero_18" name="Clarissa">Pure economy is not competitive unless the hero also solves fights, and Clarissa does not.</g-row>
 </g-table>
 </div>
 
@@ -1021,7 +1062,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <div class="text-[#606070] text-[.88em] mb-3 mt-1 italic">Angels are the core identity unit. All other units exist to buff them via Forging Perfection.</div>
 
 <g-table tier="top" base="units">
-  <g-row img="crossbowman_upg.png" href="crossbowman_upg" name="Austringer" spec="T2 upgrade (Crossbowman)">Double shot. "That's literally everything, and it's hella worth it." Core power stack. Build in every city from Day 1.</g-row>
+  <g-row img="crossbowman_upg.png" href="crossbowman_upg" name="Austringer" spec="T2 upgrade (Crossbowman)">Double Shot is enough to define the unit. Austringers are Temple's Day 1 power stack and should be built in every city immediately.</g-row>
   <g-row img="sunlight_cavalry_upg_alt.png" href="sunlight_cavalry_upg_alt" name="Sunspear Cavalry" spec="T5 upgrade">10% bonus dmg per hex moved, 40% penetration, +2 morale aura. Gains +1 dmg per positive effect received (morale/luck → permanent scaling throughout the fight). "Monster power stack."</g-row>
   <g-row img="angel_upg_alt.png" href="angel_upg_alt" name="Apotheosis" spec="T7 upgrade (Angel)">Melee + ranged Dualist. <strong>Immune to all negative effects + aura</strong> (adjacent friendlies also immune). +75 HP vs Archangel. "One of the strongest units in the entire game."</g-row>
   <g-row img="angel.png" href="angel" name="Angel" spec="T7 base">Ranged unit. <strong>Forging Perfection</strong>: receives every buff given to any friendly unit. <strong>Refract</strong>: copies all positive effects to another target. "Build every other unit to buff your angels, then shoot the opponent's face."</g-row>
@@ -1043,7 +1084,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 <g-table tier="useless" base="units" cols="Unit,Why">
   <g-row img="crossbowman.png" href="crossbowman" name="Crossbowman">Fine Bolts ability not worth using without angel synergy. Upgrade to Austringer ASAP.</g-row>
-  <g-row img="griffin.png" href="griffin" name="Griffin">"Most boring unit. Like a fat pigeon that's hard to pilot. Use until they bleed out."</g-row>
+  <g-row img="griffin.png" href="griffin" name="Griffin">Filler flyer with awkward handling. Use Griffins as temporary bodies and expect them to bleed out.</g-row>
   <g-row img="inquisitor.png" href="inquisitor" name="Inquisitor">Immune to magic, decent stats — but "nobody targets them, everyone ignores them, then heroic-strikes them at the end." Meta hasn't figured out how to use them.</g-row>
 </g-table>
 </div>
@@ -1052,23 +1093,23 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <g-sec>Laws</g-sec>
 
 <g-table tier="top" base="laws" label="TOP — Rush Immediately">
-  <g-row img="fraction_law_human_25.png" name="Encouragement">Every morale point gives 7% trigger chance instead of 4%. "Super cheap law at its tier. Super effective. Pick this up the moment you get there."</g-row>
+  <g-row img="fraction_law_human_25.png" name="Encouragement">Every morale point gives 7% trigger chance instead of 4%. Cheap for its tier and one of Temple's most efficient scaling laws.</g-row>
   <g-row img="fraction_law_human_26.png" name="Hero's Blessing">25% hero spell power → friendly creature attack; 25% hero knowledge → friendly creature defense. "Battle magic as a law. Pick it up, play the game, get significantly more powerful."</g-row>
   <g-row img="fraction_law_human_30.png" name="Elite Angels">Angels gain 25% of hero's atk/def (50% at 2 pts). "Standout law — makes all your hero stats directly more efficient on your angels."</g-row>
-  <g-row img="fraction_law_human_15.png" name="Sun's Grace">All daylight spells +1 level. "Temple has a massive affinity with daylight. Very powerful."</g-row>
+  <g-row img="fraction_law_human_15.png" name="Sun's Grace">All Daylight spells gain +1 level, directly improving Temple's primary magic plan.</g-row>
 </g-table>
 
 <g-table tier="decent" base="laws">
   <g-row img="fraction_law_human_13.png" name="Vengeful Strike">Counterattacks deal +100% damage. Combined with Riposte (T3 daylight): target takes a full-power retaliation before their attack lands. "Honestly amazing."</g-row>
   <g-row img="fraction_law_human_5.png" name="Execute Excellence">Buffs last longer. Good early when buff duration is lacking before spell power scales.</g-row>
-  <g-row img="fraction_law_human_34.png" name="Faith in Magic">Astrology points + scouting radius. "Usually pretty good to have."</g-row>
-  <g-row img="fraction_law_human_12.png" name="Swift Reflexes">Expensive but initiative is "very very precious."</g-row>
+  <g-row img="fraction_law_human_34.png" name="Faith in Magic">A useful utility pickup when the main combat laws are already secured.</g-row>
+  <g-row img="fraction_law_human_12.png" name="Swift Reflexes">Expensive, but initiative is one of the most valuable stats in late-game fights.</g-row>
   <g-row img="fraction_law_human_11.png" name="Elite Griffins">Griffins +5 HP · Light Weavers +2 dmg · Cavalry armor pen + speed · Inquisitors ignore more attack. Situational — take if building around that unit type.</g-row>
   <g-row img="fraction_law_human_27.png" name="Power of Faith">Late game only. Bypasses needing Wisdom or magic school skills. "Casting direction is usually figured out before this comes online."</g-row>
 </g-table>
 
 <g-table tier="useless" base="laws" cols="Law,Why">
-  <g-row img="fraction_law_human_32.png" name="Sacred Lands">"Friendly creatures immune to negative effects on native terrain. If you're fighting at home, your game is probably garbage. Pathetic."</g-row>
+  <g-row img="fraction_law_human_32.png" name="Sacred Lands">Too defensive and location-dependent: if Temple is relying on home-terrain protection, the game is already going poorly.</g-row>
   <g-row img="fraction_law_human_3.png" name="Resource Riches I">Low value. Skip for higher-impact nodes.</g-row>
 </g-table>
 
@@ -1129,7 +1170,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 </div><!-- /tab-temple -->
 
-﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-schism">
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-schism-en" data-lang="en" data-tab="schism">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">SCHISM</h1>
 
@@ -1212,7 +1253,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <g-row img="frostworm_rider.png" href="frostworm_rider" name="Aga'Shoth Rider" spec="T3">Fast, pure-damage ability that doesn't end their turn (= effective double move). Good range blockers. Mostly meat to feed into Grand Shoth Summoning Rights, but useful utility stacks while alive.</g-row>
   <g-row img="frostworm_rider_upg.png" href="frostworm_rider_upg" name="Aga'Shoth Tamer" spec="T3 upgrade">Super fast. Piercing Cold: applies a debuff making target take 50% more damage — pair with any damaging spells for huge burst. Reduces terrain penalty (useful out of snow biome).</g-row>
   <g-row img="eldritch_flyer_upg_alt.png" href="eldritch_flyer_upg_alt" name="Unthinkable Shoth" spec="T4 upgrade">Arcane/mage build path. Black Ice Shard: deals pure damage when you have less attack than the opponent has defense — helpful when losing the stats race. Pick if going for arcane/avatar-focused build.</g-row>
-  <g-row img="succubus_upg.png" href="succubus_upg" name="Mistress of Chains" spec="T5 upgrade (Concubus)">Hourglass: prevents the enemy hero from using active abilities until end of round. Mana gain doubles. Keep as one-stack utility — limits key opponent abilities at key moments.</g-row>
+  <g-row img="succubus_upg.png" href="succubus_upg" name="Mistress of Chains" spec="T5 upgrade (Concubus)">Hourglass: prevents the enemy hero from using abilities until end of round. Mana gain doubles. Keep as one-stack utility — limits key opponent abilities at key moments.</g-row>
   <g-row img="succubus_upg_alt.png" href="succubus_upg_alt" name="Bewitcher" spec="T5 upgrade (Concubus)">1 focus: prevents ALL enemies from gaining focus from any source until end of round. Absolutely toxic — one Bewitcher one-stack denies 3+ focus to Grove, Necro, or any focus-hungry faction. Very powerful utility.</g-row>
   <g-row img="arbitrator_upg.png" href="arbitrator_upg" name="Rift Arbitrator" spec="T6 upgrade">Insane initiative — gets shots off much more often. Gorge Storm: AoE that deals 25% damage and reduces enemy speed/initiative by 1. Less defensive-impact utility than Bloated but more mobile.</g-row>
 </g-table>
@@ -1302,6 +1343,1061 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
     <g-req skill="magic_space">Expert Arcane Magic</g-req>
     <g-req skill="luck">Expert Luck</g-req>
     <g-req skill="logistic">Expert Logistics</g-req>
+  </g-sc>
+</g-class>
+
+</div>
+
+</div><!-- /tab-schism -->
+
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-hive-pl" data-lang="pl" data-tab="hive">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">RÓJ</h1>
+
+<g-mech title="Mechanika frakcji — Przyzwij Rój">
+  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
+    <li><strong>Przyzwij Rój</strong> — dostępne dla każdego bohatera. Zużywa focus, żeby złożyć jaja; Larwy pojawiają się w następnej turze. Liczba Larw skaluje się z <strong>łącznym HP jednostek Roju</strong> w armii. Więcej jednostek = więcej Larw.</li>
+    <li><strong>Larwy</strong> eksplodują po śmierci i zadają obrażenia AoE. Mogą trafić też twoje jednostki, jeśli źle je ustawisz.</li>
+    <li><strong>Brak strzelców.</strong> Cała frakcja bije w zwarciu. Early game jest brutalny — trzeba przetrwać do T5/T6.</li>
+    <li><strong>Zarządzanie focusem:</strong> ten sam zasób idzie na Przyzwij Rój, Heroic Strike, Żniwa i inne zdolności. Wybierz jeden plan i trzymaj się go.</li>
+    <li><strong>Napięcie Hive Mind:</strong> wiele jednostek dostaje bonusy za różnorodność jednostek Roju w armii, ale meta premiuje jeden dominujący power stack. Ten konflikt nadal nie jest w pełni rozwiązany.</li>
+  </ul>
+</g-mech>
+
+<g-sec>Dodatkowe uwagi</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Early game jest brutalny</strong> — Rój jest najsłabszą i najmniej rozpracowaną frakcją. Jednostki łatwo tracisz, nikt nie strzela i brakuje wczesnego power spike'u. Przetrwaj do T5/T6.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wybierz JEDNĄ ścieżkę:</strong> <strong>Reavery</strong>: Maelstrom → Maniakalny Łupieżca + prawo Elitarni Łupieżcy. <strong>Czerwie</strong>: Zoran → Pożeracz albo Piroboros. Królowe Roju to dream build — rzadko realny.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Prawa Roju</strong> pozwalają odblokować prawa jednostek T5/T6 już przy 15 punktach prawa w tygodniu 1. Rushuj to jako pierwsze.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Hive Mind kontra meta</strong> — frakcja chce różnorodności jednostek dla bonusów, ale realna gra chce jednego power stacka. Nadal nierozwiązany problem.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Focus management</strong> — nie rozciągaj się jednocześnie na Rój + Heroic Strike + Żniwa. Wybierz jedno główne użycie.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Brak Maelstroma / Zorana = ciężka gra</strong> — bez jednego z nich frakcję bardzo trudno prowadzić. Rozważ omijanie Roju w pick/ban, jeśli obaj są niedostępni.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Larwy eksplodują po śmierci</strong> — AoE trafia okoliczne stacki, także twoje. Ustawienie ma ogromne znaczenie.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Late game payoff istnieje</strong> — Maniakalny Łupieżca z Morderczą Radością oraz wysokim morale/szczęściem potrafi usuwać 4-5 stacków na rundę. Piroboros jako artyleria dystansowa jest podobnie niszczący.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Magia Pierwotna jest ignorowana mimo intencji designu</strong> — społeczność nie znalazła tu realnej synergii. Nie priorytetyzuj jej.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Priorytet tygodnia 1:</strong> Prawa Roju → prawo Reaverów/Czerwi przy 15 pkt → zbuduj jeden power stack → przetrwaj tym, co masz.</li>
+  </ol>
+</g-notes>
+
+<div class="grid grid-cols-2 gap-x-[52px] items-start mt-0">
+<div>
+<g-sec>Bohaterowie</g-sec>
+
+<g-table tier="top" base="heroes">
+  <g-row img="Maelstrom.png" href="demon_hero_2" name="Wir" spec="Specjalista od Łupieżców">Najlepszy bohater frakcji. Łupieżcy dostają szybkość, inicjatywę, HP i szybszy przyrost. Start z 2-3 Łupieżcami + Wgląd oznacza szybsze poziomy i realną szansę wyjścia z fatalnego early.</g-row>
+  <g-row img="Zoran__the_Self-Founded.png" href="demon_hero_4" name="Zoran Samostworzony" spec="Specjalista od Czerwi">Od razu zaczyna z 2 Czerwiami. Czerwie zjadają trupy, leczą się i wskrzeszają. Dzięki temu early game staje się w ogóle grywalny.</g-row>
+</g-table>
+
+<g-table tier="decent" base="heroes">
+  <g-row img="Nor.png" href="demon_hero_3" name="Nor" spec="Statystyki za poziomy">Startuje ze Sztuką Walki. Nie jest niesamowity, ale to sensowny pick drugiego wyboru, jeśli Maelstrom i Zoran są poza pulą.</g-row>
+  <g-row img="Tavi.png" href="demon_hero_6" name="Tavi" spec="Specjalista od Larw">Startuje z zaawansowanym Przyzwaniem Roju. Dobry na template’ach z dużą armią — Larwy potrafią mocno się rozpędzić.</g-row>
+  <g-row img="Oriax.png" href="demon_hero_16" name="Oriaks" spec="Tani Blink na wrogów"><strong>Startuje z podstawowym Przyzwaniem Awatara</strong> — mocne w early. Specjalizacja jest słaba, ale sam Awatar robi go grywalnym.</g-row>
+  <g-row img="Mila.png" href="demon_hero_15" name="Mila" spec="Mistrzowskie Haste dla wszystkich">Mało ograna. Potencjalnie przyzwoita, ale brakuje praktyki i danych.</g-row>
+</g-table>
+
+<g-table tier="useless" base="heroes" cols="Bohater,Dlaczego">
+  <g-row img="Niev.png" href="demon_hero_1" name="Niev">Ofensywa — jednostki Roju są zbyt wolne i kruche, żeby dobrze skorzystać z tego w early.</g-row>
+  <g-row img="Curson__Duke_of_Rage.png" href="demon_hero_5" name="Purson, Książę Gniewu">Heroic Strike — konflikt focusu. Heroic Strike i Przyzwij Rój walczą o ten sam zasób.</g-row>
+  <g-row img="Goldentongue.png" href="demon_hero_8" name="Złotousty">Morale — brak strzelców i brak stabilnych proców morale. Armia wyłącznie melee nie może na tym polegać.</g-row>
+  <g-row img="Abigor__Duke_of_Battle.png" href="demon_hero_9" name="Abigor, Książę Wojny">+1 inicjatywy co 6 poziomów — bonus przychodzi za późno.</g-row>
+  <g-row img="Fleu.png" href="demon_hero_10" name="Fleu">Startuje z Doomem, który jest za drogi zanim Rój ma statystyki i manę, żeby go utrzymać.</g-row>
+  <g-row img="Xirr.png" href="demon_hero_11" name="Xirr">Odporność — sensowna głównie przeciw graczom; problem w tym, że możesz umrzeć zanim do nich dojdziesz.</g-row>
+  <g-row img="Bathym__Duke_of_Jewels.png" href="demon_hero_12" name="Bathym, Książę Klejnotów">Ekonomia kryształów nie poprawia creepingu, skalowania ani siły w finale.</g-row>
+  <g-row img="Leira.png" href="demon_hero_13" name="Leira">Specjalistka od Szerszeni — Szerszenie nie działają jako power stack.</g-row>
+  <g-row img="Groo.png" href="demon_hero_14" name="Groo">Specjalista od Królowej Roju, ale startuje z zerem Królowych Roju.</g-row>
+  <g-row img="Khariseth.png" href="demon_hero_17" name="Khariseth">Magia Pierwotna — start z Antymagią, czyli praktycznie martwym czarem w early.</g-row>
+  <g-row img="Pauper.png" href="demon_hero_18" name="Żebraczka">+1 szybkości dla wszystkich to świetna specjalizacja, ale start z Magią Bitewną jest martwy zanim masz statystyki. Fatalne dla early Roju.</g-row>
+  <g-row img="Lo.png" href="demon_hero_7" name="Lo">Grywalny filler: nie szkodzi aktywnie, ale nie daje jasnej ścieżki lepszej niż topowi specjaliści frakcji.</g-row>
+</g-table>
+</div>
+
+<div>
+<g-sec>Jednostki</g-sec>
+
+<g-table tier="top" base="units">
+  <g-row img="godslayer_upg_alt.png" href="godslayer_upg_alt" name="Maniakalny łupieżca" spec="Ulepszenie T5">Szalony atak, inicjatywa i obrażenia. <strong>Apex Predator</strong>: +50% dmg przeciw celom wyższego tieru. <strong>Mordercza Radość</strong>: po zabiciu dostaje natychmiastową dodatkową turę raz na rundę. Przy wysokim morale/szczęściu czyści 4-5 stacków na rundę. To jest właściwy power stack.</g-row>
+  <g-row img="olgoi_upg.png" href="olgoi_upg" name="Pożeracz" spec="Ulepszenie T6 (Czerw)">Prosty power-up Czerwia. Tanky, duże obrażenia, zjada trupy, leczy się i wskrzesza. Bardzo solidny all-rounder.</g-row>
+  <g-row img="olgoi_upg_alt.png" href="olgoi_upg_alt" name="Piroboros" spec="Ulepszenie T6 (Czerw)">Staje się <strong>dystansowy + Duelist</strong>, więc dalej bije pełnymi obrażeniami w zwarciu. Strzały AoE, tankowatość i ogromny late game.</g-row>
+  <g-row img="hive_queen_upg.png" href="hive_queen_upg" name="Matka Roju" spec="Ulepszenie T7">Bardzo wysoka inicjatywa. <strong>Zanieczyszczający Wybuch</strong> daje podwojone obrażenia ataku w dużym AoE. Najlepszy payoff linii T7, ale wymaga dużej inwestycji focusu.</g-row>
+</g-table>
+
+<g-table tier="decent" base="units">
+  <g-row img="locust_upg_alt.png" href="locust_upg_alt" name="Szarańcza żniwiarka" spec="Ulepszenie T2">Więcej obrażeń, ataku i szybkości. <strong>Żniwa</strong>: zjada trup → +4 atk/def, +1 spd/ini. Preferowane ulepszenie Szarańczy.</g-row>
+  <g-row img="locust_upg.png" href="locust_upg" name="Przerośnięta szarańcza" spec="Ulepszenie T2"><strong>Parry</strong> — kontruje zanim oberwie. Rola defensywna.</g-row>
+  <g-row img="trick_demon_upg_alt.png" href="trick_demon_upg_alt" name="Pasożyt niszczycielski" spec="Ulepszenie T1">Trochę lepsza inicjatywa i szybkość. <strong>Awangarda</strong>: +1 ataku za każdy unikalny typ jednostki Roju w armii. Najmniej zły T1.</g-row>
+  <g-row img="wasp_upg_alt.png" href="wasp_upg_alt" name="Żądlica" spec="Ulepszenie T3 (Szerszeń)"><strong>Przeszywające Żądło</strong> daje gwarantowany death effect. Szybka jednostka, ale trudno zbudować z niej stabilny stack.</g-row>
+  <g-row img="lava_larva.png" href="lava_larva" name="Larwa ognista" spec="Przyzwij Rój">Eksploduje po śmierci (AoE). Słaba wcześnie. <strong>Ogromny late game</strong> z Piekielnym Gniewem: 300 Larw z +1 dmg to wielka fala obrażeń.</g-row>
+  <g-row img="hive_queen_upg_alt.png" href="hive_queen_upg_alt" name="Łowczyni Roju" spec="Ulepszenie T7">Oddaje Zanieczyszczający Wybuch za surowe obrażenia i szybkość. Dobra, gdy masz już duży stack T7, słabsza jako główny cel inwestycji.</g-row>
+</g-table>
+
+<g-table tier="useless" base="units" cols="Jednostka,Dlaczego">
+  <g-row img="trick_demon.png" href="trick_demon" name="Pasożyt">T1 — za wolny i z za niską inicjatywą.</g-row>
+  <g-row img="trick_demon_upg.png" href="trick_demon_upg" name="Pasożyt obronny">Ulepszenie T1 — realna wartość to więcej HP do przeliczenia Przyzwania Roju. Nie jest to jednostka bojowa.</g-row>
+  <g-row img="wasp_upg.png" href="wasp_upg" name="Brzmik">Ulepszenie T3 — ogromna szybkość, ale niska inicjatywa sprawia, że strzelcy i tak ruszają pierwsi. Mija się z celem.</g-row>
+  <g-row img="jaw.png" href="jaw" name="Skorpion">T4 — wolny, niezgrabny i łatwo go tracić. Istnieje głównie jako HP do mechaniki Roju.</g-row>
+  <g-row img="godslayer_upg.png" href="godslayer_upg" name="Bezwzględny łupieżca">Ulepszenie T5 defensywne. Unholy Resilience bywa irytujące u neutrali, ale gdy sam tym grasz, to zły kierunek rozwoju.</g-row>
+  <g-row img="hive_queen.png" href="hive_queen" name="Królowa Roju">T7 — w normalnej grze realistycznie prawie nigdy nie dojdzie do armii.</g-row>
+</g-table>
+</div>
+</div>
+
+<g-sec>Prawa</g-sec>
+
+<g-table tier="top" base="laws">
+  <g-row img="fraction_law_demon_2.png" name="Prawa Roju">Każdy wydany punkt liczy się dodatkowo do progów odblokowania wyższych praw. Pozwala dostać prawa jednostek T5/T6 w <strong>tygodniu 1</strong>. Kluczowy enabler — rush natychmiast.</g-row>
+  <g-row img="fraction_law_demon_17.png" name="Elitarni Łupieżcy">Poziom 1: +1 morale i szczęścia. <strong>Poziom 2: +5 morale</strong> → Łupieżcy praktycznie cały czas grają na maksymalnym szczęściu. Zawsze brać.</g-row>
+  <g-row img="fraction_law_demon_28.png" name="Piekielny Gniew">+1 dmg dla każdej jednostki skaluje się świetnie z dużymi falami Larw i pozostaje istotne dla całej armii.</g-row>
+  <g-row img="fraction_law_demon_18.png" name="Elitarne Czerwie">Prawo jednostki T6 dostępne już przy 15 punktach prawa. Zwiększa przyrost Czerwi. Rushuj, jeśli idziesz w ścieżkę Czerwi.</g-row>
+</g-table>
+
+<g-table tier="decent" base="laws">
+  <g-row img="fraction_law_demon_9.png" name="Pożeranie Many">Działa na Dimension Door, Second Wind i wszystkie czary bojowe. Przydatne, gdy bohaterom brakuje Wiedzy.</g-row>
+  <g-row img="fraction_law_demon_7.png" name="Szał Godowy">Solidny długoterminowy boost przyrostu, jeśli gra jest na tyle wolna, że przyrost zdąży mieć znaczenie.</g-row>
+  <g-row img="fraction_law_demon_29.png" name="Bez Litości">Poprawia stabilność szczęścia i dobrze łączy się z Reaverami albo Czerwiami po dojściu frakcji do late game.</g-row>
+  <g-row img="fraction_law_demon_6.png" name="Potomstwo Roju I">Wrogowie obok Larw muszą atakować Larwy. Sytuacyjne, ale przy dużej liczbie Larw potrafi być przytłaczające.</g-row>
+  <g-row img="fraction_law_demon_19.png" name="Potomstwo Roju II">Podwójnie atakujące Larwy zaczynają mieć sens, gdy Przyzwij Rój generuje ich dużo, szczególnie z Piekielnym Gniewem.</g-row>
+</g-table>
+
+<g-table tier="useless" base="laws" cols="Prawo,Dlaczego">
+  <g-row img="fraction_law_demon_21.png" name="Dobór naturalny">Niska wartość, bo ulepszenia i tak załatwiasz w mieście bez wydawania punktów prawa.</g-row>
+  <g-row img="fraction_law_demon_22.png" name="Magia Roju">Wzmacnia Magię Pierwotną i czary obrażeń. Bohaterowie Roju zwykle nie mają statystyk, żeby dobrze z tego korzystać. Niedopasowanie designu.</g-row>
+</g-table>
+
+<g-sec>Klasy</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Notatki o podklasach:</strong> podklasy są rzadkie. Większość gier kończy się zanim ktokolwiek je odblokuje, bo wymagają pięciu konkretnych umiejętności na poziomie eksperckim naraz.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Uniwersytety są główną ścieżką.</strong> Jedna wizyta potrafi dać 3-4 wymagane skille naraz; jeśli jesteś już blisko, podklasa od razu staje się realna.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wchodź w podklasę tylko, gdy przechodzą 2 z 3 kryteriów:</strong> payoff, osiągalność i jakość wymaganych skilli. Nie rozwalaj działającego buildu dla słabego efektu albo martwych umiejętności.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Nie ma capów statystyk, więc podklasy podwajające staty nadal mają wartość nawet przy 100+ łącznych statystykach.</li>
+  </ol>
+</g-notes>
+<div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
+
+<g-class name="Enforcer" type="Moc" img="class_demon_might.png">
+  <g-sc name="Broodmother" tier="useless" img="sub_class_demons_might_1.png">
+    <g-desc>Podwaja bazowe statystyki przyzwanych Larw ognistych.</g-desc>
+    <g-alt>Niszowy payoff na i tak słabym gimmicku. Ekonomia i Magia Mroku są martwymi skillami dla Egzekutora Roju.</g-alt>
+    <g-req skill="formation">Ekspercka Sztuka Walki</g-req>
+    <g-req skill="mastery">Ekspercka Mądrość</g-req>
+    <g-req skill="magic_night">Ekspercka Magia Mroku</g-req>
+    <g-req skill="leadership">Eksperckie Dowodzenie</g-req>
+    <g-req skill="economy">Ekspercka Ekonomia</g-req>
+  </g-sc>
+  <g-sc name="Soul Eater" tier="top" img="sub_class_demons_might_2.png">
+    <g-desc>Daje nową zdolność bitewną: bohater może pożreć wskazany trup i zyskać atak, obronę oraz moc zaklęć do końca walki.</g-desc>
+    <g-alt>Top-tier, bo daje stackujące się atak/obronę/moc do końca walki. W długim finale każdy trup staje się trwałym skalowaniem. Wymagania są w większości naturalne dla Egzekutora; Magia Bitewna to jedyny realny bottleneck.</g-alt>
+    <g-req skill="resistance">Ekspercka Odporność</g-req>
+    <g-req skill="battlemage">Ekspercka Magia Bitewna</g-req>
+    <g-req skill="magic_day">Ekspercka Magia Światła</g-req>
+    <g-req skill="enlightenment">Ekspercki Wgląd</g-req>
+    <g-req skill="logistic">Ekspercka Logistyka</g-req>
+  </g-sc>
+</g-class>
+
+<g-class name="Herald" type="Magia" img="class_demon_magic.png">
+  <g-sc name="Progenitor" tier="useless" img="sub_class_demons_magic_1.png">
+    <g-desc>+200% przyrostu stworzeń we wszystkich twoich miastach.</g-desc>
+    <g-alt>Działa tylko na bazowy przyrost, nie na siedliska ani skalowanie z praw. Dużo słabsze niż brzmi. Dyplomacja i Taktyka są niechciane na Heroldzie.</g-alt>
+    <g-req skill="protection">Ekspercka Obrona</g-req>
+    <g-req skill="summoner">Eksperckie Przyzwanie Awatara</g-req>
+    <g-req skill="magic_space">Ekspercka Magia Arkanów</g-req>
+    <g-req skill="diplomacy">Ekspercka Dyplomacja</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+  <g-sc name="Lord of Chaos" tier="useless" img="sub_class_demons_magic_2.png">
+    <g-desc>Heroic Strike zadaje +2 obrażeń za każdy punkt atrybutu bohatera.</g-desc>
+    <g-alt>Przy 40 all stats w late game wygląda jak +320 dmg, ale Herold nie ma stabilnego sposobu resetowania Heroic Strike i potrzebuje jeszcze Walki + Dowodzenia.</g-alt>
+    <g-req skill="assault">Ekspercka Ofensywa</g-req>
+    <g-req skill="sorcery">Ekspercka Sztuka Czarów</g-req>
+    <g-req skill="magic_primal">Ekspercka Magia Pierwotna</g-req>
+    <g-req skill="luck">Eksperckie Szczęście</g-req>
+    <g-req skill="scouting">Ekspercki Zwiad</g-req>
+  </g-sc>
+</g-class>
+
+</div>
+
+</div><!-- /tab-hive -->
+
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-dungeon-pl" data-lang="pl" data-tab="dungeon">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">LOCH</h1>
+
+<g-mech title="Mechanika frakcji — Siła Trombarati + style walki">
+  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
+    <li><strong>Siła Trombarati</strong> — każdy bohater zaczyna z tą umiejętnością. Trzy postawy: Atak / Obrona / Moc, przełączane raz na turę. Na ekspercie warto wziąć <strong>Flow</strong>: każda zmiana postawy daje 1 focus. Typhona ma zaawansowaną wersję na start, więc ekspert na 2 poziomie daje Flow od początku gry.</li>
+    <li><strong>Style walki</strong> — każda jednostka ma alternatywny tryb ataku. Bez prawa danej jednostki jest słaby, często z karą -50% dmg. <strong>Po wzięciu prawa styl walki zadaje 1.5x obrażeń.</strong> To rdzeń frakcji: bez praw jednostki są kulawe, z prawami robią się bardzo mocne.</li>
+  </ul>
+</g-mech>
+
+<g-sec>Dodatkowe uwagi</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Główna szkoła: Magia Pierwotna</strong> — postawa Smoka daje Moc. Czarnoksiężnicy dobrze rzucają duże direct damage spelle, jak Lightning Bolt i Fireball. Frakcja jest elastyczna i dobrze reaguje na mapę.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Style walki bez praw są słabe</strong> — nie używaj ich agresywnie zanim podniesiesz prawo konkretnej jednostki.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Opcje power stacka:</strong> Rzeźbiarka meduz (najlepszy uniwersalny strzelec T5), Minotaury (obie ścieżki świetne), Chtoniczna Hydra (najmocniejszy wczesny T6), Czarny Smok (najlepszy przy casterze: odporność na magię, inicjatywa, tankowatość).</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Strzelec dnia 1: Onyksowa tancerka</strong> — buduj od razu w każdym mieście. Przy wielu stackach bardzo szybko zdejmuje obronę przeciwnika do zera.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Siła Trombarati → Flow</strong> — ekspert + Flow oznacza Heroic Strike co turę. Typhona ma to praktycznie od 2 poziomu i dlatego jest top tier.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Infiltratorzy będą ginąć</strong> — przeciwnicy lubią ich focusować. Zakładaj straty i nie overinvestuj.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Morale Minotaurów jest opresyjne</strong> — bazowe morale 2 + Eager for Battle + Blood for Blood sprawiają, że dodatkowa tura pojawia się ciągle. Lord daje Parry, Vanguard daje Adrenaline Surge; wybierz według stylu.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Tip dla Zakrona</strong> — postawa Smoka natychmiast daje Moc, więc w dniu 1-2 można rzucać spelle za 200+ dmg. Świetne tempo bez dużej inwestycji.</li>
+  </ol>
+</g-notes>
+
+<div class="grid grid-cols-2 gap-x-[52px] items-start mt-0">
+<div>
+<g-sec>Bohaterowie</g-sec>
+
+<g-table tier="top" base="heroes" label="TOP — perma ban / perma pick">
+  <g-row img="Stinger.png" href="dungeon_hero_3" name="Osa" spec="Specjalista od Heroic Strike">+10 obrażeń z Heroic Strike, dalej skaluje co 6 poziomów, do tego stała kumulująca się trucizna. Start ze Sztuką Walki daje presję od pierwszej walki. Bardzo często banowany.</g-row>
+  <g-row img="Kelarr__son_of_Navarr.png" href="dungeon_hero_10" name="Kelarr, syn Navarra" spec="Specjalista od XP / Wglądu">+1 atrybut co 2 poziomy i dodatkowe XP skalujące się z levelem. Start z Wglądem, pełna elastyczność i brak wymuszonego kierunku. Perma ban/pick.</g-row>
+  <g-row img="Typhona.png" href="dungeon_hero_16" name="Tyfona" spec="Specjalistka od Hydr">Start z <strong>2 Hydrami T6</strong>. Zaawansowana Siła Trombarati → ekspert na 2 poziomie → Flow natychmiast. Niesamowita, często banowana.</g-row>
+</g-table>
+
+<g-table tier="top" base="heroes" label="TOP — mocny pick">
+  <g-row img="Enatee.png" href="dungeon_hero_1" name="Enatee" spec="Specjalistka od Meduz">Start z 3-4 Meduzami, +1 przyrost w każdym mieście i bonusy do szybkości/inicjatywy/HP/statów Meduz. Bardzo mocna, często banowana na wielu template’ach.</g-row>
+  <g-row img="Devir__son_of_Devir.png" href="dungeon_hero_6" name="Devir, syn Devira" spec="Specjalista od Minotaurów">Start z <strong>2 stackami Minotaurów</strong> i Dowodzeniem. Minotaury można budować dnia 1. Prawie poziom ban/pick; świetny bohater, który czasem prześlizguje się przez bany.</g-row>
+</g-table>
+
+<g-table tier="decent" base="heroes">
+  <g-row img="Zakron_the_Great.png" href="dungeon_hero_11" name="Zakron Wielki" spec="Specjalista od Sztuki Czarów">+10% dmg czarów i dalsze skalowanie, a wrogie czary biją słabiej. Start ze Sztuką Czarów i Fireballem, plus synergia z postawą Smoka. Potrafi sam pociągnąć grę.</g-row>
+  <g-row img="Motley.png" href="dungeon_hero_13" name="Motley" spec="Specjalista od Onyksowych tancerek">Start z 3 stackami Tancerek i Twilight. Dobre narzędzia na early, ale sufit jest niższy niż u prawdziwych carry Lochu.</g-row>
+</g-table>
+
+<g-table tier="useless" base="heroes" cols="Bohater,Dlaczego">
+  <g-row img="Tellaris_the_Betrayed.png" href="dungeon_hero_2" name="Tellaris Zdradzony">Niedyspelowalna Early Star jest ciekawa, ale specjalizacja nie daje wystarczającego tempa ani skalowania.</g-row>
+  <g-row img="Kieran.png" href="dungeon_hero_4" name="Kieran">Specjalista T1 + Taktyka. Grywalny tylko na bardzo wolnych mapach, zwykle pomijany.</g-row>
+  <g-row img="Mouaren.png" href="dungeon_hero_5" name="Mouaren">Specjalistka od Infiltratorów + Zwiad. Jednostka krwawi i nie jest wystarczającym planem na grę.</g-row>
+  <g-row img="Creta__daughter_of_Navarr.png" href="dungeon_hero_7" name="Kreta, córka Navarra">Ekonomia klejnotów nie pomaga Lochowi wygrywać walk ani szybciej dojść do power stacków.</g-row>
+  <g-row img="Rhea.png" href="dungeon_hero_8" name="Rhea">Specjalistka od Szczęścia. Loch ma niewiele synergii ze szczęściem, więc jest słusznie pomijana.</g-row>
+  <g-row img="Gleard_the_Grey.png" href="dungeon_hero_9" name="Gleard Szary">Specjalista od Magii Arkanów. Arkana są słabe w early i nie dają planu na mapę.</g-row>
+  <g-row img="Sister_Deira.png" href="dungeon_hero_12" name="Siostra Deira">Mistrzowskie Arena’s Chosen trudno przekuć w spójny plan, a startowy skill nie naprawia tempa.</g-row>
+  <g-row img="Ylwari.png" href="dungeon_hero_14" name="Ylwari">Armia przy ucieczce / Dyplomacja — nie pasuje do formatu one-hero.</g-row>
+  <g-row img="Glastor.png" href="dungeon_hero_15" name="Glastor">Specjalista od Ekonomii. Banki z Awatarem albo combat herosem dają lepsze pieniądze.</g-row>
+  <g-row img="Sunny_Rauktol.png" href="dungeon_hero_17" name="Słoneczny Rauktol">Magia Światła nie pasuje do Czarnoksiężników. Brak realnego gameplanu.</g-row>
+  <g-row img="Lodos.png" href="dungeon_hero_18" name="Lodos">Magia Mroku ma podobny problem: mało interesująca i bez dobrego tempa.</g-row>
+</g-table>
+</div>
+
+<div>
+<g-sec>Jednostki</g-sec>
+<div class="text-[#606070] text-[.88em] mb-3 mt-1 italic">⚠ Every unit has a Fighting Style — its value DEPENDS on picking the corresponding law (+50% dmg). Without the law: weak. With the law: strong.</div>
+
+<g-table tier="top" base="units">
+  <g-row img="assassin_upg.png" href="assassin_upg" name="Wyrachowany infiltrator" spec="Ulepszenie T2"><strong>Staggering Hits</strong>: cel nie kontruje do końca rundy. <strong>Shadow Strike</strong>: atak dystansowy ignorujący obronę. Z prawem jednostki styl walki robi się świetny.</g-row>
+  <g-row img="blade_dancer_upg_alt.png" href="blade_dancer_upg_alt" name="Złota tancerka" spec="Ulepszenie T3">Obniża obronę o <strong>2</strong> na atak i ma 7 inicjatywy. Kluczowy strzelec.</g-row>
+  <g-row img="blade_dancer_upg.png" href="blade_dancer_upg" name="Jaspisowa tancerka" spec="Ulepszenie T3"><strong>Draconic Blade</strong>: podwójne obrażenia w melee. Swift Strike bez kontry. Wybór, gdy nie utrzymasz wroga na dystans.</g-row>
+  <g-row img="minos_upg.png" href="minos_upg" name="Minotaurzy lord" spec="Ulepszenie T4">+3 def, +2 ini, +1 spd. <strong>Parry</strong> kontruje zanim przyjdzie atak. Bardzo toksyczne do grania przeciwko.</g-row>
+  <g-row img="minos_upg_alt.png" href="minos_upg_alt" name="Frontowiec minotaurów" spec="Ulepszenie T4">+3 atk, +1 bazowego morale. <strong>Adrenaline Surge</strong> przy morale daje +2 speed i +8 atk/def. Minotaury procują morale ciągle, więc upgrade jest absurdalny.</g-row>
+  <g-row img="medusa_upg.png" href="medusa_upg" name="Rzeźbiarka meduz" spec="Ulepszenie T5"><strong>Duelist</strong>, Petrification, Sharpshooter i Slither Away. Strzela, bije w melee i nie ma oczywistych słabości. Najlepszy all-rounder T5.</g-row>
+  <g-row img="hydra_upg.png" href="hydra_upg" name="Chtoniczna hydra" spec="Ulepszenie T6">+10 def, +20 HP. Powtarzalna regeneracja do pełna, mocne kontrataki i redukcja dmg sąsiadów. Preferowana Hydra mówcy.</g-row>
+  <g-row img="black_dragon_upg.png" href="black_dragon_upg" name="Czarny smok" spec="Ulepszenie T7">Bardzo wysoka inicjatywa i odporność na czary T5 i niższe. Najlepszy przy casterach: tanky, rusza szybko i ignoruje magię.</g-row>
+</g-table>
+
+<g-table tier="decent" base="units">
+  <g-row img="blade_dancer.png" href="blade_dancer" name="Onyksowa tancerka" spec="T3">Strzelec dnia 1. Thousand Cuts obniża def, a odbijający styl walki z prawem trafia dwa cele. Solidny przed ulepszeniem.</g-row>
+  <g-row img="trogl_upg.png" href="trogl_upg" name="Piekielny troglodyta" spec="Ulepszenie T1">Więcej szybkości i 6 obrony. <strong>Toxic Spear</strong> zwiększa otrzymywane dmg celu o 25%. Lepszy wariant jako power stack.</g-row>
+  <g-row img="trogl_upg_alt.png" href="trogl_upg_alt" name="Jadowity troglodyta" spec="Ulepszenie T1">Podwójna kontra i Toxic Blood. Niszowe do konkretnych ciężkich campów.</g-row>
+  <g-row img="medusa_upg_alt.png" href="medusa_upg_alt" name="Meduza królewska" spec="Ulepszenie T5">Kontruje strzały i obniża inicjatywę celu, ale ma wyraźnie słabsze staty niż Rzeźbiarka. Tylko do buildów range-vs-range.</g-row>
+  <g-row img="hydra_upg_alt.png" href="hydra_upg_alt" name="Piekielna hydra" spec="Ulepszenie T6">Więcej obrażeń, ataku, inicjatywy i szybkości. Jeśli Hydra ma być battle stackiem, Infernalna może mieć sens.</g-row>
+  <g-row img="black_dragon_upg_alt.png" href="black_dragon_upg_alt" name="Siwy smok" spec="Ulepszenie T7">11 speed i dużo ataku, ale zdolność blink + AoE kosztuje 5 focusu przy capie 3, więc praktycznie nie działa. Traci inicjatywę i tankowatość względem Czarnego Smoka.</g-row>
+</g-table>
+
+<g-table tier="useless" base="units" cols="Jednostka,Dlaczego">
+  <g-row img="trogl.png" href="trogl" name="Troglodyta">Wolny, niska inicjatywa, Vicious Spit z karą dmg. Bardziej irytuje jako neutral niż pomaga graczowi.</g-row>
+  <g-row img="assassin_upg_alt.png" href="assassin_upg_alt" name="Posępny infiltrator">Traci Staggering Hits, czyli najlepszą część drugiego ulepszenia. Veil of Shadows jest zbyt drogie w focusie.</g-row>
+</g-table>
+</div>
+</div>
+
+<g-sec>Prawa</g-sec>
+
+<g-table tier="top" base="laws" label="TOP — must pick">
+  <g-row img="fraction_law_dungeon_6.png" name="Mistrzowie Lochu I">Jedno prawo na typ jednostki. Każde sprawia, że styl walki zadaje <strong>+50% dmg</strong> i daje staty. Fundament frakcji — Loch bez tych praw ledwo działa. Priorytet: prawo pod główny power stack.</g-row>
+  <g-row img="fraction_law_dungeon_28.png" name="Edukacja Magiczna">Wszystkie czary bohatera na stałe zyskują <strong>+1 poziom</strong>. Każdy cast, do końca gry. Bardzo mocne i przyjemne w grze.</g-row>
+</g-table>
+
+<g-table tier="decent" base="laws">
+  <g-row img="fraction_law_dungeon_23.png" name="Gildia Kupców">Zdejmuje narzut targu, więc zasoby można czysto zamieniać na to, czego Loch potrzebuje do techu i ulepszeń.</g-row>
+  <g-row img="fraction_law_dungeon_9.png" name="Kod Alchemika I">Pył za punkty prawa. Loch ma więcej praw od pyłu niż inne frakcje i naprawdę go potrzebuje do itemów oraz ulepszeń.</g-row>
+  <g-row img="fraction_law_dungeon_20.png" name="Przewaga Taktyczna">Szerokie quality-of-life dla pozycjonowania i taktyki jednostek. Ułatwia wykonywanie planu Lochu.</g-row>
+  <g-row img="fraction_law_dungeon_8.png" name="Mapy Jadame">Daje punkty księżyca małym kosztem alternatywnym; dobry pickup, jeśli pasuje do ścieżki.</g-row>
+</g-table>
+
+<g-table tier="useless" base="laws" cols="Prawo,Dlaczego">
+  <g-row img="fraction_law_dungeon_29.png" name="Nasycenie">Loch nie jest frakcją skupioną na focusie. Ma znaczenie głównie dla i tak niepraktycznego combo Popielatego Smoka.</g-row>
+</g-table>
+
+<g-sec>Klasy</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Notatki o podklasach:</strong> podklasy są rzadkie. Większość gier kończy się zanim ktokolwiek je odblokuje, bo wymagają pięciu konkretnych umiejętności na poziomie eksperckim naraz.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Uniwersytety są główną ścieżką.</strong> Jedna wizyta potrafi dać 3-4 wymagane skille naraz; jeśli jesteś już blisko, podklasa od razu staje się realna.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wchodź w podklasę tylko, gdy przechodzą 2 z 3 kryteriów:</strong> payoff, osiągalność i jakość wymaganych skilli. Nie rozwalaj działającego buildu dla słabego efektu albo martwych umiejętności.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Nie ma capów statystyk, więc podklasy podwajające staty nadal mają wartość nawet przy 100+ łącznych statystykach.</li>
+  </ol>
+</g-notes>
+<div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
+
+<g-class name="Overlord" type="Moc" img="class_dungeon_might.png">
+  <g-sc name="Balthazar's Bodyguard" tier="decent" img="sub_class_dungeon_might_1.png">
+    <g-desc>Bohater zyskuje +100% ataku.</g-desc>
+    <g-alt>W praktyce około 50% wzrostu dmg. Większość wymagań jest dobra, ale Dyplomacja boli. Fajna ciekawostka, nie fundament buildu.</g-alt>
+    <g-req skill="assault">Ekspercka Ofensywa</g-req>
+    <g-req skill="mastery">Ekspercka Mądrość</g-req>
+    <g-req skill="magic_night">Ekspercka Magia Mroku</g-req>
+    <g-req skill="leadership">Eksperckie Dowodzenie</g-req>
+    <g-req skill="diplomacy">Ekspercka Dyplomacja</g-req>
+  </g-sc>
+  <g-sc name="Silvertongue's Envoy" tier="decent" img="sub_class_dungeon_might_2.png">
+    <g-desc>Bohater zyskuje +100% obrony.</g-desc>
+    <g-alt>Minimalnie lepsze od ofensywnego wariantu, bo obrona nigdy się nie marnuje. Sztuka Czarów jest nietypowym bottleneckiem dla Władcy. Średnie.</g-alt>
+    <g-req skill="protection">Ekspercka Obrona</g-req>
+    <g-req skill="sorcery">Ekspercka Sztuka Czarów</g-req>
+    <g-req skill="magic_day">Ekspercka Magia Światła</g-req>
+    <g-req skill="luck">Eksperckie Szczęście</g-req>
+    <g-req skill="scouting">Ekspercki Zwiad</g-req>
+  </g-sc>
+</g-class>
+
+<g-class name="Warlock" type="Magia" img="class_dungeon_magic.png">
+  <g-sc name="Amelchia's Heir" tier="top" img="sub_class_dungeon_magic_1.png">
+    <g-desc>Bohater zyskuje +100% mocy zaklęć.</g-desc>
+    <g-alt>Top-tier: podwojenie Mocy z 80 do 160 zostaje wartościowe zawsze. Najczęściej widziana podklasa w praktyce; Sztuka Walki i Taktyka są twardymi wymaganiami, ale uniwersytet potrafi to bardzo urealnić.</g-alt>
+    <g-req skill="formation">Ekspercka Sztuka Walki</g-req>
+    <g-req skill="summoner">Eksperckie Przyzwanie Awatara</g-req>
+    <g-req skill="magic_primal">Ekspercka Magia Pierwotna</g-req>
+    <g-req skill="enlightenment">Ekspercki Wgląd</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+  <g-sc name="Great Merchant" tier="useless" img="sub_class_dungeon_magic_2.png">
+    <g-desc>Produkuje +10 000 złota dziennie.</g-desc>
+    <g-alt>Gdy to odblokujesz, złoto zwykle nie ma już znaczenia. Utopie i laboratoria dają więcej. Ekonomia jako wymóg jest martwa.</g-alt>
+    <g-req skill="resistance">Ekspercka Odporność</g-req>
+    <g-req skill="battlemage">Ekspercka Magia Bitewna</g-req>
+    <g-req skill="magic_space">Ekspercka Magia Arkanów</g-req>
+    <g-req skill="logistic">Ekspercka Logistyka</g-req>
+    <g-req skill="economy">Ekspercka Ekonomia</g-req>
+  </g-sc>
+</g-class>
+
+</div>
+
+</div><!-- /tab-dungeon -->
+
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-grove-pl" data-lang="pl" data-tab="grove">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">KNIEJA</h1>
+
+<g-mech title="Mechanika frakcji — Szeptanie, focus i Przebudzenie">
+  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
+    <li><strong>Szeptanie</strong> — każdy bohater Kniei ma tę umiejętność. Zaczyna walkę z dodatkowymi ładunkami focusu, więc zdolności działają od tury 1. Kluczowe podskille: <strong>Dziecko Lasu</strong> (+30 many, czyli darmowa Wiedza na start) oraz <strong>Silna Więź</strong> (każdy wydany focus → +1 do wszystkich atrybutów do końca walki). Eksperckie Szeptanie warto mieć bardzo szybko, często dnia 1.</li>
+    <li><strong>Focus</strong> to główny zasób frakcji. Płaci za zdolności jednostek, Przebudzenie i Bloom.</li>
+    <li><strong>Przebudzenie</strong> — większość jednostek T3-T7 wydaje 3 focus, żeby zyskać szybkość, inicjatywę, HP i unikalne zdolności do końca walki.</li>
+    <li><strong>Exploit Dusk Hoplet + BLOOM:</strong> kup Dusk Hoplets dnia 1, rozdziel na one-stacki, weź Dziecko Lasu, w każdej walce aktywuj Blooms (+3 spell power każdy, za darmo), a potem przyzwij Awatara. <strong>Awatar snapshotuje te staty na stałe.</strong> Zero many, zero strat, czyszczenie niemożliwych walk.</li>
+  </ul>
+</g-mech>
+
+<g-sec>Dodatkowe uwagi</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Dusk Hoplet + Awatar jest obowiązkowy</strong> — dzień 1: upgrade Hopletów, kup Dusk Hoplets, rozdziel na one-stacki, weź Dziecko Lasu. Każda walka: spam Bloom → Awatar z podbitymi statami → trwały snapshot.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Theurgy + Awatar = najlepsze combo w grze</strong> — Awatar kosztuje 0 many. Z Theurgy rzucasz normalny spell i Awatara w tej samej rundzie. Przy Sullie i buildach pod Awatara draftuj Theurgy.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Faun Archer domyślnie, Faun Warrior tylko z Gingertail</strong> — Archer ma Sharpshooter i podwaja realny dmg przeciw strzelcom. Warrior działa dopiero, gdy bonusy Gingertail robią z niego potwora.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Knieja wygrywa T1-T2, nie high-tierami</strong> — nieuczciwy enjoyer Awatara z Dusk Hopletami jest dwie strefy przed uczciwym budowniczym Qilinów.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Ścieżka do Qilinów jest brutalna</strong> — gildia magów → golemy → Najady, które będą krwawić → dopiero Qiliny. Około 6500 złota do odblokowania i 1400 za sztukę. Tylko przy dużym head starcie zasobów.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Vatawna zależy od formatu</strong> — Vendetta: instant ban/first pick, absurd od tury 1. Inne formaty: specjalizacja często nic nie robi przez tydzień 1.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Drzewko praw jest w większości do odpuszczenia</strong> — najlepsze early: Elitarne Iriady, Dzikość Natury i Szczęście Sprzyja Godnym. Najmocniejsze prawa przychodzą przy 50+ punktach, gdy właściwe jednostki często już zniknęły z armii.</li>
+  </ol>
+</g-notes>
+
+<div class="grid grid-cols-2 gap-x-[52px] items-start mt-0">
+<div>
+<g-sec>Bohaterowie</g-sec>
+
+<g-table tier="top" base="heroes" label="TOP — perma ban / perma pick">
+  <g-row img="Sullie.png" href="nature_hero_17" name="Sullie" spec="Specjalistka od Awatara">Awatar odporny na obrażenia magiczne i efektywnie +1 spell power co 3 poziomy. Awatar jest królem mety; Sullie startuje z nim i robi walki, których inni nie mogą ruszyć. Ban/pick tier.</g-row>
+  <g-row img="Halon.png" href="nature_hero_15" name="Halon" spec="Mistrzowskie Chain Lightning">Chain Lightning traci tylko 25% dmg na odbiciu zamiast 50%. Absurdalne tempo, czyści mapę wcześniej niż inni. Zwykle instant ban.</g-row>
+  <g-row img="Aunt_Daliar.png" href="nature_hero_9" name="Ciotunia Daliar" spec="Specjalistka od Wglądu">Dodatkowe XP i Civic Innovation, które podwaja punkty prawa z obiektów mapy. Elastyczna, przyspiesza wszystko, prawie zawsze ban/pick.</g-row>
+</g-table>
+
+<g-table tier="top" base="heroes" label="TOP — mocny pick">
+  <g-row img="Gingertail.png" href="nature_hero_3" name="Rudowłosa" spec="Specjalistka od Faunów">+przyrost, inicjatywa, HP i szybkość dla Faunów; start z 3 stackami. Wyjątek od zasady, że specjaliści T1 są słabi. Z nią graj Faun Warriorami.</g-row>
+  <g-row img="Gorel_Spearhead.png" href="nature_hero_2" name="Gorel Przywódca" spec="Specjalista od Ofensywy">Wszystkie podstawowe ataki biją znacznie mocniej i skalują z poziomem. Solidny bohater, trochę niżej niż Sullie/Halon, ale często przechodzi przez bany.</g-row>
+</g-table>
+
+<g-table tier="vendetta" base="heroes" label="VENDETTA">
+  <g-row img="Vatawna.png" href="nature_hero_10" name="Vatawna" spec="Specjalistka od globalnych czarów mapy">Must-ban / must-pick na <strong>Vendetta</strong>. Dwa Dimension Doory na turę od tury 1 wygrywają mapę samą Wiedzą. Poza tym formatem zwykle średnia.</g-row>
+</g-table>
+
+<g-table tier="decent" base="heroes">
+  <g-row img="Faleor.png" href="nature_hero_7" name="Faleor" spec="Mistrzowski Fireball + zaawansowane Szeptanie">Sleeper pick. Fireball daje burst od razu, a zaawansowane Szeptanie otwiera szybką ścieżkę Dziecka Lasu i stackowania spell power z Dusk Hopletów.</g-row>
+</g-table>
+
+<g-table tier="useless" base="heroes" cols="Bohater,Dlaczego">
+  <g-row img="Eith.png" href="nature_hero_1" name="Eith">Pathing i wizja nie wystarczają. Bohater ma robić mocniejsze rzeczy niż oszczędzać trochę ruchu.</g-row>
+  <g-row img="Old_Pilgrim.png" href="nature_hero_4" name="Stary Pielgrzym">Magia Bitewna + Mistrzowska Guillotine są za wolne. Inne czary zabijają zanim to się rozkręci.</g-row>
+  <g-row img="Octavia.png" href="nature_hero_5" name="Oktawia">Szczęście jest trudne do oparcia jako plan. Knieja i tak może dojść do wysokiego lucky strike chance bez niej.</g-row>
+  <g-row name="Economy hero (crystal)">Ekonomia kryształów nie rozwiązuje priorytetów Kniei: tempa, skalowania Awatara i kontroli walk.</g-row>
+  <g-row img="Alluring_Sh_a.png" href="nature_hero_8" name="Sza Kusząca">Dyplomacja / armia przy ucieczce — nie jest to bohater do gry one-hero.</g-row>
+  <g-row img="Elder_Tss_kish.png" href="nature_hero_11" name="Tss’kish Starszy">Start z Herbomantami i Theurgy. Armia jest wolna, a drugi czar w early bywa zbyt drogi. Słaby start.</g-row>
+  <g-row img="Aeliniel.png" href="nature_hero_12" name="Aeliniel">Mistrzowski Firewall jest drogi i nie daje lepszego planu niż topowe opcje.</g-row>
+  <g-row img="Glacia.png" href="nature_hero_13" name="Glacja">Icebolt jest głównie czarem obrażeń; dodatkowa redukcja inicjatywy nie robi wystarczającej różnicy.</g-row>
+  <g-row img="Vim.png" href="nature_hero_14" name="Vim">Caven ma fatalny stosunek many do dmg. Lightning Bolt robi prawie tyle samo za ułamek kosztu.</g-row>
+  <g-row img="Echolily.png" href="nature_hero_16" name="Echolilia">Mirror Copy na wrogach brzmi świetnie, ale w one-hero PvP zwykle jedna armia jest już dużo silniejsza. Kopiujący rzadko wygrywa ten układ.</g-row>
+  <g-row img="The_Minstrel.png" href="nature_hero_18" name="Pieśniarz">2 focus/rundę i tyle samo straty u wroga. Niszowe; Szeptanie zwykle daje wystarczająco focusu.</g-row>
+</g-table>
+</div>
+
+<div>
+<g-sec>Jednostki</g-sec>
+
+<g-table tier="top" base="units">
+  <g-row img="elf_tracker_upg.png" href="elf_tracker_upg" name="Łuczniczka faunek" spec="Ulepszenie T1"><strong>Sharpshooter</strong> oznacza pełny dmg z każdego dystansu, realnie podwajając obrażenia przeciw strzelcom. Parry pomaga przeżyć. Domyślny wybór prawie zawsze.</g-row>
+  <g-row img="twinkle_upg_alt.png" href="twinkle_upg_alt" name="Chmielarek Zmierzchu" spec="Ulepszenie T2"><strong>Bloom</strong>: +3 spell power bohatera do końca walki, za darmo. One-stacki stackują tymczasową moc, którą Awatar snapshotuje na stałe. Core strategia early.</g-row>
+</g-table>
+
+<g-table tier="decent" base="units">
+  <g-row img="elf_tracker_upg_alt.png" href="elf_tracker_upg_alt" name="Wojowniczka faunek" spec="Ulepszenie T1">Więcej statów, dmg i speed. Parry na melee daje pick-offy 1v1. Duży payoff, ale wymaga pracy; rekomendowany głównie z Gingertail.</g-row>
+  <g-row img="twinkle_upg.png" href="twinkle_upg" name="Chmielarek Brzasku" spec="Ulepszenie T2">Generuje 1 focus raz na walkę i ma Swift Strike. Przyzwoite do komb z Silną Więzią.</g-row>
+  <g-row img="ent.png" href="ent" name="Iriad winny" spec="T3">Tankowate golemy, nudne, ale trzymają linię kiedy bohater rzuca czary. Kryształowy Iriad ma Thorns, które zabijają atakujące jednostki T5 lub niższe.</g-row>
+  <g-row img="druid_upg_alt.png" href="druid_upg_alt" name="Szmeromanta" spec="Ulepszenie T5 (Herbomanta)"><strong>Echoes of the Murmurwood</strong>: bohater używa księgi jeszcze raz w tej rundzie. Z Theurgy daje praktycznie 3 czary na rundę. Grać jako one-stack.</g-row>
+  <g-row img="druid_upg.png" href="druid_upg" name="Grzybomanta" spec="Ulepszenie T5 (Herbomanta)">Prosty upgrade: więcej speed, niższy koszt czarów, odporność na dmg magiczny dla sojusznika na rundę. Drugi wybór po Szmeromancie.</g-row>
+  <g-row img="qilin_upg.png" href="qilin_upg" name="Qilin gromu" spec="Ulepszenie T6">Generuje focus, ma więcej speed/dmg i po Przebudzeniu dostaje mocne narzędzia AoE/blink. Power stack, jeśli uda się go zbudować.</g-row>
+  <g-row img="qilin_upg_alt.png" href="qilin_upg_alt" name="Qilin mglisty" spec="Ulepszenie T6">Utility: sąsiedzi biorą więcej magic damage, forma mgły ignoruje przeszkody i redukuje dmg. Dobry amplifier jako one-stack.</g-row>
+  <g-row img="phoenix_upg.png" href="phoenix_upg" name="Feniks płomienny" spec="Ulepszenie T7">Nieśmiertelność: pierwsza śmierć → jajo → powrót w następnej rundzie. Heatwave czyści buffy wroga i debuffy sojuszników. Toksyczne jako neutral.</g-row>
+  <g-row img="phoenix_upg_alt.png" href="phoenix_upg_alt" name="Feniks azurytowy" spec="Ulepszenie T7">Leczy 25% brakującego HP na początku tury i może wskrzeszać. Stabilniejszy, tankowniejszy Feniks; Supernova rzadko jest praktyczna.</g-row>
+</g-table>
+
+<g-table tier="useless" base="units" cols="Jednostka,Dlaczego">
+  <g-row img="twinkle.png" href="twinkle" name="Chmielarek">Bazowy Hoplet to filler. Ulepszaj szybko, żeby dawał focus albo Bloom.</g-row>
+  <g-row img="druid.png" href="druid" name="Herbomanta">Słaba jednostka: wolna, niewygodna, long-reach melee. Widziana głównie dlatego, że jest dostępna dnia 1.</g-row>
+  <g-row img="aqualotl.png" href="aqualotl" name="Najada">Poza obecną metą; zwykle budowana tylko jako wymóg pod Qiliny/Feniksy.</g-row>
+  <g-row img="qilin.png" href="qilin" name="Qilin">Staty są solidne, ale build path jest brutalny. Rzadko realnie dochodzi do gry.</g-row>
+</g-table>
+</div>
+</div>
+
+<g-sec>Prawa</g-sec>
+<div class="text-[#606070] text-[.88em] mb-3 mt-1 italic">"Grove has the most garbage law tree I've ever seen in any game. <strong>The worst law tree of all factions.</strong>" Plan around heroes + units — don't rely on law payoffs.</div>
+
+<g-table tier="top" base="laws">
+  <g-row img="fraction_law_nature_11.png" name="Dzikość Natury">Lucky strike zadaje <strong>+50% dmg</strong>. Podstawa każdego buildu pod szczęście.</g-row>
+  <g-row img="fraction_law_nature_24.png" name="Szczęście Sprzyja Godnym">Jednostki dostają 1% lucky strike chance za punkt szczęścia ponad normalny przelicznik. W praktyce prawie podwaja wartość luck bez skilla.</g-row>
+</g-table>
+
+<g-table tier="decent" base="laws">
+  <g-row img="fraction_law_nature_10.png" name="Elitarne Iriady">+5 HP za punkt dla Iriadów. Najpopularniejsze early law — tanki po prostu dłużej żyją.</g-row>
+  <g-row img="fraction_law_nature_5.png" name="Elitarne Faunki">+50% melee damage dla Faunów. Dobre tylko dla Faun Warrior + Gingertail; nie wzmacnia Faun Archerów.</g-row>
+  <g-row img="fraction_law_nature_6.png" name="Elitarne Chmielarki">Skromny, ale użyteczny boost, jeśli Hoplety zostają w armii dłużej niż zwykle.</g-row>
+  <g-row img="fraction_law_nature_22.png" name="Elitarni Herbomanci">Zdolności Herbomantów kosztują 1 focus mniej. Echo Szmeromanty kosztuje wtedy 1 zamiast 2. Chcesz to przy one-stackach Szmeromanty.</g-row>
+  <g-row img="fraction_law_nature_23.png" name="Elitarne qiliny">Brać tylko przy commicie w power stack Qilinów; zwykle przychodzi za późno.</g-row>
+  <g-row img="fraction_law_nature_27.png" name="Elitarne Feniksy">Do rozważenia przy planowanym stacku Feniksów, ale bez znaczenia w szybszych grach.</g-row>
+  <g-row img="fraction_law_nature_29.png" name="Sanktuarium">Przebudzenie kosztuje 1 focus mniej. Bardzo sensowne, ale wymaga 50 punktów prawa — późno.</g-row>
+  <g-row img="fraction_law_nature_7.png" name="Dzikie Dzieci">Ruch i wizja są przydatne, ale konkuruje z prawami dającymi realną siłę walki.</g-row>
+  <g-row img="fraction_law_nature_19.png" name="Skupienie">+1 focus na rundę. Knieja jest głodna focusu, więc to realnie dobre.</g-row>
+</g-table>
+
+<g-table tier="useless" base="laws" cols="Prawo,Dlaczego">
+  <g-row img="fraction_law_nature_28.png" name="Baśniowość">+2 spd/ini dla Faunów/Hopletów/Herbomantów, ale przy 50 punktach prawa te jednostki często są już poza armią.</g-row>
+  <g-row img="fraction_law_nature_25.png" name="Siła Natury">Heroic Strike +10 dmg. Frakcja prawie nie ma synergii z Heroic Strike, więc wygląda jak obcy element.</g-row>
+  <g-row img="fraction_law_nature_9.png" name="Leśna Odporność">Ukrywanie szczegółów armii rzadko zmienia decyzje przeciwnika na tyle, żeby płacić punktami prawa.</g-row>
+  <g-row img="fraction_law_nature_3.png" name="Bohaterowie Ludu">Przychodzi po oknie zakupu bohaterów, więc payoff zwykle się marnuje.</g-row>
+  <g-row img="fraction_law_nature_8.png" name="Ocalić Lasy">Zniżki drewna wchodzą za późno, żeby ruszyć realne bottlenecki build orderu.</g-row>
+  <g-row img="fraction_law_nature_18.png" name="Potęga Słowa Pisanego">Zbyt wąskie i niestabilne. Scroll value rzadko decyduje ważne walki.</g-row>
+  <g-row img="fraction_law_nature_31.png" name="Naturalny Spokój">Redukcja cooldownów jest za warunkowa względem prostych praw od focusu, szczęścia i jednostek.</g-row>
+  <g-row img="fraction_law_nature_21.png" name="Żywe Korzenie">Blokowanie ucieczki rzadko jest warte punktów prawa w docelowych formatach.</g-row>
+  <g-row img="fraction_law_nature_20.png" name="Żyzna Gleba">Za wolne na obecne długości gier; payoff przychodzi po decydujących walkach.</g-row>
+</g-table>
+
+<g-sec>Klasy</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Notatki o podklasach:</strong> podklasy są rzadkie. Większość gier kończy się zanim ktokolwiek je odblokuje, bo wymagają pięciu konkretnych umiejętności na poziomie eksperckim naraz.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Uniwersytety są główną ścieżką.</strong> Jedna wizyta potrafi dać 3-4 wymagane skille naraz; jeśli jesteś już blisko, podklasa od razu staje się realna.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wchodź w podklasę tylko, gdy przechodzą 2 z 3 kryteriów:</strong> payoff, osiągalność i jakość wymaganych skilli. Nie rozwalaj działającego buildu dla słabego efektu albo martwych umiejętności.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Nie ma capów statystyk, więc podklasy podwajające staty nadal mają wartość nawet przy 100+ łącznych statystykach.</li>
+  </ol>
+</g-notes>
+<div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
+
+<g-class name="Warden" type="Moc" img="class_nature_might.png">
+  <g-sc name="Wellspring of Vigor" tier="useless" img="sub_class_nature_might_1.png">
+    <g-desc>Na początku każdej rundy generuje maksymalną liczbę ładunków focusu.</g-desc>
+    <g-alt>Wymagane skille są dobre, ale payoff jest bez sensu — Strażnicy i tak wchodzą do walki z pełnym focusem dzięki Szeptaniu.</g-alt>
+    <g-req skill="resistance">Ekspercka Odporność</g-req>
+    <g-req skill="battlemage">Ekspercka Magia Bitewna</g-req>
+    <g-req skill="magic_day">Ekspercka Magia Światła</g-req>
+    <g-req skill="leadership">Eksperckie Dowodzenie</g-req>
+    <g-req skill="enlightenment">Ekspercki Wgląd</g-req>
+  </g-sc>
+  <g-sc name="Fortune's Favored" tier="top" img="sub_class_nature_might_2.png">
+    <g-desc>Sojusznicze jednostki mają maksymalne możliwe szczęście i zawsze trafiają lucky strike przy ataku.</g-desc>
+    <g-alt>Jedna z najlepszych podklas w grze. Gwarantowane lucky strike robią absurd z prawami Kniei: Dzikość Natury i Szczęście Sprzyja Godnym potrafią pchać każdy atak w okolice potrójnych obrażeń.</g-alt>
+    <g-req skill="assault">Ekspercka Ofensywa</g-req>
+    <g-req skill="mastery">Ekspercka Mądrość</g-req>
+    <g-req skill="magic_primal">Ekspercka Magia Pierwotna</g-req>
+    <g-req skill="luck">Eksperckie Szczęście</g-req>
+    <g-req skill="diplomacy">Ekspercka Dyplomacja</g-req>
+  </g-sc>
+</g-class>
+
+<g-class name="Druid" type="Magia" img="class_nature_magic.png">
+  <g-sc name="Celestial Envoy" tier="useless" img="sub_class_nature_magic_1.png">
+    <g-desc>Bohater może używać wszystkich czarów.</g-desc>
+    <g-alt>Druidzi mają już dość mocnych czarów i rzucają najwyżej dwa na turę. Ekonomia jest martwym wymaganiem, a więcej spell listy nie ma wartości, gdy nie da się jej użyć.</g-alt>
+    <g-req skill="protection">Ekspercka Obrona</g-req>
+    <g-req skill="summoner">Eksperckie Przyzwanie Awatara</g-req>
+    <g-req skill="magic_space">Ekspercka Magia Arkanów</g-req>
+    <g-req skill="scouting">Ekspercki Zwiad</g-req>
+    <g-req skill="economy">Ekspercka Ekonomia</g-req>
+  </g-sc>
+  <g-sc name="Heaven's Fury" tier="useless" img="sub_class_nature_magic_2.png">
+    <g-desc>Heroic Strike zadaje obrażenia wszystkim wrogom w promieniu 1 heksa.</g-desc>
+    <g-alt>Druidzi nie są od Heroic Strike i muszą dołożyć Walkę + Dowodzenie. W praktyce build na 7 skilli dla średniego efektu.</g-alt>
+    <g-req skill="formation">Ekspercka Sztuka Walki</g-req>
+    <g-req skill="sorcery">Ekspercka Sztuka Czarów</g-req>
+    <g-req skill="magic_night">Ekspercka Magia Mroku</g-req>
+    <g-req skill="logistic">Ekspercka Logistyka</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+</g-class>
+
+</div>
+
+</div><!-- /tab-grove -->
+
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-necro-pl" data-lang="pl" data-tab="necro">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">NEKROPOLIA</h1>
+
+<g-mech title="Mechanika frakcji — Nekromancja">
+  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
+    <li><strong>Energia Nekrotyczna</strong> — widoczna przy portrecie bohatera, maks. 1250. Każda wskrzeszana jednostka kosztuje energię, np. 5 za Szkieleta. Uzupełniasz ją walcząc z wyłączoną nekromancją.</li>
+    <li><strong>Moc nekromancji %</strong> — po walce wskrzeszasz taki procent najwyższego tieru zabitych wrogów jako nieumarłych. <em>Musisz już mieć jednostkę tego tieru w armii</em>; inaczej tylko odnawiasz Energię Nekrotyczną.</li>
+    <li><strong>Targetowanie tieru</strong> — chcesz Kościanych łuczników? Bij jednostki T1 mając łuczników w armii. Chcesz Lisze? Bij T5 mając Lisze obecne.</li>
+    <li><strong>Przełącznik</strong> — kliknij czar w księdze, żeby włączać/wyłączać nekromancję i oszczędzać energię na ważniejsze walki.</li>
+  </ul>
+</g-mech>
+
+<g-sec>Dodatkowe uwagi</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Kościany łucznik to fundament early</strong> — start Onkosem, Podstawowa Ofensywa, potem Zaawansowana Ofensywa → Shadow Blades (+1 bazowego dmg, ogromny wzrost dla łuczników). Do tego Drums of War. Wielki stack łuczników czyści mapę bezpiecznie i skaluje się długo.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Dwa główne openery:</strong> <strong>Onkos</strong> — łucznicy i Ofensywa od początku, bezpieczny ranged creeping. <strong>Kel'Ghul</strong> — start z Upiornymi Rycerzami, +2 przyrostu i najszybszy early. Wybór zależy od template’u i banów.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Lisze są carrierem</strong> — wolny strzelec, ale Rewind Death daje masowe wskrzeszanie dwa razy na walkę. W większości buildów Sanguine Lich jest lepszy od Pestilent Lich, chyba że grasz pełny DoT.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Magia Mroku to naturalna szkoła</strong> — Natural Calm, Despair i DoT mają mocne wsparcie w prawach frakcji.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Pakiet terenu wygrywa finały</strong> — prawo sprawia, że Nekropolia zawsze walczy na swoim terenie. Do tego +1 speed i Death's Presence, czyli ogromny swing dmg w finale niezależnie od mapy.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wampiry: ilość, nie jakość</strong> — nie graj nimi jak w HoMM3. Staty mają słabe, ale jako jedyny T7 mają bazowy przyrost 2 i wysoką inicjatywę. Traktuj je jako utility/meat, które możesz tracić.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wolne formaty: Tarius albo Funerella</strong> — moc nekromancji składa się z czasem. Na szybkich formatach skaluje za wolno, na Exodus/Harmony robi się nie do zatrzymania.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Głębia bohaterów jest świetna</strong> — nawet po trzech banach zostaje kolejna topowa ścieżka. Przeciwnik nie zamknie wszystkich opcji.</li>
+  </ol>
+</g-notes>
+
+<div class="grid grid-cols-2 gap-x-[52px] items-start mt-0">
+<div>
+<g-sec>Bohaterowie</g-sec>
+
+<g-table tier="top" base="heroes">
+  <g-row img="Bulwark.png" href="necro_hero_1" name="Bastion" spec="Specjalista od pancerza">Jednostki otrzymują wyraźnie mniej obrażeń. Startuje z Obrona. Król tanków — armie trudno wykrwawić. Częsty ban i zawsze pick do rozważenia.</g-row>
+  <g-row img="Onkos.png" href="necro_hero_3" name="Onkos" spec="Specjalista od Szkieletów">Start z Podstawową Ofensywą jest kluczowy. Zaawansowana Ofensywa → Shadow Blades daje +1 bazowego dmg łucznikom, czyli ogromny wzrost outputu. Świetny early.</g-row>
+  <g-row img="Kel_Ghul.png" href="necro_hero_4" name="Kel’Ghul" spec="Specjalista od Upiornych Rycerzy">+2 przyrostu zamiast typowego +1 to absurd. T6 od dnia 1 czyści mapę łatwo. Start z Taktyką nie jest idealny, ale bohater nadal jest świetny.</g-row>
+  <g-row img="Marl.png" href="necro_hero_7" name="Marl" spec="Mistrzowska Sieć"><g-lbl tier="sprint" size="small">SPRINT</g-lbl> S tier na Sprint, A tier poza nim. Mistrzowska Sieć spowalnia wszystko, a Lisze/łucznicy strzelają bez presji. Expert Slow był banowany w HoMM3 nie bez powodu.</g-row>
+  <g-row img="Tarius.png" href="necro_hero_8" name="Tarius" spec="Zaawansowana Nekromancja od startu"><g-lbl tier="exodus" size="small">EXODUS</g-lbl> Zaawansowana Nekromancja od startu i skalowanie w czasie. Priorytet na wolnych formatach, gdzie nekromancja compounding robi ogromną armię.</g-row>
+</g-table>
+
+<g-table tier="top" base="heroes" label="MOCNE">
+  <g-row img="Laura.png" href="necro_hero_15" name="Laura" spec="Mistrzowska Rozpacz">Rozpacz działa na wszystkie typy jednostek, omijając normalne ograniczenia. Na 4 poziomie daje efektywny AoE dmg za manę. Mocna w creepingu i late.</g-row>
+  <g-row img="Lord_Rufus.png" href="necro_hero_16" name="Lord Rufus" spec="Mistrzowskie Rewind Life">Natychmiastowy dostęp do Rewind Life. Jeśli nie ma czego wskrzeszać, nadwyżka idzie jako tymczasowe overheal. Startowy skill jest słaby, ale bohater bardzo dobry.</g-row>
+  <g-row img="Funerella.png" href="necro_hero_17" name="Grabarka" spec="Specjalistka Nekromantów od nekromancji"><g-lbl tier="vendetta" size="small">VENDETTA</g-lbl> Nekromancka wersja Tariusza. Dobra alternatywa po banie Tariusza, szczególnie na Vendetta i template’ach z dużą Wiedzą.</g-row>
+</g-table>
+
+<g-table tier="decent" base="heroes">
+  <g-row img="Artorius_Veritas.png" href="necro_hero_6" name="Artorius Veritas" spec="Mistrzowski Berserk AoE">Start z Odpornością nic nie robi w early, a specjalizacja dotyczy czaru, którego długo nie rzucisz. Ciekawa, ale obecnie niekonkurencyjna.</g-row>
+  <g-row img="Ethric.png" href="necro_hero_12" name="Ethric" spec="Specjalista od Liszy">Solidna specjalizacja, ale Mądrość na start nie pomaga w early. Środek stawki, raczej 7 pick lub później.</g-row>
+  <g-row img="Guildmaster_Klastor.png" href="necro_hero_13" name="Klastor, Mistrz Gildii" spec="Specjalista od Hien cmentarnych">Hieny cmentarne są wolne i trudne jako power stack. Szczęście nie jest preferowanym early skillem. Ciężko uzasadnić.</g-row>
+  <g-row img="Shadespinner_Oona.png" href="necro_hero_14" name="Oona, Cienista Prządka" spec="Specjalistka od Magii Mroku">Dziwna nisza: więcej poziomów Magii Mroku niż zwykle potrzeba. Gdy zaczyna mieć znaczenie, przeciwnik może pójść w Światło albo Pierwotną.</g-row>
+  <g-row img="Natalida.png" href="necro_hero_5" name="Natalida" spec="Specjalistka od Nieumarłych brytanów">Zwiad nie jest pożądanym early skillem. Jednostki T3 są ok, ale za słabe jako pełny plan.</g-row>
+</g-table>
+
+<g-table tier="useless" base="heroes" cols="Bohater,Dlaczego">
+  <g-row img="King-of-Kings.png" href="necro_hero_2" name="Król Królów">Bohater pod multi-hero i Dyplomację, nie pod konkurencyjne formaty one-hero.</g-row>
+  <g-row img="Zam.png" href="necro_hero_9" name="Zam">Sztuka Walki generująca zasoby nie daje siły bojowej. Słabe.</g-row>
+  <g-row img="Mag.png" href="necro_hero_10" name="Mag">Magia Arkanów jest fatalna w early. Wartość pojawia się za późno, gdy każdy inny bohater byłby lepszy.</g-row>
+  <g-row img="Adahn.png" href="necro_hero_11" name="Adahn">Specjalista od Zjaw/Widm ze startem w Rekrutacji, jednym z najgorszych skilli. Trash.</g-row>
+  <g-row img="Milossa_The_Golden.png" href="necro_hero_18" name="Milossa Złota">Ekonomia złota nie daje ani fight power, ani skalowania nekromancji.</g-row>
+</g-table>
+</div>
+
+<div>
+<g-sec>Jednostki</g-sec>
+
+<g-table tier="top" base="units">
+  <g-row img="skeleton_upg_alt.png" href="skeleton_upg_alt" name="Kościany łucznik" spec="Ulepszenie T1">Silnik early frakcji. Masa + Raise Dead robi lawinę, a Shadow Blades i Drums of War jeszcze to wzmacniają.</g-row>
+  <g-row img="flicker_upg.png" href="flicker_upg" name="Zmora" spec="Ulepszenie T2 (White)">40% zadanych obrażeń wraca jako tymczasowe HP, które można tracić bez realnych strat. Wymusza losowy ruch wroga, świetne przeciw strzelcom.</g-row>
+  <g-row img="lich_upg_alt.png" href="lich_upg_alt" name="Krwawy lisz" spec="Ulepszenie T5">Carrier. Wolny strzelec, ale Rewind Death daje sustain całej armii. Lepszy mnożnik leczenia i XP dla bohatera. Domyślnie lepszy od Pestilent Licha.</g-row>
+  <g-row img="avatar_of_war_upg.png" href="avatar_of_war_upg" name="Awatar wojny" spec="Ulepszenie T6 (Dread Knight)">Double Strike jest zbyt mocne, żeby z niego rezygnować. War Incarnate kradnie atak przy każdym uderzeniu, a dwa hity składają to błyskawicznie.</g-row>
+</g-table>
+
+<g-table tier="decent" base="units">
+  <g-row img="skeleton_upg.png" href="skeleton_upg" name="Kościany wojownik" spec="Ulepszenie T1">Tylko jeśli przeciwnik gra Twilight i wyłącza strzelców. W innym wypadku zawsze łucznicy.</g-row>
+  <g-row img="flicker_upg_alt.png" href="flicker_upg_alt" name="Widmo" spec="Ulepszenie T2 (White)">DoT przy każdym trafieniu i więcej obrony. Wybór pod buildy DoT, szczególnie z Pestilent Lichem.</g-row>
+  <g-row img="pet_upg.png" href="pet_upg" name="Barghest" spec="Ulepszenie T3 (Undead Pet)">Bardzo wysoka inicjatywa i szybkość. Call of the Pack przywołuje tymczasową kopię stacka; wolno się odpala, ale koncept jest mocny.</g-row>
+  <g-row img="pet_upg_alt.png" href="pet_upg_alt" name="Opancerzony ogar" spec="Ulepszenie T3 (Undead Pet)">Redukuje obronę celu, daje rany DoT i rośnie defensywnie przy śmierciach sojuszników. Opcja tank/DoT.</g-row>
+  <g-row img="graverobber_upg_alt.png" href="graverobber_upg_alt" name="Treser ogarów" spec="Ulepszenie T4 (Grave Robber)">Najlepszy z T4. Wykopuje Nieumarłe brytany, nie kończąc tury. Niszowe, ale w dobrym setupie bardzo mocne.</g-row>
+  <g-row img="lich_upg.png" href="lich_upg" name="Morowy lisz" spec="Ulepszenie T5">AoE i natychmiastowe odpalenie wszystkich DoT na celu. Do buildów Despair + Pestilent Lich + Czarna Śmierć. Utrata Rewind Death boli.</g-row>
+  <g-row img="avatar_of_war_upg_alt.png" href="avatar_of_war_upg_alt" name="Ponury żniwiarz" spec="Ulepszenie T6 (Dread Knight)">Lepsze surowe staty i AoE za focus, ale traci Double Strike — krytyczna wada. Konkuruje też z Liszami o focus.</g-row>
+  <g-row img="vampire_upg.png" href="vampire_upg" name="Wampirzy lord" spec="Ulepszenie T7">Brak kontry i 40% wampiryzmu. Jedyny T7 z przyrostem 2, więc buduje liczby. Grać pod ilość, nie jakość pojedynczej jednostki.</g-row>
+</g-table>
+
+<g-table tier="useless" base="units" cols="Jednostka,Dlaczego">
+  <g-row img="vampire.png" href="vampire" name="Wampir">Niewybaczalnie słabe staty jak na T7. Przegrywa brawl z T5, a wampiryzm nie działa na wiele typów jednostek.</g-row>
+  <g-row img="vampire_upg_alt.png" href="vampire_upg_alt" name="Wampirzy uczony">Blood Transfusion i Corpse Explosion są drogie w focusie. Gorsze Rewind Death za większy koszt.</g-row>
+  <g-row img="graverobber_upg.png" href="graverobber_upg" name="Handlarz śmierci">Może wykopywać Zjawy dla focusu, ale speed/inicjatywa są tak słabe, że praktyka kuleje. Lisze potrzebują tych ładunków.</g-row>
+</g-table>
+</div>
+</div>
+
+<g-sec>Prawa</g-sec>
+
+<g-table tier="top" base="laws" label="TOP — priorytet">
+  <g-row img="fraction_law_undead_24.png" name="Do Prochu">Terra Mortis daje zawsze natywny teren, Return to the Soil +1 speed, a Death’s Presence dokłada swing dmg. Ogromny pakiet finałowy.</g-row>
+  <g-row img="fraction_law_undead_31.png" name="Śmiertelna Osobowość">Wrogie nie-Nekro jednostki biją słabiej i więcej dostają; twoje nie-Nekro odwrotnie. Idealne uzupełnienie pakietu terenu.</g-row>
+  <g-row img="fraction_law_undead_18.png" name="Elitarne Lisze">Leczenie Liszy przywraca dużo więcej HP. Skoro Sanguine Lich + Rewind Death jest core sustainem, to kluczowe prawo.</g-row>
+  <g-row img="fraction_law_undead_17.png" name="Pragnienie Krwi">+50% wampiryzmu dla wszystkich sojuszników. Dobra synergia z dużymi stackami Wampirów.</g-row>
+  <g-row img="fraction_law_undead_30.png" name="Morituri te Salutant">Jednostki dostają dodatkową darmową kontrę na rundę. Świetne na Wampirach: wróg bije, kontra leczy, wróg bije znowu, druga kontra.</g-row>
+</g-table>
+
+<g-table tier="decent" base="laws">
+  <g-row img="fraction_law_undead_7.png" name="Ożywiony Trup II">Cztery prawa po lewej zwiększają moc nekromancji. Stackuj na wolnych formatach z Tariuszem/Funerellą — skaluje wykładniczo.</g-row>
+  <g-row img="fraction_law_undead_32.png" name="Łaska Księżyca">Boost Magii Mroku. Natural Calm, Despair i reszta naturalnej szkoły frakcji korzystają z tego prawie zawsze.</g-row>
+  <g-row img="fraction_law_undead_26.png" name="Czarna Śmierć">Wrogowie biorą do +100% więcej DoT. Core buildów Despair + Pestilent Lich. Rush przy archetypie DoT.</g-row>
+  <g-row img="fraction_law_undead_19.png" name="Elitarni Upiorni Rycerze">+6 maksymalnych obrażeń dla Upiornych Rycerzy. Ogromne na jednostce z Double Strike i War Incarnate.</g-row>
+  <g-row img="fraction_law_undead_4.png" name="Elitarne Szkielety">Brać przy Onkosie albo każdej strategii na łucznikach. To silnik early, więc bezpośrednie staty robią robotę.</g-row>
+  <g-row img="fraction_law_undead_10.png" name="Elitarne Nieumarłe Brytany">Brytany/Barghesty dostają dużą inicjatywę. Więcej tur = więcej realnego wpływu.</g-row>
+  <g-row img="fraction_law_undead_23.png" name="Elitarne Wampiry">Więcej HP i przyrostu Wampirów. Dobra długoterminowa inwestycja pod ilość.</g-row>
+  <g-row img="fraction_law_undead_29.png" name="Terror i Postrach">Wróg traci 1 poziom we wszystkich szkołach magii. Zaskakująco mocne z Odpornością, szczególnie przeciw casterom.</g-row>
+</g-table>
+
+<g-table tier="useless" base="laws" cols="Prawo,Dlaczego">
+  <g-row img="fraction_law_undead_3.png" name="Bogactwo Zasobów I">Niski wpływ względem praw od nekromancji, terenu albo sustainu.</g-row>
+  <g-row img="fraction_law_undead_9.png" name="Równi w Śmierci">Niski priorytet, zwykle do pominięcia.</g-row>
+</g-table>
+
+<g-sec>Klasy</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Notatki o podklasach:</strong> podklasy są rzadkie. Większość gier kończy się zanim ktokolwiek je odblokuje, bo wymagają pięciu konkretnych umiejętności na poziomie eksperckim naraz.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Uniwersytety są główną ścieżką.</strong> Jedna wizyta potrafi dać 3-4 wymagane skille naraz; jeśli jesteś już blisko, podklasa od razu staje się realna.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wchodź w podklasę tylko, gdy przechodzą 2 z 3 kryteriów:</strong> payoff, osiągalność i jakość wymaganych skilli. Nie rozwalaj działającego buildu dla słabego efektu albo martwych umiejętności.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Nie ma capów statystyk, więc podklasy podwajające staty nadal mają wartość nawet przy 100+ łącznych statystykach.</li>
+  </ol>
+</g-notes>
+<div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
+
+<g-class name="Death Knight" type="Moc" img="class_undead_might.png">
+  <g-sc name="Harbinger of Doom" tier="decent" img="sub_class_undead_might_1.png">
+    <g-desc>Wrogie jednostki zawsze mają minimalne szczęście i zawsze trafiają pechowy atak.</g-desc>
+    <g-alt>Przyzwoite, bo w praktyce redukuje incoming dmg o około 50%. Payoff jest realny, ale Magia Pierwotna i Zwiad są trudne na Rycerzu Śmierci — najlepiej z uniwersytetu.</g-alt>
+    <g-req skill="protection">Ekspercka Obrona</g-req>
+    <g-req skill="sorcery">Ekspercka Sztuka Czarów</g-req>
+    <g-req skill="magic_primal">Ekspercka Magia Pierwotna</g-req>
+    <g-req skill="luck">Eksperckie Szczęście</g-req>
+    <g-req skill="scouting">Ekspercki Zwiad</g-req>
+  </g-sc>
+  <g-sc name="Walking Rot" tier="useless" img="sub_class_undead_might_2.png">
+    <g-desc>Wszyscy wrogowie zawsze mają minimalne morale.</g-desc>
+    <g-alt>Minimalne morale odpala się rzadko i jest zawodne. Dyplomacja + Taktyka to zbyt wiele niechcianych skilli za mały efekt.</g-alt>
+    <g-req skill="resistance">Ekspercka Odporność</g-req>
+    <g-req skill="mastery">Ekspercka Mądrość</g-req>
+    <g-req skill="magic_night">Ekspercka Magia Mroku</g-req>
+    <g-req skill="diplomacy">Ekspercka Dyplomacja</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+</g-class>
+
+<g-class name="Necromancer" type="Magia" img="class_undead_magic.png">
+  <g-sc name="Soulweaver" tier="decent" img="sub_class_undead_magic_1.png">
+    <g-desc>Po zabiciu wrogiego stacka pojawia się na jego miejscu tymczasowy sojuszniczy stack Zjaw.</g-desc>
+    <g-alt>Przyzwoite i łatwe do osiągnięcia: Logistyka, Wgląd i Awatar są normalnymi pickami Nekromanty. Sztuka Walki to główny bottleneck. Payoff średni, ale koszt mały.</g-alt>
+    <g-req skill="formation">Ekspercka Sztuka Walki</g-req>
+    <g-req skill="summoner">Eksperckie Przyzwanie Awatara</g-req>
+    <g-req skill="magic_space">Ekspercka Magia Arkanów</g-req>
+    <g-req skill="enlightenment">Ekspercki Wgląd</g-req>
+    <g-req skill="logistic">Ekspercka Logistyka</g-req>
+  </g-sc>
+  <g-sc name="Chronomancer" tier="useless" img="sub_class_undead_magic_2.png">
+    <g-desc>Nekromancja działa na wszystkie stworzenia, nie tylko nieumarłych.</g-desc>
+    <g-alt>Wymaga armii nie-nieumarłych, co prawie nie dzieje się online. Ofensywa i Taktyka też są mało prawdopodobne na Nekromancie.</g-alt>
+    <g-req skill="assault">Ekspercka Ofensywa</g-req>
+    <g-req skill="battlemage">Ekspercka Magia Bitewna</g-req>
+    <g-req skill="magic_day">Ekspercka Magia Światła</g-req>
+    <g-req skill="economy">Ekspercka Ekonomia</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+</g-class>
+
+</div>
+
+</div><!-- /tab-necro -->
+
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-temple-pl" data-lang="pl" data-tab="temple">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">ŚWIĄTYNIA</h1>
+
+<g-mech title="Mechanika frakcji — buffy + Magia Światła">
+  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
+    <li><strong>Świątynia to frakcja buffów.</strong> Każda jednostka ma zdolność wzmacniającą. Anioł T7 zbiera wszystkie buffy dane dowolnej sojuszniczej jednostce dzięki <strong>Kuciu Doskonałości</strong>, więc inne jednostki nie buffują siebie — karmią buffami Anioły.</li>
+    <li><strong>Magia Światła</strong> to główna szkoła. Core czary: <strong>Błogosławieństwo</strong> (+35% dmg), <strong>Dotyk Areny</strong> (+20% HP + inicjatywa), <strong>Riposta</strong> (sojusznicy kontrują zanim wrogi atak wejdzie), <strong>Promienna Zbroja</strong> (-40% dmg z każdego źródła), <strong>Osąd</strong> jako odpowiednik Implozji.</li>
+    <li><strong>Synergia morale</strong> — jednostki i prawa stackują morale. Realnie da się dojść do 45%+ trigger chance, czyli jednostki ciągle biorą dodatkowe tury.</li>
+  </ul>
+</g-mech>
+
+<g-sec>Dodatkowe uwagi</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wszystkie inne jednostki istnieją po to, by buffować Anioły</strong> — nie buffujesz Austringerów czy Kawalerii dla nich samych. Przez Kucie Doskonałości buffy trafiają też na Anioły.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Apotheosis &gt; Archanioł zwykle</strong> — Archanioł ma najwyższy dmg w grze, ale Apotheosis ma +75 HP, Duelist melee/range i aurę odporności na negatywne efekty.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Riposta + Vengeful Strike to combo</strong> — Riposta sprawia, że sojusznicy kontrują przed otrzymaniem ciosu, a Vengeful Strike podwaja kontrę. Wróg atakuje i najpierw dostaje pełny hit.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Heroic Strike jest zawsze dobry</strong> — Mandall się w tym specjalizuje, ale każdy bohater z Walką → Dowodzeniem może czyścić mapę Heroic Strike’iem. Skaluje się ze statami na każdym formacie.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Zachęta to jedno z najlepszych tanich praw</strong> — morale liczy się 7% zamiast 4% za punkt. Kilka źródeł morale i jednostki biorą dodatkowe tury non stop.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Austringerzy są power stackiem dnia 1</strong> — buduj Kuszników i od razu ulepszaj. Double shot + synergia z Aniołami robi ogromną wartość.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Inkwizytorzy są zagadką designu</strong> — odporność na magię, ignorowanie ataku i AoE brzmią świetnie, ale w praktyce wszyscy ich ignorują i zabijają Heroic Strike’iem na końcu.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Morale stacking w endgame</strong> — jednostki + Dowodzenie + Zachęta = około 45% proc chance. Aeos może pchać to jeszcze dalej.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Sunspear Cavalry skaluje się w trakcie walki</strong> — każdy proc morale, luck i pozytywny efekt daje +1 bazowego dmg do końca bitwy.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Merry Elias zależy od formatu</strong> — Vendetta: najlepszy bohater frakcji. Inne formaty: średni. Sprawdź template.</li>
+  </ol>
+</g-notes>
+
+<div class="grid grid-cols-2 gap-x-[52px] items-start mt-0">
+<div>
+<g-sec>Bohaterowie</g-sec>
+
+<g-table tier="top" base="heroes" label="TOP — perma ban / perma pick">
+  <g-row img="Pip.png" href="human_hero_11" name="Pip" spec="Wgląd + specjalista od XP">+1 atrybut co 2 poziomy i szybsze XP. Bez zobowiązania do kierunku: caster, might, Awatar, cokolwiek. 100% ban albo pick.</g-row>
+  <g-row img="Old_Lord_Mandall.png" href="human_hero_9" name="Stary lord Mandall" spec="Specjalista od Heroic Strike, start z Walką">Cele trafione Heroic Strike biorą +10% dmg do końca rundy. Nawet gdy armia krwawi, bohater nadal działa. Mocny na każdym formacie.</g-row>
+</g-table>
+
+<g-table tier="top" base="heroes" label="TOP — mocny pick">
+  <g-row img="Kestrel.png" href="human_hero_4" name="Kestrel" spec="Specjalista od Ofensywy">Na zaawansowanej Ofensywie odblokowuje Archery. Austringerzy jako shooter power stack z Archery dewastują mapę.</g-row>
+  <g-row img="Lord_Edgar.png" href="human_hero_8" name="Lord Edgar" spec="Sojusznicy zyskują część ataku/obrony bohatera">Sojusznicy zyskują procent ataku/obrony bohatera. Typ bohatera w stylu Gunnar/Tazar — najlepszy na wolnych i late-game formatach.</g-row>
+</g-table>
+
+<g-table tier="vendetta" base="heroes" label="VENDETTA">
+  <g-row img="Merry_Elias.png" href="human_hero_10" name="Eliasz Radosny" spec="+1 użycie dla każdego globalnego czaru mapy">DD, TP, Second Wind i Fly można rzucać +1 raz na turę. Na Vendetta must-ban; poza formatami z global spellami dużo średniejszy.</g-row>
+</g-table>
+
+<g-table tier="sprint" base="heroes" label="SPRINT">
+  <g-row img="Ister.png" href="human_hero_1" name="Ister" spec="Specjalista od Logistyki i ruchu po drogach">Najlepszy bohater Świątyni na Sprint: ruch po drogach daje ogromne tempo. Poza Sprintem przegrywa z Pipem, Mandallem i Kestrelem.</g-row>
+</g-table>
+
+<g-table tier="decent" base="heroes">
+  <g-row img="Zenith.png" href="human_hero_12" name="Zenitia" spec="Specjalista od Prządek Brzasku">+1 przyrost, start z Light Weaverami i Heavenly Blades. Heavenly Blades + Austringerzy to dużo płaskiego dmg. Niszowy, nie topowy.</g-row>
+  <g-row img="Vesper.png" href="human_hero_15" name="Vesper" spec="Mistrzowskie Błogosławieństwo">Mistrzowskie Błogosławieństwo łączy stary efekt HoMM3 Bless z dużym buffem dmg. Ma potencjał, część dobrych graczy testuje.</g-row>
+  <g-row img="Aeos_the_Exalted.png" href="human_hero_5" name="Aeos Egzaltowana" spec="Morale i scaling trigger chance">Dream build pod late morale: teoretycznie 70%+ trigger chance. Niedograna, ale specjalizacja jest ciekawa.</g-row>
+  <g-row img="Lia_the_Untethered_One.png" href="human_hero_13" name="Lia Nieokiełznana" spec="Magia Światła +1 poziom, podwójny cast i blokada wrogiego Światła">Kit wygląda mocno, ale podwójne rzucanie Magii Światła jest manochłonne i trudniejsze do wykorzystania niż topowi bohaterowie.</g-row>
+</g-table>
+
+<g-table tier="useless" base="heroes" cols="Bohater,Dlaczego">
+  <g-row img="Leon_Sticky_Fingers.png" href="human_hero_2" name="Leon Lepkie Palce">Zwiad i pathing nie wystarczą, żeby konkurować z bohaterami wygrywającymi walki.</g-row>
+  <g-row img="John_Johnson.png" href="human_hero_3" name="John Johnson">Specjalista T1. Newbie trap — tempo jest za wysokie i szybko wychodzisz z T1.</g-row>
+  <g-row img="Heretic_Avis.png" href="human_hero_6" name="Avis Heretyk">Ekonomia klejnotów i Rekrutacja nie dają wystarczającej siły w early.</g-row>
+  <g-row img="Keandra.png" href="human_hero_7" name="Keandra">Specjalistka od Kawalerii, ale siedlisko nie jest przy starcie, więc setup jest niewygodny i mało testowany.</g-row>
+  <g-row img="Julius.png" href="human_hero_14" name="Juliusz">Mistrzowska Healing Water jest za wąska; Świątynia potrzebuje tempa, skalowania albo presji w walce.</g-row>
+  <g-row img="Anastasia_the_Meek.png" href="human_hero_16" name="Anastazja Łagodna">Mistrzowski Dotyk Areny z +1 speed nie wystarcza, żeby uzasadnić pick.</g-row>
+  <g-row img="Nadir.png" href="human_hero_17" name="Nadir">Magia Mroku w złej frakcji. Świątynia skaluje Światło, nie Nightshade.</g-row>
+  <g-row img="Clarissa.png" href="human_hero_18" name="Klarysa">Czysta ekonomia nie jest konkurencyjna, jeśli bohater nie rozwiązuje walk.</g-row>
+</g-table>
+</div>
+
+<div>
+<g-sec>Jednostki</g-sec>
+<div class="text-[#606070] text-[.88em] mb-3 mt-1 italic">Angels are the core identity unit. All other units exist to buff them via Forging Perfection.</div>
+
+<g-table tier="top" base="units">
+  <g-row img="crossbowman_upg.png" href="crossbowman_upg" name="Sokolnik" spec="Ulepszenie T2 (Kusznik)">Double Shot sam definiuje jednostkę. Austringerzy są power stackiem dnia 1 i powinni być budowani natychmiast.</g-row>
+  <g-row img="sunlight_cavalry_upg_alt.png" href="sunlight_cavalry_upg_alt" name="Kawalerzysta Słonecznej Włóczni" spec="Ulepszenie T5">Bonus dmg za przejechane heksy, penetracja, aura morale i +1 dmg za każdy pozytywny efekt. Potworny power stack.</g-row>
+  <g-row img="angel_upg_alt.png" href="angel_upg_alt" name="Seraf" spec="Ulepszenie T7 (Anioł)">Duelist melee/range, odporność na negatywne efekty i aura dla sąsiadów, +75 HP względem Archanioła. Jedna z najmocniejszych jednostek w grze.</g-row>
+  <g-row img="angel.png" href="angel" name="Anioł" spec="Bazowy T7">Jednostka dystansowa. <strong>Kucie Doskonałości</strong> zbiera każdy buff dany sojusznikowi, a Refract kopiuje pozytywne efekty. Cała armia pracuje na Anioły.</g-row>
+</g-table>
+
+<g-table tier="decent" base="units">
+  <g-row img="esquire_upg.png" href="esquire_upg" name="Kapitan straży" spec="Ulepszenie T1 (Zbrojny)">Double strike i obrona przeciw range. Zwykle bardziej użyteczny upgrade T1, tankuje gdy bohater używa Heroic Strike.</g-row>
+  <g-row img="esquire_upg_alt.png" href="esquire_upg_alt" name="Egida Słońca" spec="Ulepszenie T1 (Zbrojny)">Bardziej tanky, aura -30% dmg dystansowego dla sąsiadów. Warto mieć kilka na walkę o siedlisko T7 przeciw Aniołom.</g-row>
+  <g-row img="crossbowman_upg_alt.png" href="crossbowman_upg_alt" name="Strzelec wyborowy" spec="Ulepszenie T2 (Kusznik)">Sharpshooter + Piercing Shot. Situacyjnie lepszy przeciw siedlisku T7, ale prawie zawsze bierzesz Austringera.</g-row>
+  <g-row img="griffin_upg.png" href="griffin_upg" name="Gryf świątynny" spec="Ulepszenie T3">Nieskończone kontry, lepsza szybkość, Valiant Cry jako sensowny focus dump. Gryfy są fillerem i będą krwawić.</g-row>
+  <g-row img="griffin_upg_alt.png" href="griffin_upg_alt" name="Gryf strażniczy" spec="Ulepszenie T3">Kontruje, gdy sąsiedni wróg atakuje sojusznika. Utility anti-melee do ochrony power stacków.</g-row>
+  <g-row img="lightweaver_upg.png" href="lightweaver_upg" name="Hierofantka" spec="Ulepszenie T4 (Prządka Brzasku)">Dispel i mocniejszy Inner Glow (+2 spd/ini). One-stack utility: co turę buffujesz power stack za 1 focus.</g-row>
+  <g-row img="lightweaver_upg_alt.png" href="lightweaver_upg_alt" name="Zwiastunka Słońca" spec="Ulepszenie T4 (Prządka Brzasku)">Wersja power stack. Dostaje +1 bazowego dmg za każdy pozytywny efekt i skaluje się przez całą walkę.</g-row>
+  <g-row img="sunlight_cavalry_upg.png" href="sunlight_cavalry_upg" name="Szlachetny kawalerzysta" spec="Ulepszenie T5">Charge daje wszystkim sojusznikom +1 spd/ini na 2 rundy. One-stack utility do focus dumpów.</g-row>
+  <g-row img="inquisitor_upg.png" href="inquisitor_upg" name="Matka przełożona" spec="Ulepszenie T6 (Inkwizytor)">Odporność na magię, ignorowanie 40% ataku wroga, dużo HP i +2 focus gdy oberwie. Prawie nie do zabicia, ale trudna do użycia.</g-row>
+  <g-row img="inquisitor_upg_alt.png" href="inquisitor_upg_alt" name="Ekskomunikatorka" spec="Ulepszenie T6 (Inkwizytor)">Nadal odporna na magię i unyielding, ale bardziej ofensywna. W praktyce wciąż dość toporna.</g-row>
+  <g-row img="angel_upg.png" href="angel_upg" name="Archanioł" spec="Ulepszenie T7 (Anioł)">Sharpshooter, najwyższy dmg w grze, +5 atk i +2 ini względem Apotheosis. Wymaga pełnej ochrony i buff focusu, a Apotheosis zwykle jest bezpieczniejszy.</g-row>
+</g-table>
+
+<g-table tier="useless" base="units" cols="Jednostka,Dlaczego">
+  <g-row img="crossbowman.png" href="crossbowman" name="Kusznik">Fine Bolts nie są warte używania bez synergii z Aniołami. Ulepszaj do Austringerów jak najszybciej.</g-row>
+  <g-row img="griffin.png" href="griffin" name="Gryf">Filler latający z niewygodną obsługą. Używaj jako tymczasowe ciało i licz się ze stratami.</g-row>
+  <g-row img="inquisitor.png" href="inquisitor" name="Inkwizytorka">Odporność na magię i przyzwoite staty, ale meta nie wie jeszcze jak ich używać: przeciwnik często ignoruje ich do końca walki.</g-row>
+</g-table>
+</div>
+</div>
+
+<g-sec>Prawa</g-sec>
+
+<g-table tier="top" base="laws" label="TOP — rush natychmiast">
+  <g-row img="fraction_law_human_25.png" name="Odwaga">Każdy punkt morale daje 7% trigger chance zamiast 4%. Tanie jak na tier i jedno z najlepszych praw skalowania Świątyni.</g-row>
+  <g-row img="fraction_law_human_26.png" name="Błogosławieństwo Bohatera">25% mocy zaklęć bohatera idzie w atak jednostek, 25% Wiedzy w obronę. Battle magic jako prawo — bierzesz i stajesz się wyraźnie mocniejszy.</g-row>
+  <g-row img="fraction_law_human_30.png" name="Elitarni Aniołowie">Anioły dostają procent ataku/obrony bohatera. Wyróżniające się prawo, bo wszystkie staty bohatera stają się lepsze na Aniołach.</g-row>
+  <g-row img="fraction_law_human_15.png" name="Łaska Słońca">Wszystkie czary Magii Światła dostają +1 poziom. Bezpośrednio wzmacnia główny plan magiczny frakcji.</g-row>
+</g-table>
+
+<g-table tier="decent" base="laws">
+  <g-row img="fraction_law_human_13.png" name="Uderzenie Zemsty">Kontry zadają +100% dmg. Z Ripostą cel dostaje pełnoprawną kontrę zanim jego atak wejdzie. Bardzo mocne.</g-row>
+  <g-row img="fraction_law_human_5.png" name="Doskonałość">Buffy trwają dłużej. Dobre wcześnie, zanim spell power zacznie naturalnie wydłużać efekty.</g-row>
+  <g-row img="fraction_law_human_34.png" name="Wiara w Magię">Przydatne utility, gdy główne prawa bojowe są już zabezpieczone.</g-row>
+  <g-row img="fraction_law_human_12.png" name="Błyskawiczny Refleks">Drogie, ale inicjatywa jest jedną z najcenniejszych statystyk w late-game walkach.</g-row>
+  <g-row img="fraction_law_human_11.png" name="Elitarne Gryfy">Pakiet sytuacyjnych boostów dla Gryfów, Light Weaverów, Kawalerii i Inkwizytorów. Brać tylko przy buildzie pod dany typ.</g-row>
+  <g-row img="fraction_law_human_27.png" name="Potęga Wiary">Late game only. Omija potrzebę Mądrości/szkół magii, ale zwykle kierunek castowania jest ustalony zanim to wejdzie.</g-row>
+</g-table>
+
+<g-table tier="useless" base="laws" cols="Prawo,Dlaczego">
+  <g-row img="fraction_law_human_32.png" name="Święte Ziemie">Zbyt defensywne i zależne od lokacji. Jeśli Świątynia broni się na własnym terenie, gra już idzie źle.</g-row>
+  <g-row img="fraction_law_human_3.png" name="Bogactwo Zasobów I">Niska wartość. Pomijaj na rzecz praw o większym wpływie.</g-row>
+</g-table>
+
+<g-sec>Klasy</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Notatki o podklasach:</strong> podklasy są rzadkie. Większość gier kończy się zanim ktokolwiek je odblokuje, bo wymagają pięciu konkretnych umiejętności na poziomie eksperckim naraz.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Uniwersytety są główną ścieżką.</strong> Jedna wizyta potrafi dać 3-4 wymagane skille naraz; jeśli jesteś już blisko, podklasa od razu staje się realna.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wchodź w podklasę tylko, gdy przechodzą 2 z 3 kryteriów:</strong> payoff, osiągalność i jakość wymaganych skilli. Nie rozwalaj działającego buildu dla słabego efektu albo martwych umiejętności.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Nie ma capów statystyk, więc podklasy podwajające staty nadal mają wartość nawet przy 100+ łącznych statystykach.</li>
+  </ol>
+</g-notes>
+<div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
+
+<g-class name="Knight" type="Moc" img="class_human_might.png">
+  <g-sc name="Swashbuckler" tier="top" img="sub_class_human_might_1.png">
+    <g-desc>Heroic Strike zadaje +60 bazowych obrażeń.</g-desc>
+    <g-alt>Top-tier dla buildów Walka + Dowodzenie. +60 bazowego dmg ma znaczenie nawet w late, a większość wymagań i tak chcesz.</g-alt>
+    <g-req skill="assault">Ekspercka Ofensywa</g-req>
+    <g-req skill="mastery">Ekspercka Mądrość</g-req>
+    <g-req skill="magic_night">Ekspercka Magia Mroku</g-req>
+    <g-req skill="leadership">Eksperckie Dowodzenie</g-req>
+    <g-req skill="luck">Eksperckie Szczęście</g-req>
+  </g-sc>
+  <g-sc name="Paragon" tier="useless" img="sub_class_human_might_2.png">
+    <g-desc>Sojusznicze jednostki zawsze zadają maksymalne i otrzymują minimalne obrażenia.</g-desc>
+    <g-alt>Efekt dobry, ale wymaga Taktyki, Dyplomacji i Awatara — mało realne i często niechciane na Rycerzu.</g-alt>
+    <g-req skill="formation">Ekspercka Sztuka Walki</g-req>
+    <g-req skill="summoner">Eksperckie Przyzwanie Awatara</g-req>
+    <g-req skill="magic_day">Ekspercka Magia Światła</g-req>
+    <g-req skill="diplomacy">Ekspercka Dyplomacja</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+</g-class>
+
+<g-class name="Cleric" type="Magia" img="class_human_magic.png">
+  <g-sc name="Grand Inquisitor" tier="useless" img="sub_class_human_magic_1.png">
+    <g-desc>Wrogi bohater może użyć każdego czaru tylko raz na walkę.</g-desc>
+    <g-alt>Wymagane skille są solidne, ale payoff słaby; late-game walki często kończą się w 2-3 tury.</g-alt>
+    <g-req skill="protection">Ekspercka Obrona</g-req>
+    <g-req skill="battlemage">Ekspercka Magia Bitewna</g-req>
+    <g-req skill="magic_space">Ekspercka Magia Arkanów</g-req>
+    <g-req skill="enlightenment">Ekspercki Wgląd</g-req>
+    <g-req skill="scouting">Ekspercki Zwiad</g-req>
+  </g-sc>
+  <g-sc name="Ascendant" tier="useless" img="sub_class_human_magic_2.png">
+    <g-desc>Wszystkie czary bohatera zawsze kosztują 0 many.</g-desc>
+    <g-alt>Bezużyteczne — mana w late jest trywialna, a Ekonomia jako wymóg jest martwa.</g-alt>
+    <g-req skill="resistance">Ekspercka Odporność</g-req>
+    <g-req skill="sorcery">Ekspercka Sztuka Czarów</g-req>
+    <g-req skill="magic_primal">Ekspercka Magia Pierwotna</g-req>
+    <g-req skill="logistic">Ekspercka Logistyka</g-req>
+    <g-req skill="economy">Ekspercka Ekonomia</g-req>
+  </g-sc>
+</g-class>
+
+</div>
+
+</div><!-- /tab-temple -->
+
+﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-schism-pl" data-lang="pl" data-tab="schism">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">SCHIZMA</h1>
+
+<g-mech title="Mechanika frakcji — Komunia">
+  <ul class="pl-[22px] space-y-[9px] leading-[1.65]">
+    <li><strong>Każdy bohater Schizmy zaczyna z Komunią.</strong> Każda wygrana walka daje +1 poziom komunii, domyślnie do 6. Każdego poranka tracisz połowę komunii, zaokrąglając w górę.</li>
+    <li><strong>Shadow Army</strong> — każdy poziom komunii daje 3% dodatkowych jednostek na początku walki. Z <em>Celestial Abyss</em> na ekspercie, które bierzesz prawie zawsze, to 4% za poziom, czyli 24% dodatkowej armii przy capie. Te bonusowe jednostki można tracić bez utraty prawdziwej armii.</li>
+    <li><strong>Działa tylko na jednostki Schizmy</strong> — obce jednostki z mapy nie dostają Shadow Army. Vendetta i formaty z mieszaną armią zmniejszają wartość tej mechaniki.</li>
+    <li><strong>Uwaga na finały</strong> — jeśli format turniejowy pomija dzień przed finałem, wchodzisz z połową komunii. Prawo Spojrzenie Otchłani naprawia to, dając maksymalną komunię na start dnia.</li>
+    <li><strong>Summoning Rights</strong> — Ra'Shothy T1, Wielkie Shothy T4 i Emisariusze Otchłani T7 mogą podnosić dodatkowe kopie siebie z pul trupów w trakcie walki. To centralizuje power stack.</li>
+  </ul>
+</g-mech>
+
+<g-sec>Dodatkowe uwagi</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Ra'Shoth rażący to carry early</strong> — ulepsz T1 do strzelca natychmiast. Shadow Army z Komunii sprawia, że rzadko tracisz realne jednostki nawet w shooter campach.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Bierz Celestial Abyss prawie zawsze</strong> — ekspercka Komunia → 4% shadow army za poziom zamiast 3%. Jeśli opierasz się na jednostkach Schizmy, rozważ też Incomprehensible Death Seal pod stat scaling.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Ofensywa jest królem Schizmy</strong> — Expert Offense → Shadow Blades daje +1 bazowego dmg wszystkim jednostkom, co dla strzelców T1 oznacza ogromny wzrost outputu. Grellekh startuje z tym, ale każdy bohater z Ofensywą powinien rushować tę ścieżkę.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wielki Shoth T4 to power stack</strong> — szybki, solidny, liczny i z Summoning Rights. Zamienia trupy innych jednostek w więcej Wielkich Shothów. Centralizacja stacka w trakcie walki to jedna z najmocniejszych mechanik HoMM.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Rozjemcy T6 to ranged powerhouse</strong> — Paradoxical Shots odwraca karę zasięgu, więc dalekie cele biorą 150% dmg. Największy dmg T6 w grze, trudny build path, ale absurdalny po wejściu online.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Emisariusze Otchłani T7 mają Will of the Abyss</strong> — podwójna tura na ogromnym stacku T7, odporność na magic damage i Summoning Rights do farmienia kolejnych T7 z trupów.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Seria Odmrożona Siła działa na WSZYSTKIE jednostki</strong> — także obce z mapy. To robi ogromną różnicę na Vendetta i formatach z mieszaną armią.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Surowe Warunki = produkcja zasobów per miasto</strong> — +1 drewna i rudy na miasto dziennie. Przy 5-6 miastach i 2 punktach prawa to 10-12 drewna/rudy dziennie.</li>
+  </ol>
+</g-notes>
+
+<div class="grid grid-cols-2 gap-x-[52px] items-start mt-0">
+<div>
+<g-sec>Bohaterowie</g-sec>
+
+<g-table tier="top" base="heroes">
+  <g-row img="The_Eye_Collective.png" href="unfrozen_hero_13" name="Legion Oczu" spec="Specjalista od Wielkich Shothów, start z Awatarem i 2 stackami T4">Robi wszystko naraz. Wielkie Shothy są power stackiem, a start z Przyzwaniem Awatara daje gwarantowane tempo od tury 1. Mocny na każdym etapie gry.</g-row>
+  <g-row img="Grellekh_the_Betrayer.png" href="unfrozen_hero_10" name="Grellekh Niegodzien Zaufania" spec="Specjalista od Ofensywy, start z Ofensywą">Start z Ofensywą to ogromna sprawa. Expert Offense → Shadow Blades daje +1 bazowego dmg wszystkim jednostkom, czyli często około +50% dla strzelców T1. Dziś jeden z najlepszych picków.</g-row>
+  <g-row img="Icequeen_Hel_Ghat.png" href="unfrozen_hero_11" name="Hel’Ghat, Królowa Lodu" spec="Specjalistka od Obrony">Magiczny typ bohatera, który zaskakująco dobrze działa z Komunią. Dodatkowa shadow army oznacza więcej jednostek do stracenia i mniej realnych strat.</g-row>
+</g-table>
+
+<g-table tier="top" base="heroes" label="MOCNE">
+  <g-row img="Changeling_Urgo.png" href="unfrozen_hero_8" name="Urgo Zmiennokształtna" spec="Specjalista od Przyzwania Awatara">Awatar dostaje barierę na początku swojej tury. Moc skaluje co 3 poziomy, a Schizma naturalnie zbiera sporo power. Działający Awatar jest bardzo mocny w early.</g-row>
+  <g-row img="Dhüvri.png" href="unfrozen_hero_18" name="Dhüvri" spec="Specjalista od Komunii"><g-lbl tier="sprint" size="small">SPRINT</g-lbl> Komunia rośnie dwa razy szybciej, a co 8 poziomów rośnie cap. Ogromne shadow armies w late na jednostkach Schizmy. Świetny Sprint, słabszy gdy grasz obcą armią.</g-row>
+</g-table>
+
+<g-table tier="sprint" base="heroes" label="SPRINT">
+  <g-row img="Nihil.png" href="unfrozen_hero_1" name="Nihilia" spec="Specjalista od Logistyki">Specjalista Sprinta. Logistyka i ruch po drogach dają gigantyczne tempo. Poza Sprintem raw movement rzadko przebija topowych bohaterów.</g-row>
+</g-table>
+
+<g-table tier="decent" base="heroes">
+  <g-row img="Tölketh.png" href="unfrozen_hero_14" name="Tölketh" spec="Specjalista od Heroic Strike">Nie startuje z Walką, co jest dużym problemem dla Heroic Strike hero. Najsłabszy bohater HS w grze; grywalny awaryjnie na Sprint.</g-row>
+  <g-row img="Mara_Matha.png" href="unfrozen_hero_5" name="Mara Matha" spec="Specjalistka od Jeźdźców Aga’Shothów, start z zaawansowaną Komunią">Power stack T3 i dobry start komunii, ale T3 w tej frakcji to głównie mięso. Wolisz strzelców albo Wielkie Shothy.</g-row>
+</g-table>
+
+<g-table tier="useless" base="heroes" cols="Bohater,Dlaczego">
+  <g-row img="Blackhorn.png" href="unfrozen_hero_2" name="Czarnorogi">Specjalista od Sztuki Czarów na bohaterze mind-type bez naturalnej synergii. Nie składa się.</g-row>
+  <g-row img="Matastala_the_White.png" href="unfrozen_hero_3" name="Matastala Biała">Bonusy inicjatywy przychodzą na poziomach 6 i 12, za późno żeby mieć wpływ. Prawie niewidziana w grach.</g-row>
+  <g-row img="Jänhei.png" href="unfrozen_hero_4" name="Jänhei">Specjalista od Kultystów ze startem w Mądrości. Kultyści są wolnymi meat shieldami, nie planem na grę.</g-row>
+  <g-row img="Iron_Master.png" href="unfrozen_hero_6" name="Żelazny Dziedzic">Specjalista od Konkuba ze startem w Odporności. Konkuby są fillerem, Odporność nic nie robi w early.</g-row>
+  <g-row img="Walkha.png" href="unfrozen_hero_7" name="Wal’kha">Specjalista od Magii Pierwotnej z 1 Wiedzy. Brak wsparcia dla castowania w early i brak oczywistej synergii.</g-row>
+  <g-row img="Martyr_Tho.png" href="unfrozen_hero_9" name="Tho Męczennik">Generacja rtęci + Magia Światła. Bohater ekonomiczny nie uzasadnia slotu, gdy potrzebujesz siły bojowej.</g-row>
+  <g-row img="Kwinri.png" href="unfrozen_hero_12" name="Kwinri">Specjalista T1, ale startuje z Rekrutacją. Grellekh robi tę samą rolę strzelca T1 dużo lepiej.</g-row>
+  <g-row img="Ulkuth.png" href="unfrozen_hero_15" name="Ulkuth">Pathfinding i Zwiad pomagają w ruchu, ale nie wygrywają walk.</g-row>
+  <g-row img="Ra_Davok.png" href="unfrozen_hero_16" name="Ra’Davok">Mistrzowski czar Card i Magia Arkanów. Arkana są słabe w early, a Schizma nie ma dobrego sposobu inwestowania w nie focusu.</g-row>
+  <g-row img="Sister_Keiri.png" href="unfrozen_hero_17" name="Siostra Keiri">Mistrzowski Umbral Grip AoE ma potencjał, ale konkurencja bohaterów Schizmy jest zbyt mocna.</g-row>
+</g-table>
+</div>
+
+<div>
+<g-sec>Jednostki</g-sec>
+
+<g-table tier="top" base="units">
+  <g-row img="lesser_eldritch_upg.png" href="lesser_eldritch_upg" name="Ra’shoth rażący" spec="Ulepszenie T1 (Ra’Shoth)">Early carry frakcji, odpowiednik Master Gremlinów. Strzela przez cały early, a Summoning Rights odbudowuje stack z trupów po walce.</g-row>
+  <g-row img="eldritch_flyer.png" href="eldritch_flyer" name="Wielki shoth" spec="T4">Szybki, solidny, łatwy do budowy. Summoning Rights zamienia puli trupów w więcej Wielkich Shothów w trakcie walki. Główny power stack frakcji.</g-row>
+  <g-row img="eldritch_flyer_upg.png" href="eldritch_flyer_upg" name="Niewypowiedziany shoth" spec="Ulepszenie T4">Podwójny atak i więcej szybkości. Brawlowy upgrade, który wzmacnia już dobry Wielki Shoth. Preferowany pod fizyczne buildy.</g-row>
+  <g-row img="arbitrator.png" href="arbitrator" name="Rozjemca" spec="T6">Paradoxical Shots odwraca karę zasięgu, więc na dystansie zadaje 150% dmg. Największy dmg T6 w grze, trudny do zbudowania, ale niszczycielski.</g-row>
+  <g-row img="arbitrator_upg_alt.png" href="arbitrator_upg_alt" name="Rozdęty rozjemca" spec="Ulepszenie T6">Frozen Pages wyłącza księgę czarów wroga do końca rundy. Bardzo toksyczne w kluczowej turze, a nadal zachowuje Paradoxical Shots.</g-row>
+  <g-row img="unspeakable.png" href="unspeakable" name="Emisariusz Otchłani" spec="T7">250 HP, 30/30 staty, szybkość, odporność na magic damage i Will of the Abyss, czyli natychmiastowa dodatkowa tura. T7 z Summoning Rights.</g-row>
+  <g-row img="unspeakable_upg.png" href="unspeakable_upg" name="Nadzorca Otchłani" spec="Ulepszenie T7">Area Strike z podwójną turą karze ustawianie jednostek obok strzelców. Dodatkowo wymusza losowy atak wroga, dobre na one-stacki.</g-row>
+</g-table>
+
+<g-table tier="decent" base="units">
+  <g-row img="frostworm_rider.png" href="frostworm_rider" name="Jeździec aga’shothów" spec="T3">Szybka jednostka z pure-damage ability, która nie kończy tury. Dobre blokery range, głównie mięso pod Summoning Rights Wielkich Shothów.</g-row>
+  <g-row img="frostworm_rider_upg.png" href="frostworm_rider_upg" name="Zaklinacz aga’shothów" spec="Ulepszenie T3">Bardzo szybki. Piercing Cold daje debuff +50% otrzymywanych obrażeń — świetne pod burst czarami. Redukuje też kary terenu.</g-row>
+  <g-row img="eldritch_flyer_upg_alt.png" href="eldritch_flyer_upg_alt" name="Nieokiełznany shoth" spec="Ulepszenie T4">Ścieżka pod Arkanów/castera. Black Ice Shard pomaga gdy przegrywasz wyścig statów. Wybór pod arcane/avatar build.</g-row>
+  <g-row img="succubus_upg.png" href="succubus_upg" name="Mistrzyni kajdan" spec="Ulepszenie T5 (Konkub)">Hourglass blokuje aktywne zdolności wrogiego bohatera do końca rundy, a mana gain się podwaja. Trzymać jako one-stack utility.</g-row>
+  <g-row img="succubus_upg_alt.png" href="succubus_upg_alt" name="Pani magii" spec="Ulepszenie T5 (Konkub)">Za 1 focus blokuje wszystkim wrogom zyskiwanie focusu do końca rundy. Absurdalne one-stack utility przeciw Kniei, Nekro i innym focus-heavy frakcjom.</g-row>
+  <g-row img="arbitrator_upg.png" href="arbitrator_upg" name="Rozjemca Szczeliny" spec="Ulepszenie T6">Ogromna inicjatywa i częstsze strzały. AoE spowalnia przeciwników, ale ma mniej defensywnego wpływu niż Rozdęty Rozjemca.</g-row>
+</g-table>
+
+<g-table tier="useless" base="units" cols="Jednostka,Dlaczego">
+  <g-row img="lesser_eldritch_upg_alt.png" href="lesser_eldritch_upg_alt" name="Ra’shoth zaciekły">Cone attack na 3 stacki brzmi dobrze, ale jest za wolny jako power stack i traci wartość strzelca.</g-row>
+  <g-row img="unfrozen_cultist.png" href="unfrozen_cultist" name="Kultysta">Long reach, ale tragiczny speed i inicjatywa. Meat shield dla Ra’Shothów.</g-row>
+  <g-row img="succubus.png" href="succubus" name="Konkub">Niewygodny power stack z niską inicjatywą i trudnym build pathem. Warto głównie dla one-stack utility po drodze do Rozjemców.</g-row>
+  <g-row img="unspeakable_upg_alt.png" href="unspeakable_upg_alt" name="Egzekutor Otchłani">Więcej płaskiego dmg niż Overseer, ale niższe staty i brak area strike. W większości przypadków bierz Overseera.</g-row>
+</g-table>
+</div>
+</div>
+
+<g-sec>Prawa</g-sec>
+
+<g-table tier="top" base="laws" label="TOP — priorytet">
+  <g-row img="fraction_law_unfrozen_8.png" name="Surowe Warunki">Miasta produkują +1 drewna i rudy dziennie. To jest per miasto, nie flat, więc przy wielu miastach robi absurdalną ekonomię.</g-row>
+  <g-row img="fraction_law_unfrozen_2.png" name="Mądrość Pokoleniowa">+XP dla bohatera. Rzadki efekt, a szybsze poziomy to więcej statów i lepsze skalowanie na każdym froncie.</g-row>
+  <g-row img="fraction_law_unfrozen_6.png" name="Odmrożona Siła I">Łańcuch 7 praw z dużymi mnożnikami statów w late. Kluczowe: działa na WSZYSTKIE jednostki, także obce. Bardzo mocne na Vendetta/mixed-army.</g-row>
+  <g-row img="fraction_law_unfrozen_34.png" name="Świat Jest Nasz">Sojusznicy traktują każdy teren jak natywny, zyskując speed/ini i bonusy praw terenu. Świetne z Burzą Śnieżną.</g-row>
+  <g-row img="fraction_law_unfrozen_33.png" name="Burza Śnieżna">Wszyscy wrogowie tracą na stałe 1 speed i 1 inicjatywy w każdej walce. Bardzo mocne za kilka punktów prawa.</g-row>
+  <g-row img="fraction_law_unfrozen_29.png" name="Spojrzenie Otchłani">Bohater zaczyna każdy dzień z maksymalną komunią. Krytyczne w formatach, które pomijają dzień przed finałem.</g-row>
+</g-table>
+
+<g-table tier="decent" base="laws">
+  <g-row img="fraction_law_unfrozen_9.png" name="Głębia Umysłu">Bohaterowie Schizmy odzyskują rano dużo więcej many za tylko 2 punkty prawa. Pozwala dłużej zostać w polu.</g-row>
+  <g-row img="fraction_law_unfrozen_7.png" name="Moc Lodu">Do +3 mocy bohatera. Dobre przy buildach na Awatara, które potrzebują trochę mocy w early.</g-row>
+  <g-row img="fraction_law_unfrozen_4.png" name="Zamrożona Ojczyzna">Sojusznicy na natywnym terenie dostają staty. Z The World is Ours działa wszędzie.</g-row>
+  <g-row img="fraction_law_unfrozen_28.png" name="Zamrożony Umysł">Zmniejsza focus przeciwnika na początku każdej rundy. Z Odpornością brutalne przeciw frakcjom opartym o focus.</g-row>
+  <g-row img="fraction_law_unfrozen_19.png" name="Elitarne Wielkie Shothy">Staty i przyrost dla głównego power stacka frakcji. Brać przy commicie w Wielkie Shothy.</g-row>
+  <g-row img="fraction_law_unfrozen_27.png" name="Elitarni Rozjemcy">Więcej statów dla Rozjemców, czyli wzmacnia najwyższy dmg T6 w grze. Brać pod ranged power stack.</g-row>
+  <g-row img="fraction_law_unfrozen_32.png" name="Elitarni Emisariusze Otchłani">Staty i przyrost T7. Dobra inwestycja, jeśli Emisariusze Otchłani są late-game finisherem.</g-row>
+</g-table>
+
+<g-table tier="useless" base="laws" cols="Prawo,Dlaczego">
+  <g-row img="fraction_law_unfrozen_3.png" name="Bogactwo Zasobów I">Niska wartość względem Surowych Warunków. Pomijaj dla mocniejszych praw.</g-row>
+  <g-row img="fraction_law_unfrozen_15.png" name="Nieziemska Magia">Poziomy Magii Arkanów. Arkana są słabe w early Schizmy, więc nie inwestuj w to wcześnie.</g-row>
+</g-table>
+
+<g-sec>Klasy</g-sec>
+<g-notes>
+  <ol class="pl-6 space-y-[11px]">
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Notatki o podklasach:</strong> podklasy są rzadkie. Większość gier kończy się zanim ktokolwiek je odblokuje, bo wymagają pięciu konkretnych umiejętności na poziomie eksperckim naraz.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Uniwersytety są główną ścieżką.</strong> Jedna wizyta potrafi dać 3-4 wymagane skille naraz; jeśli jesteś już blisko, podklasa od razu staje się realna.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]"><strong>Wchodź w podklasę tylko, gdy przechodzą 2 z 3 kryteriów:</strong> payoff, osiągalność i jakość wymaganych skilli. Nie rozwalaj działającego buildu dla słabego efektu albo martwych umiejętności.</li>
+    <li class="leading-[1.7] text-[.95em] text-[#a0a0b0]">Nie ma capów statystyk, więc podklasy podwajające staty nadal mają wartość nawet przy 100+ łącznych statystykach.</li>
+  </ol>
+</g-notes>
+<div class="grid grid-cols-2 gap-x-[52px] gap-y-[14px] items-stretch">
+
+<g-class name="Oathkeeper" type="Moc" img="class_unfrozen_might.png">
+  <g-sc name="Unbound" tier="decent" img="sub_class_unfrozen_might_1.png">
+    <g-desc>Podnosi wszystkie czary bohatera do maksymalnego poziomu.</g-desc>
+    <g-alt>Przyzwoite, gdy uniwersytet da Sztukę Czarów. Max-level spelle są mocne, ale część efektu da się osiągnąć itemami, a Sorcery rzadko wpada naturalnie Oathkeeperom.</g-alt>
+    <g-req skill="assault">Ekspercka Ofensywa</g-req>
+    <g-req skill="sorcery">Ekspercka Sztuka Czarów</g-req>
+    <g-req skill="magic_day">Ekspercka Magia Światła</g-req>
+    <g-req skill="leadership">Eksperckie Dowodzenie</g-req>
+    <g-req skill="scouting">Ekspercki Zwiad</g-req>
+  </g-sc>
+  <g-sc name="Unfeeling" tier="useless" img="sub_class_unfrozen_might_2.png">
+    <g-desc>Wróg traci cały focus na początku każdej rundy.</g-desc>
+    <g-alt>Jedna z najgorszych podklas. Wymaga Dyplomacji i Ekonomii, dwóch martwych skilli, a przeciwnicy i tak regenerują focus w rundzie.</g-alt>
+    <g-req skill="resistance">Ekspercka Odporność</g-req>
+    <g-req skill="mastery">Ekspercka Mądrość</g-req>
+    <g-req skill="magic_night">Ekspercka Magia Mroku</g-req>
+    <g-req skill="diplomacy">Ekspercka Dyplomacja</g-req>
+    <g-req skill="economy">Ekspercka Ekonomia</g-req>
+  </g-sc>
+</g-class>
+
+<g-class name="Riftspeaker" type="Magia" img="class_unfrozen_magic.png">
+  <g-sc name="Unstoppable" tier="decent" img="sub_class_unfrozen_magic_1.png">
+    <g-desc>Bohater zyskuje +10 ataku, obrony, mocy zaklęć i wiedzy.</g-desc>
+    <g-alt>Przyzwoite: +10 do wszystkich statów to około 20% boost i zawsze ma wartość. Sztuka Walki i Taktyka są mało prawdopodobne na Riftspeakerze, więc traktuj jako university-only.</g-alt>
+    <g-req skill="formation">Ekspercka Sztuka Walki</g-req>
+    <g-req skill="battlemage">Ekspercka Magia Bitewna</g-req>
+    <g-req skill="magic_primal">Ekspercka Magia Pierwotna</g-req>
+    <g-req skill="enlightenment">Ekspercki Wgląd</g-req>
+    <g-req skill="tactics">Ekspercka Taktyka</g-req>
+  </g-sc>
+  <g-sc name="Unfathomable" tier="top" img="sub_class_unfrozen_magic_2.png">
+    <g-desc>Wszyscy wrogowie zawsze zadają minimalne i otrzymują maksymalne obrażenia.</g-desc>
+    <g-alt>Top-tier: permanentny bless/curse na całej walce. Wymagane skille są naturalne dla Riftspeakera, więc podklasa często przychodzi prawie za darmo przy normalnym buildzie.</g-alt>
+    <g-req skill="protection">Ekspercka Obrona</g-req>
+    <g-req skill="summoner">Eksperckie Przyzwanie Awatara</g-req>
+    <g-req skill="magic_space">Ekspercka Magia Arkanów</g-req>
+    <g-req skill="luck">Eksperckie Szczęście</g-req>
+    <g-req skill="logistic">Ekspercka Logistyka</g-req>
   </g-sc>
 </g-class>
 
@@ -1498,22 +2594,49 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <script>
+var currentLang = localStorage.getItem('guide-lang') || 'en';
+
 function activateTab(name) {
   var btn = document.querySelector('.tab-btn[data-tab="'+name+'"]');
   if (!btn) return;
+  var content = document.querySelector('.tab-content[data-tab="'+name+'"][data-lang="'+currentLang+'"]');
+  if (!content) return;
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
   document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
   btn.classList.add('active');
-  document.getElementById('tab-'+name).classList.add('active');
+  content.classList.add('active');
 }
+
+function setLanguage(lang) {
+  currentLang = lang === 'pl' ? 'pl' : 'en';
+  localStorage.setItem('guide-lang', currentLang);
+  document.documentElement.lang = currentLang;
+  document.documentElement.style.setProperty('--active-lang', currentLang === 'pl' ? '#dc143c' : '#3f8cff');
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    var label = currentLang === 'pl' ? btn.dataset.labelPl : btn.dataset.labelEn;
+    if (label) btn.textContent = label;
+  });
+  var activeTab = document.querySelector('.tab-btn.active');
+  activateTab(activeTab ? activeTab.dataset.tab : (location.hash.replace('#','') || 'hive'));
+}
+
 document.querySelectorAll('.tab-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     activateTab(btn.dataset.tab);
     location.hash = btn.dataset.tab;
   });
 });
+document.querySelectorAll('.lang-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    setLanguage(btn.dataset.lang);
+  });
+});
 var initial = location.hash.replace('#','');
-if (initial) activateTab(initial);
+setLanguage(currentLang);
+activateTab(initial || 'hive');
 </script>
 </body>
 </html>
