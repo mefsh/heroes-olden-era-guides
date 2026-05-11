@@ -25,6 +25,7 @@ tailwind.config = {
 .tab-content[data-tab="necro"]   { --accent:#849db0; --mech-title:#6e8d9e; --row-top:#0b1018 }
 .tab-content[data-tab="temple"]  { --accent:#f0c030; --mech-title:#f0c030; --row-top:#181505 }
 .tab-content[data-tab="schism"]  { --accent:#7ecbd4; --mech-title:#5bb8c8; --row-top:#060e12 }
+.tab-content[data-tab="maps"]    { --accent:#d7a84f; --mech-title:#e5bd68; --row-top:#171105 }
 
 /* ── Tab behaviour ────────────────────────────────────────────────────── */
 .tab-content { display: none }
@@ -105,6 +106,89 @@ em     { color: #606070; font-style: normal }
 a.el   { color: inherit; text-decoration: none }
 a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px }
 
+/* Map guide cards */
+.maps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+.map-guide-card {
+  overflow: hidden;
+  background: color-mix(in srgb, var(--accent) 3%, #0d0d11);
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, #1e1e25);
+  border-left: 3px solid color-mix(in srgb, var(--accent) 54%, transparent);
+  border-radius: 4px;
+}
+.map-guide-card.featured {
+  grid-column: 1 / -1;
+}
+.map-shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #050507;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 16%, #1e1e25);
+}
+.map-card-body {
+  padding: 22px 24px 24px;
+}
+.map-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.map-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, #272730);
+  background: color-mix(in srgb, var(--accent) 6%, #101016);
+  color: #8f8fa2;
+  font-family: Rajdhani, sans-serif;
+  font-size: .8em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  text-transform: uppercase;
+}
+.map-guide-card h2 {
+  color: #eeeef5;
+  font-family: Cinzel, serif;
+  font-size: 1.45em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+.map-intro {
+  color: #a8a8b8;
+  margin: 0 0 18px;
+  line-height: 1.62;
+}
+.map-block {
+  border-top: 1px solid rgba(255,255,255,.07);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+.map-block h3 {
+  color: var(--accent);
+  font-family: Rajdhani, sans-serif;
+  font-size: .86em;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.map-block ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.map-block li {
+  margin: 7px 0;
+  color: #b8b8c4;
+  line-height: 1.55;
+}
+
 /* Mobile / narrow layout */
 @media (max-width: 1024px) {
   body { font-size: 15px }
@@ -141,6 +225,14 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   .tab-content > .grid.grid-cols-2 {
     grid-template-columns: minmax(0, 1fr) !important;
     gap: 0 !important;
+  }
+
+  .maps-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .map-guide-card.featured {
+    grid-column: auto;
   }
 
   h1 {
@@ -267,6 +359,10 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
     padding: 16px !important;
   }
 
+  .map-card-body {
+    padding: 18px 16px 20px;
+  }
+
   td {
     grid-template-columns: 76px minmax(0, 1fr);
     gap: 8px;
@@ -287,6 +383,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="necro"   data-label-en="NECROPOLIS" data-label-pl="NEKROPOLIA" style="--c:#90a4ae">NECROPOLIS</button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="temple"  data-label-en="TEMPLE"     data-label-pl="ŚWIĄTYNIA"  style="--c:#ffd54f">TEMPLE</button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="schism"  data-label-en="SCHISM"     data-label-pl="SCHIZMA"    style="--c:#7ecbd4">SCHISM</button>
+  <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="maps"    data-label-en="MAPS"       data-label-pl="MAPY"       style="--c:#d7a84f">MAPS</button>
   <div class="lang-switch" aria-label="Language">
     <button class="lang-btn active" type="button" data-lang="en" title="English" aria-label="English">🇬🇧 EN</button>
     <button class="lang-btn" type="button" data-lang="pl" title="Polski" aria-label="Polski">🇵🇱 PL</button>
@@ -1350,6 +1447,78 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 
 </div><!-- /tab-schism -->
 
+<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-maps-en" data-lang="en" data-tab="maps">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">Single Hero Map Templates</h1>
+
+<g-mech title="Ranked template read">These notes are built from the template walkthrough transcript and are meant as a fast ranked reference: what the map asks from you, where the power is, and which hero/unit profiles gain value.</g-mech>
+
+<g-sec>Template Guide</g-sec>
+
+<div class="maps-grid">
+  <section class="map-guide-card featured">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/exodus" target="_blank" class="el"><img class="map-shot" src="img/maps/exodus.png" alt="Exodus map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">128 x 128</span><span class="map-pill">Tournament</span></div>
+      <h2>Exodus</h2>
+      <p class="map-intro">A best-of-three tournament template. Every ~10 days both players are summoned into a battle; the fight gives a victory point, but no lasting XP/farming value. The rest of the game is about building real army before those checkpoints.</p>
+      <div class="map-block"><h3>Game plan</h3><ul><li>Week 1 is investment: wood, ore, income buildings, towns, dwellings and usually Astrology if your army plan is not too greedy.</li><li>You start with two faction towns, free zero-mana Town Portal, and access to a third random-faction town in the home area.</li><li>After the first fight, break into side expansion zones with more faction towns; if rich enough, double/triple/quad build your key unit.</li><li>The late objective is the desert and super treasury: Aboropia gives an extra week of growth, Four Scholar Shrine lets you retrain the hero.</li></ul></div>
+      <div class="map-block"><h3>Strong here</h3><ul><li>Economy scaling, multi-town army builds and heroes who convert long-term growth into final-fight power.</li><li>High-tier plans can work because army is bought, not cheated from boxes. Temple Angel/Radiant Forge style plans are the model example.</li><li>Retrain value matters: early scaling skills like Insight or Avatar can be dropped later for hard battle skills.</li></ul></div>
+      <div class="map-block"><h3>Avoid</h3><ul><li>Do not play like a box-race template. There is no fast external army source to bail out a poor build order.</li><li>Do not fire Aboropia too early unless the next fight forces it; it is strongest once your multi-build is already online.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/sprint" target="_blank" class="el"><img class="map-shot" src="img/maps/sprint.png" alt="Sprint map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">112 x 112</span><span class="map-pill">Tournament</span></div>
+      <h2>Sprint</h2>
+      <p class="map-intro">A pure race through increasingly rich zones. You collect army from boxes, not from town development, and the player who reaches the last zone first gets the huge army, relic and fully built town payoff.</p>
+      <div class="map-block"><h3>Game plan</h3><ul><li>Push through zones in order: early boxes give low-tier army, later zones give higher-tier army and better rewards.</li><li>Build Astrology mostly for Second Wind. Movement is real movement here; no Dimension Door tempo shortcut.</li><li>The snow zone is dangerous because boxes can be XP instead of T4 army, which can waste tempo or create a bad fight.</li><li>The final town is fully built, often including Grail-level payoff, so collected unupgraded army can become much better at the finish line.</li></ul></div>
+      <div class="map-block"><h3>Strong here</h3><ul><li>Movement heroes, Logistics, strong late army fighters and heroes who do not care what random army type the boxes give.</li><li>Unupgraded box stacks are often excellent if you expect to reach the final town and upgrade them there.</li><li>Reliable brawlers scale well because the template produces large army-vs-army fights.</li></ul></div>
+      <div class="map-block"><h3>Avoid</h3><ul><li>Do not overinvest in town army. Towns mainly support Astrology and upgrades; the map pays you through boxes.</li><li>Do not stumble in the snow zone by assuming every box is army.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/harmony" target="_blank" class="el"><img class="map-shot" src="img/maps/harmony.png" alt="Harmony map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">128 x 128</span><span class="map-pill">Capital Hold</span></div>
+      <h2>Harmony</h2>
+      <p class="map-intro">The slowest ranked template. You lose if your capital falls or your main hero dies, so the game is about investment, army preservation and controlling the shared late zones without bleeding away the only army you have.</p>
+      <div class="map-block"><h3>Game plan</h3><ul><li>Like Exodus, there is no easy external army. Week 1 is towns, dwellings, income, resources and enough hero strength to leave safely.</li><li>You start with two towns and free Town Portal, so consolidate your early army before moving out.</li><li>The second zone has mines and dwellings, but the third zone is the real power spike: stats, artifacts, towns and Aboropia.</li><li>Protect your Aboropia and contest the opponent's when possible. Losing both growth trees usually decides the game.</li></ul></div>
+      <div class="map-block"><h3>Strong here</h3><ul><li>Slow scaling, efficient army preservation, capital defense and heroes who can win without sacrificing stacks every turn.</li><li>Town/dwelling investment and Aboropia timing matter more than flashy early tempo.</li><li>Control-style heroes gain value because forcing or denying capital pressure is part of the win condition.</li></ul></div>
+      <div class="map-block"><h3>Avoid</h3><ul><li>Do not bleed army for medium rewards. On this template, lost army rarely comes back.</li><li>Do not ignore the capital route. A very hard guard can become a direct pressure line if someone can break it.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/jebus_outcast" target="_blank" class="el"><img class="map-shot" src="img/maps/jebus_outcast.png" alt="Jebus Outcast map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">160 x 160</span><span class="map-pill">Final Battle</span></div>
+      <h2>Jebus Outcast</h2>
+      <p class="map-intro">A Jebus-style race into the desert. Your biome contains many army boxes, and the middle contains the real treasure: high-tier box army, artifacts, towns and enough value to decide the whole game.</p>
+      <div class="map-block"><h3>Game plan</h3><ul><li>Farm start-zone army boxes as efficiently as possible, gaining enough army and hero power to break into mid.</li><li>You cannot skip the middle break with control spells; you must kill one of the guards.</li><li>Once in desert, prioritize box density. Every box you collect is army the opponent cannot use.</li><li>If the game goes long, build and use middle towns to upgrade box army and add real growth.</li></ul></div>
+      <div class="map-block"><h3>Strong here</h3><ul><li>Early tempo heroes, box clear tools, strong break power and builds that convert random army into immediate pressure.</li><li>Astrology/control has value if it helps chain more boxes, but the central question is still: can you break and farm mid first?</li><li>Heroes with reliable AoE, sustain or early army amplification gain practical value.</li></ul></div>
+      <div class="map-block"><h3>Avoid</h3><ul><li>Do not overbuild home town if it delays box tempo. Current meta leans toward boxes over double-build town plans.</li><li>Do not give up mid for side zones unless you are already behind and need a backup line.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/vendetta" target="_blank" class="el"><img class="map-shot" src="img/maps/vendetta.png" alt="Vendetta map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">160 x 160</span><span class="map-pill">Classic</span></div>
+      <h2>Vendetta</h2>
+      <p class="map-intro">A Jebus-like middle race with control spells from the start. Dimension Door, Town Portal and Shadow Flight are available immediately, so the template rewards mana management, Knowledge and clean chaining of boxes.</p>
+      <div class="map-block"><h3>Game plan</h3><ul><li>Day 1: take the two Four Scholar Observatories near town, return, and build Mage Guild. This enables control-spell tempo from day 2.</li><li>Use Dimension Door and Town Portal to reach boxes away from home without losing access to mana, town and army.</li><li>Take small boxes first, snowball into larger boxes, then break into the desert when the army is ready.</li><li>Mid is still king. Side zones exist, but they are generally a fallback when the opponent controls the desert.</li></ul></div>
+      <div class="map-block"><h3>Strong here</h3><ul><li>Knowledge, mana sustain, control-spell abuse and heroes who can turn DD/TP tempo into more boxes per day.</li><li><strong>Vatawna</strong> is uniquely dangerous here because global map spell tempo matters from turn 1.</li><li>Fast box clearers and heroes with strong early fights can chain content before the opponent stabilizes.</li></ul></div>
+      <div class="map-block"><h3>Avoid</h3><ul><li>Do not skip the day-1 observatory into Mage Guild setup without a very good reason.</li><li>Do not farm side zones while the opponent freely farms mid; side content is usually poorer than desert content.</li></ul></div>
+    </div>
+  </section>
+</div>
+
+</div><!-- /tab-maps -->
+
 ﻿<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-hive-pl" data-lang="pl" data-tab="hive">
 
 <h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">RÓJ</h1>
@@ -2404,6 +2573,78 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 </div>
 
 </div><!-- /tab-schism -->
+
+<div class="tab-content pt-10 px-[52px] pb-16 max-w-[1780px] mx-auto" id="tab-maps-pl" data-lang="pl" data-tab="maps">
+
+<h1 class="font-cinzel text-[3em] font-bold tracking-[12px] pb-[14px] mb-2 border-b">Mapy Single Hero</h1>
+
+<g-mech title="Szybki read template'ów ranked">Notatki z transkrypcji opisu template'ów. Cel: szybko sprawdzić, czego mapa od ciebie wymaga, gdzie leży power i jakie profile bohaterów/jednostek zyskują wartość.</g-mech>
+
+<g-sec>Przewodnik po template'ach</g-sec>
+
+<div class="maps-grid">
+  <section class="map-guide-card featured">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/exodus" target="_blank" class="el"><img class="map-shot" src="img/maps/exodus.png" alt="Exodus map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">128 x 128</span><span class="map-pill">Tournament</span></div>
+      <h2>Exodus</h2>
+      <p class="map-intro">Template turniejowy best of three. Co około 10 dni obaj gracze są przywoływani do walki; wygrana daje punkt, ale sama walka nie zostawia XP ani wartości do farmienia. Reszta gry polega na zbudowaniu realnej armii przed checkpointami.</p>
+      <div class="map-block"><h3>Plan gry</h3><ul><li>Tydzień 1 to inwestycje: drewno, ruda, income buildingi, miasta, dwellingi i zwykle Astrology, jeśli plan armii nie jest bardzo chciwy.</li><li>Startujesz z dwoma miastami frakcji, darmowym Town Portalem za 0 many i dostępem do trzeciego miasta losowej frakcji w home zone.</li><li>Po pierwszej walce zwykle wychodzisz przez break do stref z kolejnymi miastami frakcji; jeśli jesteś bogaty, możesz double/triple/quad buildować kluczową jednostkę.</li><li>Late objective to pustynia i super treasury: Aboropia daje dodatkowy tygodniowy przyrost, a Four Scholar Shrine pozwala przebudować bohatera.</li></ul></div>
+      <div class="map-block"><h3>Mocne tutaj</h3><ul><li>Economy scaling, multi-town army buildy i bohaterowie, którzy zamieniają długoterminowy growth w siłę final fightów.</li><li>High-tier plany mają sens, bo armię kupujesz, a nie wyciągasz z boxów. Temple pod Anioły/Radiant Forge to modelowy przykład.</li><li>Retrain ma dużą wartość: skille early scalingu typu Insight albo Avatar można później wymienić na twarde skille bojowe.</li></ul></div>
+      <div class="map-block"><h3>Unikaj</h3><ul><li>Nie graj tego jak box-race. Nie ma szybkiego zewnętrznego źródła armii, które naprawi słaby build order.</li><li>Nie odpalaj Aboropii za wcześnie, chyba że kolejna walka cię do tego zmusza; jest najmocniejsza, gdy multi-build już działa.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/sprint" target="_blank" class="el"><img class="map-shot" src="img/maps/sprint.png" alt="Sprint map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">112 x 112</span><span class="map-pill">Tournament</span></div>
+      <h2>Sprint</h2>
+      <p class="map-intro">Czysty wyścig przez coraz bogatsze strefy. Armię bierzesz z boxów, nie z rozwoju miasta, a gracz który pierwszy dojdzie do ostatniej strefy zgarnia ogromny payoff w armii, reliktach i w pełni zbudowanym mieście.</p>
+      <div class="map-block"><h3>Plan gry</h3><ul><li>Przechodzisz strefy po kolei: early boxy dają niski tier armii, późniejsze strefy dają wyższy tier i lepsze nagrody.</li><li>Buduj Astrology głównie pod Second Wind. Ruch jest tutaj realnym ruchem; nie ma shortcutu z Dimension Door.</li><li>Śnieżna strefa jest zdradliwa, bo boxy mogą dać XP zamiast armii T4, co może zmarnować tempo albo ustawić złą walkę.</li><li>Ostatnie miasto jest w pełni zbudowane, często z payoffem na poziomie Graala, więc nieulepszone stacki z boxów mogą stać się dużo lepsze na finiszu.</li></ul></div>
+      <div class="map-block"><h3>Mocne tutaj</h3><ul><li>Bohaterowie od movementu, Logistics, mocni late army fighterzy i postacie, którym nie przeszkadza losowy typ armii z boxów.</li><li>Nieulepszone stacki z boxów są często świetne, jeśli planujesz dojść do końcowego miasta i ulepszyć je tam.</li><li>Stabilni brawlerzy skalują dobrze, bo template produkuje duże walki army vs army.</li></ul></div>
+      <div class="map-block"><h3>Unikaj</h3><ul><li>Nie przeinwestuj w armię z miasta. Miasta głównie wspierają Astrology i upgrade'y; mapa płaci boxami.</li><li>Nie zakładaj w śnieżnej strefie, że każdy box to armia.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/harmony" target="_blank" class="el"><img class="map-shot" src="img/maps/harmony.png" alt="Harmony map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">128 x 128</span><span class="map-pill">Capital Hold</span></div>
+      <h2>Harmony</h2>
+      <p class="map-intro">Najwolniejszy ranked template. Przegrywasz, gdy padnie stolica albo main hero, więc gra opiera się na inwestycjach, ochronie armii i kontroli wspólnych late zone'ów bez niepotrzebnego bleedu.</p>
+      <div class="map-block"><h3>Plan gry</h3><ul><li>Jak w Exodusie, nie ma łatwej zewnętrznej armii. Tydzień 1 to miasta, dwellingi, income, surowce i wystarczająca siła bohatera, żeby bezpiecznie wyjść.</li><li>Startujesz z dwoma miastami i darmowym Town Portalem, więc najpierw skonsoliduj early army.</li><li>Druga strefa ma kopalnie i dwellingi, ale prawdziwy power spike jest w trzeciej: staty, artefakty, miasta i Aboropia.</li><li>Chroń swoją Aboropię i contestuj przeciwnika, gdy możesz. Oddanie obu growth tree zwykle rozstrzyga grę.</li></ul></div>
+      <div class="map-block"><h3>Mocne tutaj</h3><ul><li>Slow scaling, efektywna ochrona armii, obrona stolicy i bohaterowie, którzy wygrywają bez poświęcania stacków co turę.</li><li>Inwestycje w miasta/dwellingi i timing Aboropii znaczą więcej niż flashy early tempo.</li><li>Control-style heroes zyskują wartość, bo wymuszanie albo blokowanie presji na stolicę jest częścią win condition.</li></ul></div>
+      <div class="map-block"><h3>Unikaj</h3><ul><li>Nie bleeduj armii za średnie nagrody. Na tym template utracona armia rzadko wraca.</li><li>Nie ignoruj trasy do stolicy. Bardzo trudny guard może stać się linią presji, jeśli ktoś jest w stanie go złamać.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/jebus_outcast" target="_blank" class="el"><img class="map-shot" src="img/maps/jebus_outcast.png" alt="Jebus Outcast map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">160 x 160</span><span class="map-pill">Final Battle</span></div>
+      <h2>Jebus Outcast</h2>
+      <p class="map-intro">Jebusowy race do pustyni. Startowy biom ma dużo boxów z armią, a środek zawiera realny skarb: high-tier box army, artefakty, miasta i tyle wartości, że często decyduje o całej grze.</p>
+      <div class="map-block"><h3>Plan gry</h3><ul><li>Farm boxy z armią w start zone tak efektywnie, jak się da, aż masz dość armii i siły bohatera na break do mida.</li><li>Nie da się ominąć breaka do środka control spellami; jednego guarda trzeba zabić.</li><li>Po wejściu w pustynię priorytetem jest box density. Każdy box, który bierzesz, to armia odebrana przeciwnikowi.</li><li>Jeśli gra się przedłuża, buduj i wykorzystuj miasta w midzie do upgrade'u box army i realnego growthu.</li></ul></div>
+      <div class="map-block"><h3>Mocne tutaj</h3><ul><li>Early tempo heroes, narzędzia do czyszczenia boxów, mocny break power i buildy, które zamieniają losową armię w natychmiastową presję.</li><li>Astrology/control ma wartość, jeśli pomaga chainować więcej boxów, ale główne pytanie brzmi: czy breakujesz i farmisz mid pierwszy?</li><li>Bohaterowie z pewnym AoE, sustainem albo early army amplification mają praktyczną wartość.</li></ul></div>
+      <div class="map-block"><h3>Unikaj</h3><ul><li>Nie overbuilduj home town, jeśli opóźnia box tempo. Obecna meta bardziej ceni boxy niż double-build town plany.</li><li>Nie oddawaj mida dla side zone'ów, chyba że jesteś już z tyłu i potrzebujesz backup line.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="map-guide-card">
+    <a href="https://olden-era.gameatlas.games/maps/#/maps/templates/vendetta" target="_blank" class="el"><img class="map-shot" src="img/maps/vendetta.png" alt="Vendetta map preview"></a>
+    <div class="map-card-body">
+      <div class="map-meta"><span class="map-pill">Single Hero</span><span class="map-pill">160 x 160</span><span class="map-pill">Classic</span></div>
+      <h2>Vendetta</h2>
+      <p class="map-intro">Jebusowy race do środka, ale z control spellami od startu. Dimension Door, Town Portal i Shadow Flight są dostępne od razu, więc template nagradza mana management, Knowledge i czyste chainowanie boxów.</p>
+      <div class="map-block"><h3>Plan gry</h3><ul><li>Dzień 1: weź dwa Four Scholar Observatories obok miasta, wróć i zbuduj Mage Guild. To odpala tempo z control spelli od dnia 2.</li><li>Używaj Dimension Door i Town Portal, żeby sięgać po boxy daleko od domu bez utraty dostępu do many, miasta i armii.</li><li>Bierz małe boxy, snowballuj do większych, a potem breakuj do pustyni, gdy armia jest gotowa.</li><li>Mid dalej jest królem. Side zone'y istnieją, ale zwykle są planem awaryjnym, gdy przeciwnik kontroluje pustynię.</li></ul></div>
+      <div class="map-block"><h3>Mocne tutaj</h3><ul><li>Knowledge, mana sustain, abuse control spelli i bohaterowie, którzy zamieniają DD/TP tempo w więcej boxów dziennie.</li><li><strong>Vatawna</strong> jest tutaj wyjątkowo groźna, bo tempo globalnych map spelli działa od tury 1.</li><li>Szybcy box clearerzy i bohaterowie z mocnym early fightem mogą chainować content zanim przeciwnik się ustabilizuje.</li></ul></div>
+      <div class="map-block"><h3>Unikaj</h3><ul><li>Nie pomijaj day-1 observatory into Mage Guild setup bez bardzo dobrego powodu.</li><li>Nie farm side zone'ów, gdy przeciwnik swobodnie farmi mid; side content zwykle jest słabszy niż pustynia.</li></ul></div>
+    </div>
+  </section>
+</div>
+
+</div><!-- /tab-maps -->
 
 <script>
 (function () {
