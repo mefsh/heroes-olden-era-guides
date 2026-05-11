@@ -31,6 +31,9 @@ tailwind.config = {
 .tab-content { display: none }
 .tab-content.active { display: block }
 .tab-btn.active { color:var(--c); border-bottom-color:var(--c); text-shadow:0 0 22px var(--c) }
+.mobile-nav-toggle {
+  display: none;
+}
 .lang-switch {
   margin-left: auto;
   display: flex;
@@ -341,6 +344,93 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 @media (max-width: 760px) {
   body { font-size: 14px }
 
+  nav {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    overflow: visible;
+    padding: 10px 12px !important;
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    height: 38px;
+    border: 1px solid color-mix(in srgb, var(--mobile-nav-accent, #ff8f00) 28%, #262630);
+    border-left: 3px solid var(--mobile-nav-accent, #ff8f00);
+    background: color-mix(in srgb, var(--mobile-nav-accent, #ff8f00) 8%, #0d0d12);
+    color: #eeeef5;
+    cursor: pointer;
+    font-family: Rajdhani, sans-serif;
+    font-size: .95em;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 0 12px;
+    text-transform: uppercase;
+  }
+
+  .mobile-nav-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-nav-caret {
+    color: var(--mobile-nav-accent, #ff8f00);
+    font-size: .8em;
+    margin-left: 10px;
+  }
+
+  nav.nav-open .mobile-nav-caret {
+    transform: rotate(180deg);
+  }
+
+  .tab-btn {
+    display: none;
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 38px;
+    justify-content: flex-start;
+    border: 1px solid #1d1d27 !important;
+    border-left: 3px solid transparent !important;
+    border-bottom-width: 1px !important;
+    margin: 0 !important;
+    padding: 9px 12px !important;
+    background: #0c0c11 !important;
+    font-size: .92em !important;
+    letter-spacing: 1.35px !important;
+  }
+
+  nav.nav-open .tab-btn {
+    display: flex;
+  }
+
+  .tab-btn.active {
+    border-left-color: var(--c) !important;
+    color: var(--c);
+    background: color-mix(in srgb, var(--c) 8%, #0c0c11) !important;
+    text-shadow: none;
+  }
+
+  .lang-switch {
+    position: static;
+    margin-left: 0;
+    padding: 0;
+    gap: 5px;
+    background: transparent;
+  }
+
+  .lang-btn {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 7px;
+    font-size: .82em;
+    letter-spacing: .7px;
+  }
+
   .map-object-grid {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -484,6 +574,7 @@ a.el:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px
 <body class="bg-[#09090c] text-[#b8b8c4] font-sans text-base leading-relaxed">
 
 <nav class="sticky top-0 z-[100] bg-[#060607] border-b border-[#18181f] flex px-[52px]">
+  <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-label="Sections"><span class="mobile-nav-label">HIVE</span><span class="mobile-nav-caret">v</span></button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0] active" data-tab="hive"    data-label-en="HIVE"       data-label-pl="RÓJ"        style="--c:#ff8f00">HIVE</button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="dungeon" data-label-en="DUNGEON"    data-label-pl="LOCH"       style="--c:#ce93d8">DUNGEON</button>
   <button class="tab-btn bg-transparent border-0 border-b-[3px] border-transparent text-[#40404e] cursor-pointer font-rajdhani text-[.95em] font-semibold tracking-[2px] py-4 px-[30px] -mb-px uppercase transition-all duration-200 hover:text-[#7070a0]"        data-tab="grove"   data-label-en="GROVE"      data-label-pl="KNIEJA"     style="--c:#81c784">GROVE</button>
@@ -2988,6 +3079,23 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
 var currentLang = localStorage.getItem('guide-lang') || 'en';
 
+function updateMobileNav(btn) {
+  var nav = document.querySelector('nav');
+  var toggle = document.querySelector('.mobile-nav-toggle');
+  var label = document.querySelector('.mobile-nav-label');
+  if (!nav || !toggle || !label || !btn) return;
+  label.textContent = btn.textContent;
+  nav.style.setProperty('--mobile-nav-accent', btn.style.getPropertyValue('--c') || '#ff8f00');
+}
+
+function closeMobileNav() {
+  var nav = document.querySelector('nav');
+  var toggle = document.querySelector('.mobile-nav-toggle');
+  if (!nav || !toggle) return;
+  nav.classList.remove('nav-open');
+  toggle.setAttribute('aria-expanded', 'false');
+}
+
 function activateTab(name) {
   var btn = document.querySelector('.tab-btn[data-tab="'+name+'"]');
   if (!btn) return;
@@ -2997,6 +3105,7 @@ function activateTab(name) {
   document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
   btn.classList.add('active');
   content.classList.add('active');
+  updateMobileNav(btn);
 }
 
 function setLanguage(lang) {
@@ -3019,12 +3128,30 @@ document.querySelectorAll('.tab-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     activateTab(btn.dataset.tab);
     location.hash = btn.dataset.tab;
+    closeMobileNav();
   });
 });
+var mobileToggle = document.querySelector('.mobile-nav-toggle');
+if (mobileToggle) {
+  mobileToggle.addEventListener('click',function(event){
+    event.stopPropagation();
+    var nav = document.querySelector('nav');
+    if (!nav) return;
+    var isOpen = nav.classList.toggle('nav-open');
+    mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+}
 document.querySelectorAll('.lang-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
     setLanguage(btn.dataset.lang);
   });
+});
+document.addEventListener('click',function(event){
+  var nav = document.querySelector('nav');
+  if (nav && !nav.contains(event.target)) closeMobileNav();
+});
+document.addEventListener('keydown',function(event){
+  if (event.key === 'Escape') closeMobileNav();
 });
 var initial = location.hash.replace('#','');
 setLanguage(currentLang);
